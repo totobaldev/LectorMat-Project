@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: Remix: Remix: LectorMat",
+  "description": "Educational platform for learning trigonometry, reading comprehension, and problem solving, equipped with student progress tracking and interactive quizzes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

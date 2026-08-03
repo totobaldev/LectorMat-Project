@@ -23,7 +23,16 @@ export interface M2PathEntry {
   answer: 'Sí' | 'No';
 }
 
+export type AppRole = 'student' | 'teacher' | null;
+
 export interface ProgressState {
+  // ── Auth / Session ────────────────────────────────────────────────────────
+  isAuthenticated: boolean;
+  isTeacherUnlocked: boolean;
+
+  // ── Role Gateway ──────────────────────────────────────────────────────────
+  role: AppRole;
+
   // ── Identity ──────────────────────────────────────────────────────────────
   selectedCareer: string | null;
   selectedArea: string | null;
@@ -39,12 +48,54 @@ export interface ProgressState {
   m2PathHistory: M2PathEntry[];
 
   // ── Actions ───────────────────────────────────────────────────────────────
+  login: () => void;
+  logout: () => void;
+  setRole: (role: 'student' | 'teacher') => void;
+  unlockTeacherPanel: () => void;
   setCareer: (career: string, area: string) => void;
   setActiveModule: (module: ModuleType) => void;
   updatePreModule: (score: number, completed?: boolean) => void;
   updateUnit: (unitId: 1 | 2 | 3 | 4, score: number, completed?: boolean) => void;
   resetProgress: () => void;
   clearSession: () => void;
+
+  // ── FRONT compatibility ───────────────────────────────────────────────────
+  /** Carrera seleccionada (alias del prototipo FRONT) */
+  career: string | null;
+  subject: 'Funciones y Progresiones' | 'Funciones y Geometría' | null;
+  preSpecialty: 'mecanica' | 'administracion' | null;
+  preCompleted: boolean;
+  preScore: number | null;
+  // U1
+  m1SlotsPlaced: number;
+  m1Completed: boolean;
+  m2NodesVisited: number;
+  m2Completed: boolean;
+  m3CompletedLevels: number;
+  m3Completed: boolean;
+  // U2
+  u2m1SlotsPlaced: number;
+  u2m1Completed: boolean;
+  u2m2NodesVisited: number;
+  u2m2Completed: boolean;
+  u2m3CompletedLevels: number;
+  u2m3Completed: boolean;
+  // U3
+  u3m1SlotsPlaced: number;
+  u3m1Completed: boolean;
+  u3m2NodesVisited: number;
+  u3m2Completed: boolean;
+  u3m3CompletedLevels: number;
+  u3m3Completed: boolean;
+  // U4
+  u4m1SlotsPlaced: number;
+  u4m1Completed: boolean;
+  u4m2NodesVisited: number;
+  u4m2Completed: boolean;
+  u4m3CompletedLevels: number;
+  u4m3Completed: boolean;
+  /** Merge-update any FRONT progress field */
+  updateProgress: (updates: Partial<ProgressState>) => void;
 
   // ── M2 actions ────────────────────────────────────────────────────────────
   /**
@@ -82,6 +133,9 @@ const defaultProgress = (): StudentProgress => ({
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set) => ({
+      isAuthenticated: false,
+      isTeacherUnlocked: false,
+      role: null,
       selectedCareer: null,
       selectedArea: null,
       activeModule: 'M1',
@@ -90,6 +144,48 @@ export const useProgressStore = create<ProgressState>()(
       // M2 initial state
       currentM2NodeId: U3_ROOT_NODE_ID,
       m2PathHistory: [],
+
+      // FRONT compatibility initial state
+      career: null,
+      subject: null,
+      preSpecialty: null,
+      preCompleted: false,
+      preScore: null,
+      m1SlotsPlaced: 0,
+      m1Completed: false,
+      m2NodesVisited: 0,
+      m2Completed: false,
+      m3CompletedLevels: 0,
+      m3Completed: false,
+      u2m1SlotsPlaced: 0,
+      u2m1Completed: false,
+      u2m2NodesVisited: 0,
+      u2m2Completed: false,
+      u2m3CompletedLevels: 0,
+      u2m3Completed: false,
+      u3m1SlotsPlaced: 0,
+      u3m1Completed: false,
+      u3m2NodesVisited: 0,
+      u3m2Completed: false,
+      u3m3CompletedLevels: 0,
+      u3m3Completed: false,
+      u4m1SlotsPlaced: 0,
+      u4m1Completed: false,
+      u4m2NodesVisited: 0,
+      u4m2Completed: false,
+      u4m3CompletedLevels: 0,
+      u4m3Completed: false,
+
+      // Auth actions
+      login: () => set({ isAuthenticated: true }),
+      logout: () => set({ isAuthenticated: false, role: null, isTeacherUnlocked: false }),
+      unlockTeacherPanel: () => set({ isTeacherUnlocked: true }),
+
+      // Role actions
+      setRole: (role) => set({ role }),
+
+      // FRONT updateProgress action
+      updateProgress: (updates) => set((state) => ({ ...state, ...updates })),
 
       // General actions
       setCareer: (career, area) => set({ selectedCareer: career, selectedArea: area }),
@@ -151,12 +247,45 @@ export const useProgressStore = create<ProgressState>()(
       name: 'lectormat-progress',
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
+        isAuthenticated: state.isAuthenticated,
+        isTeacherUnlocked: state.isTeacherUnlocked,
+        role: state.role,
         selectedCareer: state.selectedCareer,
         selectedArea: state.selectedArea,
         activeModule: state.activeModule,
         progress: state.progress,
         currentM2NodeId: state.currentM2NodeId,
         m2PathHistory: state.m2PathHistory,
+        // FRONT fields
+        career: state.career,
+        subject: state.subject,
+        preSpecialty: state.preSpecialty,
+        preCompleted: state.preCompleted,
+        preScore: state.preScore,
+        m1SlotsPlaced: state.m1SlotsPlaced,
+        m1Completed: state.m1Completed,
+        m2NodesVisited: state.m2NodesVisited,
+        m2Completed: state.m2Completed,
+        m3CompletedLevels: state.m3CompletedLevels,
+        m3Completed: state.m3Completed,
+        u2m1SlotsPlaced: state.u2m1SlotsPlaced,
+        u2m1Completed: state.u2m1Completed,
+        u2m2NodesVisited: state.u2m2NodesVisited,
+        u2m2Completed: state.u2m2Completed,
+        u2m3CompletedLevels: state.u2m3CompletedLevels,
+        u2m3Completed: state.u2m3Completed,
+        u3m1SlotsPlaced: state.u3m1SlotsPlaced,
+        u3m1Completed: state.u3m1Completed,
+        u3m2NodesVisited: state.u3m2NodesVisited,
+        u3m2Completed: state.u3m2Completed,
+        u3m3CompletedLevels: state.u3m3CompletedLevels,
+        u3m3Completed: state.u3m3Completed,
+        u4m1SlotsPlaced: state.u4m1SlotsPlaced,
+        u4m1Completed: state.u4m1Completed,
+        u4m2NodesVisited: state.u4m2NodesVisited,
+        u4m2Completed: state.u4m2Completed,
+        u4m3CompletedLevels: state.u4m3CompletedLevels,
+        u4m3Completed: state.u4m3Completed,
       }),
     }
   )
