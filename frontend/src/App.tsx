@@ -15,6 +15,7 @@ import HomePage      from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import PreModule     from './pages/PreModule';
 import Feedback      from './pages/Feedback';
+import CoursesPage   from './pages/CoursesPage';
 
 // ── U1 ────────────────────────────────────────────────────────────────────────
 import U1M1 from './pages/units/U1/Module1';
@@ -41,7 +42,8 @@ import U4M3 from './pages/units/U4/Module3';
 
 const RequireAuth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const isAuthenticated = useProgressStore((s) => s.isAuthenticated);
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  const isTeacherUnlocked = useProgressStore((s) => s.isTeacherUnlocked);
+  if (!isAuthenticated && !isTeacherUnlocked) return <Navigate to="/login" replace />;
   return <>{children}</>;
 };
 
@@ -57,6 +59,7 @@ function App() {
         {/* Main Application Layout */}
         <Route element={<MainLayout />}>
           <Route index path="/"               element={<HomePage />} />
+          <Route path="/courses"              element={<RequireAuth><CoursesPage /></RequireAuth>} />
           <Route path="/dashboard"            element={<RequireAuth><DashboardPage /></RequireAuth>} />
           <Route path="/pre"                  element={<RequireAuth><PreModule /></RequireAuth>} />
           <Route path="/feedback"             element={<RequireAuth><Feedback /></RequireAuth>} />

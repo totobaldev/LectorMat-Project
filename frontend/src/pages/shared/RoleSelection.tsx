@@ -148,6 +148,15 @@ const RoleSelection: React.FC = () => {
           </form>
         </div>
       </motion.div>
+
+      {/* Back to Home */}
+      <button 
+        type="button"
+        onClick={() => navigate('/')}
+        className="mt-6 text-sm text-slate-500 font-bold hover:text-slate-700 transition-colors cursor-pointer border-none bg-transparent"
+      >
+        &larr; Volver al inicio
+      </button>
     </div>
   );
 };

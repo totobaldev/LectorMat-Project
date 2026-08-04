@@ -85,7 +85,13 @@ export function useFrontProps() {
     setScreen,
     progress,
     updateProgress: store.updateProgress,
-    isTeacher:      store.role === 'teacher',
-    setIsTeacher:   (_val: boolean) => { /* managed via role gateway */ },
+    isTeacher:      store.isTeacherUnlocked,
+    setIsTeacher:   (val: boolean) => {
+      if (val) {
+        store.unlockTeacherPanel();
+      } else {
+        useProgressStore.setState({ isTeacherUnlocked: false });
+      }
+    },
   };
 }

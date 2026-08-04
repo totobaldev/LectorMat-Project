@@ -12,13 +12,12 @@ export default function Module4() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Validates a real email format and correct password
-    if (email.includes('@') && password === 'Inacap825') {
+    // Simulates login: allows entry with ANY valid email and password format
+    if (email.includes('@') && password.trim().length > 0) {
       setIsTeacher(true);
       setError(false);
     } else {
       setError(true);
-      setPassword('');
     }
   };
 
@@ -78,7 +77,7 @@ export default function Module4() {
 
             {error && (
               <p className="text-xs font-bold text-red-500 text-center mt-1">
-                Credenciales incorrectas. Intente nuevamente.
+                Por favor, ingrese un correo válido y una contraseña.
               </p>
             )}
 

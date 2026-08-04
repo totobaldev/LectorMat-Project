@@ -12,6 +12,7 @@ import {
 export default function Home() {
   const navigate = useNavigate();
   const isAuthenticated = useProgressStore((s) => s.isAuthenticated);
+  const isTeacherUnlocked = useProgressStore((s) => s.isTeacherUnlocked);
   const { setScreen, progress, updateProgress, isTeacher, setIsTeacher, currentScreen } = useFrontProps();
 
   const [isChoosingCareer, setIsChoosingCareer] = useState(false);
@@ -410,8 +411,8 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Bloque Elegir Carrera (Only visible if already configured) */}
-        {progress.career && (
+        {/* Bloque Elegir Carrera (Only visible if already configured and logged in) */}
+        {(isAuthenticated || isTeacherUnlocked) && progress.career && (
           <div className={`relative z-10 flex items-center gap-4 p-4 sm:p-5 rounded-2xl border min-w-[280px] md:min-w-[340px] shrink-0 ${
             progress.preSpecialty === 'mecanica' ? 'bg-emerald-600 border-emerald-700 text-white' : 'bg-indigo-600 border-indigo-700 text-white'
           }`}>
@@ -423,7 +424,7 @@ export default function Home() {
               <p className="text-sm font-extrabold text-white truncate leading-snug">{progress.career}</p>
               <button
                 onClick={() => {
-                  if (!isAuthenticated) {
+                  if (!isAuthenticated && !isTeacherUnlocked) {
                     navigate('/login');
                   } else {
                     setIsChoosingCareer(true);
@@ -440,7 +441,7 @@ export default function Home() {
       </section>
 
       {/* SECCIÓN MÓDULO PREVIO: DIAGNÓSTICO Y COMPRENSIÓN LECTORA */}
-      {progress.subject ? (
+      {(isAuthenticated || isTeacherUnlocked) && progress.subject ? (
         <>
           <section className="flex flex-col gap-6">
             <div className="bg-gradient-to-br from-amber-500 via-orange-500 to-indigo-700 p-6 sm:p-8 rounded-[2rem] border border-amber-200 shadow-lg relative overflow-hidden text-white">
@@ -775,7 +776,7 @@ export default function Home() {
           </div>
           <button
             onClick={() => {
-              if (!isAuthenticated) {
+              if (!isAuthenticated && !isTeacherUnlocked) {
                 navigate('/login');
               } else {
                 setIsChoosingCareer(true);

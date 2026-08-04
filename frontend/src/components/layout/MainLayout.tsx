@@ -82,8 +82,8 @@ const MainLayout: React.FC = () => {
             </div>
           </div>
 
-          {/* Career badge */}
-          {p.career && (
+          {/* Career badge (only when logged in) */}
+          {(p.isAuthenticated || p.isTeacherUnlocked) && p.career && (
             <div className="mb-6 mx-2 px-3.5 py-2 rounded-2xl bg-[#E0F7FA] border border-[#00B4C8]/20 flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-[#00B4C8] text-white flex items-center justify-center shrink-0">
                 <GraduationCap className="w-4 h-4" />
@@ -114,6 +114,9 @@ const MainLayout: React.FC = () => {
                       }
                     </div>
                   </button>
+                  <button onClick={() => navigate('/courses')} className={globalCls(cur === '/courses')}>
+                    <BookOpen className="w-5 h-5 shrink-0 text-[#00B4C8]" /><span>Mis Cursos</span>
+                  </button>
                   <button onClick={() => navigate('/dashboard')} className={globalCls(cur === '/dashboard')}>
                     <BarChart2 className="w-5 h-5 shrink-0" /><span>Mi Avance</span>
                   </button>
@@ -127,66 +130,6 @@ const MainLayout: React.FC = () => {
 
             {(p.isAuthenticated || p.isTeacherUnlocked) && (
               <>
-                {/* U1 */}
-                <div>
-                  <button onClick={() => setExpandedUnit(expandedUnit === 1 ? null : 1)} className="w-full flex items-center justify-between px-2 mb-2 cursor-pointer bg-transparent border-none text-left">
-                    <h2 className="text-xs font-black text-slate-400 p-2 uppercase tracking-widest hover:text-[#00B4C8] transition-colors text-left flex-1">U1: Funciones Polinómicas</h2>
-                    {expandedUnit === 1 ? <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />}
-                  </button>
-                  <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 1 ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}>
-                    <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                    <button onClick={() => navigate('/unit/1/module/1')} className={subCls(cur === '/unit/1/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0" /><span>M1: Comprensión</span></button>
-                    <button onClick={() => navigate('/unit/1/module/2')} className={subCls(cur === '/unit/1/module/2')}><GitMerge className="w-5 h-5 shrink-0" /><span>M2: Método</span></button>
-                    <button onClick={() => navigate('/unit/1/module/3')} className={subCls(cur === '/unit/1/module/3')}><FileQuestion className="w-5 h-5 shrink-0" /><span>M3: Banco</span></button>
-                  </div>
-                </div>
-
-                {/* U2 */}
-                <div>
-                  <button onClick={() => setExpandedUnit(expandedUnit === 2 ? null : 2)} className="w-full flex items-center justify-between px-2 mb-2 cursor-pointer bg-transparent border-none text-left">
-                    <h2 className="text-xs font-black text-slate-400 p-2 uppercase tracking-widest hover:text-[#E87A1E] transition-colors text-left flex-1">U2: Func. Exponenciales</h2>
-                    {expandedUnit === 2 ? <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />}
-                  </button>
-                  <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 2 ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}>
-                    <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                    <button onClick={() => navigate('/unit/2/module/1')} className={subCls(cur === '/unit/2/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0 text-[#E87A1E]" /><span>M1: Comprensión</span></button>
-                    <button onClick={() => navigate('/unit/2/module/2')} className={subCls(cur === '/unit/2/module/2')}><GitMerge className="w-5 h-5 shrink-0 text-[#E87A1E]" /><span>M2: Método</span></button>
-                    <button onClick={() => navigate('/unit/2/module/3')} className={subCls(cur === '/unit/2/module/3')}><FileQuestion className="w-5 h-5 shrink-0 text-[#E87A1E]" /><span>M3: Banco</span></button>
-                  </div>
-                </div>
-
-                {/* U3 */}
-                <div>
-                  <button onClick={() => setExpandedUnit(expandedUnit === 3 ? null : 3)} className="w-full flex items-center justify-between px-2 mb-2 cursor-pointer bg-transparent border-none text-left">
-                    <h2 className="text-xs font-black text-slate-400 p-2 uppercase tracking-widest hover:text-sky-500 transition-colors text-left flex-1">
-                      {p.preSpecialty === 'administracion' ? 'U3: Progresiones' : 'U3: Trigonometría'}
-                    </h2>
-                    {expandedUnit === 3 ? <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />}
-                  </button>
-                  <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 3 ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}>
-                    <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                    <button onClick={() => navigate('/unit/3/module/1')} className={subCls(cur === '/unit/3/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0 text-sky-500" /><span>M1: Comprensión</span></button>
-                    <button onClick={() => navigate('/unit/3/module/2')} className={subCls(cur === '/unit/3/module/2')}><GitMerge className="w-5 h-5 shrink-0 text-sky-500" /><span>M2: Método</span></button>
-                    <button onClick={() => navigate('/unit/3/module/3')} className={subCls(cur === '/unit/3/module/3')}><FileQuestion className="w-5 h-5 shrink-0 text-sky-500" /><span>M3: Banco</span></button>
-                  </div>
-                </div>
-
-                {/* U4 — only for administracion */}
-                {p.preSpecialty === 'administracion' && (
-                  <div>
-                    <button onClick={() => setExpandedUnit(expandedUnit === 4 ? null : 4)} className="w-full flex items-center justify-between px-2 mb-2 cursor-pointer bg-transparent border-none text-left">
-                      <h2 className="text-xs font-black text-slate-400 p-2 uppercase tracking-widest hover:text-emerald-500 transition-colors text-left flex-1">U4: Finanzas</h2>
-                      {expandedUnit === 4 ? <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />}
-                    </button>
-                    <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 4 ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}>
-                      <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                      <button onClick={() => navigate('/unit/4/module/1')} className={subCls(cur === '/unit/4/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0 text-emerald-500" /><span>M1: Comprensión</span></button>
-                      <button onClick={() => navigate('/unit/4/module/2')} className={subCls(cur === '/unit/4/module/2')}><GitMerge className="w-5 h-5 shrink-0 text-emerald-500" /><span>M2: Método</span></button>
-                      <button onClick={() => navigate('/unit/4/module/3')} className={subCls(cur === '/unit/4/module/3')}><FileQuestion className="w-5 h-5 shrink-0 text-emerald-500" /><span>M3: Banco</span></button>
-                    </div>
-                  </div>
-                )}
-
                 <div className="border-t border-slate-100/80 my-4" />
 
                 {/* Teacher panel */}
@@ -234,8 +177,8 @@ const MainLayout: React.FC = () => {
             </div>
           )}
 
-          {/* Logout button (only when authenticated) */}
-          {p.isAuthenticated && (
+          {/* Logout button (only when authenticated or teacher unlocked) */}
+          {(p.isAuthenticated || p.isTeacherUnlocked) && (
             <button onClick={logout} className="sidebar-logout mt-4">
               <LogOut size={14} />
               Salir
