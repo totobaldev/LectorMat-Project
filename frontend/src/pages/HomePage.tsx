@@ -788,21 +788,6 @@ export default function Home() {
           </button>
         </div>
       )}
-
-      {/* FOOTER ACTIONS */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-        {/* Feedback */}
-        <button onClick={() => setScreen('feedback')} className="bg-white rounded-[2rem] p-6 border border-slate-200 shadow-sm flex items-center gap-4 text-left group hover:border-slate-300 transition-colors">
-          <div className="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"><MessageSquare className="w-6 h-6"/></div>
-          <div><h3 className="text-lg font-bold text-slate-900">Tu opinión</h3><p className="text-sm text-slate-500">Comparte tus comentarios sobre la app.</p></div>
-        </button>
-
-        {/* Panel Docente */}
-        <button onClick={() => setScreen('m4')} className="bg-white rounded-[2rem] p-6 border border-slate-200 shadow-sm flex items-center gap-4 text-left group hover:border-slate-300 transition-colors">
-          <div className="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"><LayoutDashboard className="w-6 h-6"/></div>
-          <div><h3 className="text-lg font-bold text-slate-900">Panel Docente</h3><p className="text-sm text-slate-500">Métricas y datos estadísticos.</p></div>
-        </button>
-      </section>
     </div>
   );
 }
