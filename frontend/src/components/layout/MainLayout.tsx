@@ -3,7 +3,7 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import {
   BookOpen, LayoutDashboard, Home, BookOpenCheck,
   GitMerge, FileQuestion, MessageSquare, BarChart2,
-  ChevronDown, ChevronRight, GraduationCap, LogOut, Menu
+  ChevronDown, ChevronRight, GraduationCap, LogOut, Menu, Clock
 } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 import logo from '../../assets/logo.jpeg';
@@ -143,7 +143,7 @@ const MainLayout: React.FC = () => {
     <div className="flex h-screen w-full overflow-hidden font-sans text-slate-900" style={{ background: '#EEF1F6' }}>
 
       {/* ── Sidebar: exact same as FRONT Sidebar.tsx with INACAP colors ─── */}
-      <aside className="w-72 shrink-0 bg-white border-r border-slate-200/60 flex flex-col p-6 h-full shadow-[4px_0_24px_-12px_rgba(0,0,0,0.05)] relative z-20 overflow-y-auto">
+      <aside className={`shrink-0 bg-white border-r border-slate-200/60 flex flex-col p-6 h-full shadow-[4px_0_24px_-12px_rgba(0,0,0,0.05)] relative z-20 overflow-y-auto transition-all duration-300 ${isSidebarOpen ? 'w-72 opacity-100' : 'w-0 p-0 border-r-0 opacity-0 pointer-events-none'}`}>
         <div className="flex flex-col h-full min-h-max">
 
           {/* Brand Logo */}
@@ -198,6 +198,9 @@ const MainLayout: React.FC = () => {
                       }
                     </div>
                   </button>
+                  <button onClick={() => navigate('/courses')} className={globalCls(cur === '/courses')}>
+                    <BookOpen className="w-5 h-5 shrink-0 text-[#00B4C8]" /><span>Mis Cursos</span>
+                  </button>
                   <button onClick={() => navigate('/dashboard')} className={globalCls(cur === '/dashboard')}>
                     <BarChart2 className="w-5 h-5 shrink-0" /><span>Mi Avance</span>
                   </button>
@@ -208,24 +211,21 @@ const MainLayout: React.FC = () => {
                 <MessageSquare className="w-5 h-5 shrink-0" /><span>Tu opinión</span>
               </button>
 
-            {(p.isAuthenticated || p.isTeacherUnlocked) && (
-              <>
-                <div className="border-t border-slate-100/80 my-4" />
+              <div className="border-t border-slate-100/80 my-4" />
 
-                {/* Teacher panel */}
-                <button
-                  onClick={() => navigate('/unit/1/module/4')}
-                  className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all duration-200 group w-full cursor-pointer bg-transparent border-none text-left ${
-                    cur === '/unit/1/module/4'
-                      ? 'bg-[#1B2A5A] text-white shadow-xl'
-                      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
-                  }`}
-                >
-                  <LayoutDashboard className="w-5 h-5 shrink-0" />
-                  <span>Panel docente</span>
-                </button>
-              </>
-            )}
+              {/* Teacher panel (always visible, even without session) */}
+              <button
+                onClick={() => navigate('/unit/1/module/4')}
+                className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all duration-200 group w-full cursor-pointer bg-transparent border-none text-left ${
+                  cur === '/unit/1/module/4'
+                    ? 'bg-[#1B2A5A] text-white shadow-xl'
+                    : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+              >
+                <LayoutDashboard className="w-5 h-5 shrink-0" />
+                <span>Panel docente</span>
+              </button>
+            </div>
           </nav>
 
           {/* ── STUDENT PROGRESS CARD ─────────────── */}
@@ -288,12 +288,26 @@ const MainLayout: React.FC = () => {
         </div>
       </aside>
 
-      {/* ── Main: EXACT same structure as FRONT App.tsx ──────────────────── */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden relative bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#E0F7FA]/40 via-slate-50/40 to-slate-100/40">
-        <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
-          <Outlet />
-        </div>
-      </main>
+      {/* ── Main Panel Container ────────────────────────────────────────── */}
+      <div className="flex-1 flex flex-col h-full overflow-hidden relative">
+        {/* Top Header Bar */}
+        <header className="h-16 border-b border-slate-200 bg-white flex items-center px-6 gap-4 z-10 shrink-0 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <button 
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="p-2.5 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors cursor-pointer border border-slate-200/60 shadow-sm bg-transparent"
+            title={isSidebarOpen ? "Ocultar menú" : "Mostrar menú"}
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+          <span className="text-sm font-extrabold text-slate-800 tracking-wide uppercase">LectorMat</span>
+        </header>
+
+        <main className="flex-1 overflow-y-auto overflow-x-hidden relative bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#E0F7FA]/40 via-slate-50/40 to-slate-100/40">
+          <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
