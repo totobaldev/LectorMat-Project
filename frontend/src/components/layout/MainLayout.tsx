@@ -3,7 +3,8 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import {
   BookOpen, LayoutDashboard, Home, BookOpenCheck,
   GitMerge, FileQuestion, MessageSquare, BarChart2,
-  ChevronDown, ChevronRight, GraduationCap, LogOut, Menu, Clock, ArrowRight
+  ChevronDown, ChevronRight, GraduationCap, LogOut, Menu, Clock, ArrowRight,
+  LibraryBig, Package, Plus
 } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 import logo from '../../assets/logo.jpeg';
@@ -125,15 +126,24 @@ const MainLayout: React.FC = () => {
 
   const activeMaterial = getStudentContinuity();
 
-  const globalCls = (active: boolean) =>
-    `flex items-center gap-3 px-4 py-3 rounded-2xl font-bold transition-all duration-200 cursor-pointer w-full text-left border-none ${
+  const globalCls = (active: boolean) => {
+    const activeColor = p.role === 'teacher'
+      ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
+      : 'bg-[#00B4C8] text-white shadow-md shadow-[#00B4C8]/20';
+    
+    return `flex items-center rounded-2xl font-bold transition-all duration-200 cursor-pointer w-full text-left border-none ${
+      isSidebarOpen ? 'gap-3 px-4 py-3' : 'justify-center w-12 h-12 p-0 mx-auto'
+    } ${
       active
-        ? 'bg-[#00B4C8] text-white shadow-md shadow-[#00B4C8]/20'
+        ? activeColor
         : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 bg-transparent'
     }`;
+  };
 
   const subCls = (active: boolean) =>
-    `flex items-center gap-3 px-4 py-3 rounded-2xl font-bold transition-all duration-200 cursor-pointer w-full text-left border-none ${
+    `flex items-center rounded-2xl font-bold transition-all duration-200 cursor-pointer w-full text-left border-none ${
+      isSidebarOpen ? 'gap-3 px-4 py-3' : 'justify-center w-12 h-12 p-0 mx-auto'
+    } ${
       active
         ? 'bg-[#E0F7FA] text-[#0098AA] shadow-sm shadow-[#E0F7FA]/50'
         : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 bg-transparent'
@@ -142,54 +152,68 @@ const MainLayout: React.FC = () => {
   return (
     <div className="flex h-screen w-full overflow-hidden font-sans text-slate-900" style={{ background: '#EEF1F6' }}>
 
-      {/* ── Sidebar: exact same as FRONT Sidebar.tsx with INACAP colors ─── */}
-      <aside className={`shrink-0 bg-white border-r border-slate-200/60 flex flex-col p-6 h-full shadow-[4px_0_24px_-12px_rgba(0,0,0,0.05)] relative z-20 overflow-y-auto transition-all duration-300 ${isSidebarOpen ? 'w-72 opacity-100' : 'w-0 p-0 border-r-0 opacity-0 pointer-events-none'}`}>
+      {/* ── Sidebar: Collapsible but stays visible as mini icon navbar (w-20) ─── */}
+      <aside className={`shrink-0 bg-white border-r border-slate-200/60 flex flex-col h-full shadow-[4px_0_24px_-12px_rgba(0,0,0,0.05)] relative z-20 overflow-y-auto transition-all duration-300 ${isSidebarOpen ? 'w-72 p-6' : 'w-20 px-3 py-6'}`}>
         <div className="flex flex-col h-full min-h-max">
 
           {/* Brand Logo */}
-          <div className="flex items-center gap-3 mb-6 pl-2">
+          <div className={`flex items-center mb-6 pl-2 ${isSidebarOpen ? 'gap-3' : 'justify-center pl-0'}`}>
             <img
               src={logo}
               alt="LectorMat"
-              className="h-10 w-auto object-contain"
+              className="h-10 w-auto object-contain shrink-0"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 const fb = e.currentTarget.nextElementSibling as HTMLElement;
                 if (fb) fb.style.display = 'flex';
               }}
             />
-            <div className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-[#00B4C8] to-[#0098AA] items-center justify-center shadow-md shadow-[#00B4C8]/30 hidden">
-              <div className="w-4 h-4 bg-white rounded-sm rotate-12" />
-            </div>
-            <div className="leading-tight">
-              <div className="font-extrabold text-2xl tracking-tight text-slate-900">LectorMat</div>
-            </div>
+            {isSidebarOpen && (
+              <div className="leading-tight">
+                <div className="font-extrabold text-2xl tracking-tight text-slate-900">LectorMat</div>
+              </div>
+            )}
           </div>
 
           {/* Career badge */}
           {(p.isAuthenticated || p.isTeacherUnlocked) && p.career && (
-            <div className="mb-6 mx-1 px-3.5 py-2 rounded-2xl bg-[#E0F7FA] border border-[#00B4C8]/20 flex items-center gap-2.5">
+            <div className={`mb-6 mx-1 px-3.5 py-2 rounded-2xl bg-[#E0F7FA] border border-[#00B4C8]/20 flex items-center ${isSidebarOpen ? 'gap-2.5' : 'justify-center'}`} title={p.career}>
               <div className="w-8 h-8 rounded-lg bg-[#00B4C8] text-white flex items-center justify-center shrink-0">
                 <GraduationCap className="w-4 h-4" />
               </div>
-              <div className="flex-1 min-w-0">
-                <span className="text-[9px] font-bold uppercase tracking-wider text-[#0098AA] block leading-none mb-0.5">Carrera</span>
-                <span className="text-[11px] font-extrabold text-slate-800 leading-tight block truncate" title={p.career}>{p.career}</span>
-              </div>
+              {isSidebarOpen && (
+                <div className="flex-1 min-w-0">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#0098AA] block leading-none mb-0.5">Carrera</span>
+                  <span className="text-[11px] font-extrabold text-slate-800 leading-tight block truncate">{p.career}</span>
+                </div>
+              )}
             </div>
           )}
 
-          <nav className="space-y-5 flex-1 text-sm">
-            {/* Global navigation */}
-            <div className="space-y-1.5">
-              <button onClick={() => navigate('/')} className={globalCls(cur === '/')}>
-                <Home className="w-5 h-5 shrink-0" /><span>Inicio</span>
-              </button>
+          <nav className="space-y-1.5 flex-1 text-sm">
+            {/* ── Shared: Inicio ─────────────────────── */}
+            <button onClick={() => navigate('/')} className={globalCls(cur === '/')}>
+              <Home className="w-5 h-5 shrink-0" />
+              {isSidebarOpen && <span>Inicio</span>}
+            </button>
 
-              {(p.isAuthenticated || p.isTeacherUnlocked) && (
-                <>
-                  <button onClick={() => navigate('/pre')} className={globalCls(cur === '/pre')}>
-                    <BookOpenCheck className="w-5 h-5 shrink-0 text-amber-500" />
+            {/* ── TEACHER: Panel docente right below Inicio ─────────────── */}
+            {p.role === 'teacher' && (
+              <button
+                onClick={() => navigate('/teacher/courses')}
+                className={globalCls(cur.startsWith('/teacher/courses'))}
+              >
+                <LayoutDashboard className="w-5 h-5 shrink-0" />
+                {isSidebarOpen && <span>Panel Docente</span>}
+              </button>
+            )}
+
+            {/* ── STUDENT nav (role === 'student') ─────────────────────────── */}
+            {p.role === 'student' && p.isAuthenticated && (
+              <>
+                <button onClick={() => navigate('/pre')} className={globalCls(cur === '/pre')}>
+                  <BookOpenCheck className="w-5 h-5 shrink-0 text-amber-500" />
+                  {isSidebarOpen ? (
                     <div className="flex-1 flex items-center justify-between">
                       <span>Comprensión Lectora</span>
                       {p.preCompleted
@@ -197,46 +221,62 @@ const MainLayout: React.FC = () => {
                         : <span className="text-[9px] bg-amber-500 text-white px-2 py-0.5 rounded-full font-black uppercase animate-pulse">Inicio</span>
                       }
                     </div>
-                  </button>
-                  <button onClick={() => navigate('/courses')} className={globalCls(cur === '/courses')}>
-                    <BookOpen className="w-5 h-5 shrink-0 text-[#00B4C8]" /><span>Mis Cursos</span>
-                  </button>
-                  <button onClick={() => navigate('/dashboard')} className={globalCls(cur === '/dashboard')}>
-                    <BarChart2 className="w-5 h-5 shrink-0" /><span>Mi Avance</span>
-                  </button>
-                </>
-              )}
+                  ) : null}
+                </button>
+                <button onClick={() => navigate('/courses')} className={globalCls(cur === '/courses')}>
+                  <BookOpen className="w-5 h-5 shrink-0 text-blue-600" />
+                  {isSidebarOpen && <span>Mis Cursos</span>}
+                </button>
+                <button onClick={() => navigate('/dashboard')} className={globalCls(cur === '/dashboard')}>
+                  <BarChart2 className="w-5 h-5 shrink-0" />
+                  {isSidebarOpen && <span>Mi Avance</span>}
+                </button>
+                <button onClick={() => navigate('/feedback')} className={globalCls(cur === '/feedback')}>
+                  <MessageSquare className="w-5 h-5 shrink-0" />
+                  {isSidebarOpen && <span>Tu opinión</span>}
+                </button>
+              </>
+            )}
 
-              <button onClick={() => navigate('/feedback')} className={globalCls(cur === '/feedback')}>
-                <MessageSquare className="w-5 h-5 shrink-0" /><span>Tu opinión</span>
-              </button>
+            {/* ── TEACHER extended nav ─────────────────────────────────────── */}
+            {p.role === 'teacher' && (
+              <>
+                <div className="border-t border-slate-100/80 my-3" />
+                {isSidebarOpen ? (
+                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest px-3 pb-1">Docente</p>
+                ) : (
+                  <div className="h-0.5" />
+                )}
 
-              <div className="border-t border-slate-100/80 my-4" />
+                {/* Quick + Nuevo Curso action */}
+                <button
+                  id="sidebar-btn-nuevo-curso"
+                  onClick={() => navigate('/teacher/courses', { state: { openModal: true } })}
+                  className={`flex items-center rounded-2xl font-extrabold text-sm w-full cursor-pointer border-2 border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-100 hover:border-orange-300 transition-all duration-200 ${isSidebarOpen ? 'gap-3 px-4 py-3 text-left' : 'justify-center w-12 h-12 p-0 mx-auto'}`}
+                  title="Nuevo Curso"
+                >
+                  <Plus className="w-4 h-4 shrink-0" />
+                  {isSidebarOpen && <span>Nuevo Curso</span>}
+                </button>
 
-              {/* Teacher panel (always visible, even without session) */}
-              <button
-                onClick={() => navigate('/unit/1/module/4')}
-                className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all duration-200 group w-full cursor-pointer bg-transparent border-none text-left ${
-                  cur === '/unit/1/module/4'
-                    ? 'bg-[#1B2A5A] text-white shadow-xl'
-                    : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
-                }`}
-              >
-                <LayoutDashboard className="w-5 h-5 shrink-0" />
-                <span>Panel docente</span>
-              </button>
-            </div>
+                <button
+                  onClick={() => navigate('/teacher/content-bank')}
+                  className={globalCls(cur === '/teacher/content-bank')}
+                >
+                  <Package className="w-5 h-5 shrink-0" />
+                  {isSidebarOpen && <span>Banco de Contenido</span>}
+                </button>
+              </>
+            )}
           </nav>
 
           {/* ── STUDENT PROGRESS CARD ─────────────── */}
-          {(p.isAuthenticated || p.isTeacherUnlocked) && (
+          {p.role === 'student' && p.isAuthenticated && isSidebarOpen && (
             <div className="mt-8 flex flex-col gap-3">
-
               <div className="pl-3 text-sm font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-slate-400" />
                 Actividad Reciente
               </div>
-              {/* Single ProgressCard: CONTINUIDAD AL MATERIAL EN DESARROLLO */}
               <div
                 className="rounded-3xl p-5 text-white shadow-xl relative overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-[1.02]"
                 style={{ background: 'linear-gradient(to bottom, #004D5A, #002B33)' }}
@@ -253,7 +293,6 @@ const MainLayout: React.FC = () => {
                   {activeMaterial.subtitle}
                 </p>
 
-                {/* Active module progress bar */}
                 <div className="flex items-center justify-between text-[11px] font-bold text-slate-200 mb-1.5 relative z-10">
                   <span>Avance del módulo</span>
                   <span className="text-[#67E8F9]">{activeMaterial.pct}%</span>
@@ -265,7 +304,6 @@ const MainLayout: React.FC = () => {
                   />
                 </div>
 
-                {/* Interactive CTA button */}
                 <button
                   type="button"
                   className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-extrabold text-white transition-all bg-[#00B4C8] hover:bg-[#0098AA] shadow-sm cursor-pointer border-none"
@@ -279,9 +317,9 @@ const MainLayout: React.FC = () => {
 
           {/* Logout button */}
           {(p.isAuthenticated || p.isTeacherUnlocked) && (
-            <button onClick={logout} className="sidebar-logout mt-4">
-              <LogOut size={14} />
-              Salir
+            <button onClick={logout} className={`sidebar-logout mt-4 flex items-center ${isSidebarOpen ? 'gap-3 px-4 py-3 text-left w-full' : 'justify-center w-12 h-12 p-0 mx-auto rounded-2xl hover:bg-red-50 hover:text-red-600 text-slate-500 bg-transparent border-none'}`}>
+              <LogOut size={16} className="shrink-0" />
+              {isSidebarOpen && <span>Salir</span>}
             </button>
           )}
 

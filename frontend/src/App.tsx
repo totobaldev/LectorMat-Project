@@ -7,6 +7,13 @@ import Login         from './pages/shared/Login';
 import RoleSelection from './pages/shared/RoleSelection';
 import TeacherPanel  from './pages/shared/TeacherPanel';
 
+// ── Teacher pages ─────────────────────────────────────────────────────────────
+import TeacherCoursesPage      from './pages/teacher/TeacherCoursesPage';
+import TeacherCourseDetailPage from './pages/teacher/TeacherCourseDetailPage';
+import TeacherH5PResourceForm  from './pages/teacher/TeacherH5PResourceForm';
+import TeacherContentBankPage  from './pages/teacher/TeacherContentBankPage';
+import TeacherLoginPage        from './pages/shared/TeacherLoginPage';
+
 // ── Student layout ────────────────────────────────────────────────────────────
 import MainLayout    from './components/layout/MainLayout';
 
@@ -47,14 +54,22 @@ const RequireAuth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <>{children}</>;
 };
 
+const RequireTeacher: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const role = useProgressStore((s) => s.role);
+  const isTeacherUnlocked = useProgressStore((s) => s.isTeacherUnlocked);
+  if (role !== 'teacher' && !isTeacherUnlocked) return <Navigate to="/" replace />;
+  return <>{children}</>;
+};
+
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Standalone Login Page */}
-        <Route path="/login" element={<RoleSelection />} />
+        {/* Standalone pages (no MainLayout) */}
+        <Route path="/login"          element={<RoleSelection />} />
+        <Route path="/teacher/login"  element={<TeacherLoginPage />} />
 
         {/* Main Application Layout */}
         <Route element={<MainLayout />}>
@@ -85,6 +100,12 @@ function App() {
           <Route path="/unit/4/module/2"      element={<RequireAuth><U4M2 /></RequireAuth>} />
           <Route path="/unit/4/module/3"      element={<RequireAuth><U4M3 /></RequireAuth>} />
           
+          {/* Teacher management routes */}
+          <Route path="/teacher/courses"              element={<RequireTeacher><TeacherCoursesPage /></RequireTeacher>} />
+          <Route path="/teacher/courses/:courseId"    element={<RequireTeacher><TeacherCourseDetailPage /></RequireTeacher>} />
+          <Route path="/teacher/courses/:courseId/resource/new" element={<RequireTeacher><TeacherH5PResourceForm /></RequireTeacher>} />
+          <Route path="/teacher/content-bank"         element={<RequireTeacher><TeacherContentBankPage /></RequireTeacher>} />
+
           {/* Fallback */}
           <Route path="*"                     element={<Navigate to="/" replace />} />
         </Route>

@@ -32,6 +32,145 @@ export default function Home() {
     }
   }, [isAuthenticated, progress.career]);
 
+  const role = useProgressStore((s) => s.role);
+
+  // ── Features + Access landing: shown for unauthenticated OR teacher role ────
+  // Only authenticated STUDENTS bypass this to see their progress dashboard.
+  if (!(isAuthenticated && role === 'student')) {
+    return (
+      <div className="min-h-full bg-slate-50 flex flex-col">
+        {/* Hero */}
+        <section className="flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20 gap-8">
+          <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-600">
+            Plataforma de Nivelación Matemática
+          </span>
+          <div className="space-y-4 max-w-2xl">
+            <h1 className="text-5xl sm:text-6xl font-black text-slate-950 tracking-tight leading-none">
+              Bienvenido a{' '}
+              <span className="text-blue-600">LectorMat</span>
+            </h1>
+            <p className="text-slate-500 text-lg font-medium leading-relaxed">
+              Aprende matemática aplicada a tu carrera técnico-profesional con actividades interactivas, lectura comprensiva y ejercicios adaptativos.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            {role === 'teacher' ? (
+              /* Teacher already logged in */
+              <button
+                onClick={() => navigate('/teacher/courses')}
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-orange-500 text-white font-extrabold text-sm shadow-lg shadow-orange-500/25 hover:bg-orange-600 transition-all duration-200 cursor-pointer border-none"
+              >
+                <LayoutDashboard className="w-5 h-5" />
+                Ir a mi Panel
+              </button>
+            ) : (
+              /* Unauthenticated: show both access buttons */
+              <>
+                <button
+                  onClick={() => navigate('/login')}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-blue-600 text-white font-extrabold text-sm shadow-lg shadow-blue-600/25 hover:bg-blue-700 transition-all duration-200 cursor-pointer border-none"
+                >
+                  <GraduationCap className="w-5 h-5" />
+                  Ingresar como Estudiante
+                </button>
+                <button
+                  onClick={() => navigate('/teacher/login')}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-orange-500 text-white font-extrabold text-sm shadow-lg shadow-orange-500/25 hover:bg-orange-600 transition-all duration-200 cursor-pointer border-none"
+                >
+                  <LayoutDashboard className="w-5 h-5" />
+                  Acceso Docente
+                </button>
+              </>
+            )}
+          </div>
+        </section>
+
+        {/* Features grid */}
+        <section className="px-6 pb-16 max-w-5xl mx-auto w-full grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            {
+              icon: BookOpen,
+              color: 'blue',
+              title: 'Comprensión Lectora',
+              desc: 'Módulos de lectura matemática contextualizada a tu especialidad vocacional.',
+            },
+            {
+              icon: Compass,
+              color: 'orange',
+              title: 'Método Interactivo',
+              desc: 'Árboles de decisión y actividades H5P que guían tu razonamiento paso a paso.',
+            },
+            {
+              icon: Zap,
+              color: 'emerald',
+              title: 'Banco de Ejercicios',
+              desc: 'Problemas escalonados por nivel con retroalimentación inmediata y progreso visible.',
+            },
+          ].map(({ icon: Icon, color, title, desc }) => (
+            <div
+              key={title}
+              className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col gap-4"
+            >
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-${color}-50`}>
+                <Icon className={`w-7 h-7 text-${color}-600`} />
+              </div>
+              <div>
+                <h3 className="text-base font-extrabold text-slate-900">{title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed mt-1">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* ── Platform News / Versions ──────────────────────────────── */}
+        <section className="px-6 pb-16 max-w-5xl mx-auto w-full flex flex-col gap-4">
+          <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Novedades y Versiones</h2>
+          {[
+            {
+              version: 'v1.3.0',
+              date: 'Agosto 2026',
+              badge: 'Nuevo',
+              badgeColor: 'bg-blue-600',
+              title: 'Módulo H5P para Docentes',
+              desc: 'Los docentes ahora pueden subir actividades interactivas H5P directamente desde el Panel Docente, organizarlas en secciones y gestionar un banco de contenido centralizado.',
+            },
+            {
+              version: 'v1.2.0',
+              date: 'Julio 2026',
+              badge: 'Mejora',
+              badgeColor: 'bg-emerald-500',
+              title: 'Continuidad de Aprendizaje',
+              desc: 'El sidebar del estudiante ahora muestra una ProgressCard inteligente que detecta automáticamente en qué módulo se quedó el estudiante y permite reanudar con un clic.',
+            },
+            {
+              version: 'v1.1.0',
+              date: 'Junio 2026',
+              badge: 'Funcionalidad',
+              badgeColor: 'bg-orange-500',
+              title: 'Panel Docente con Búsqueda de Cursos',
+              desc: 'Panel dedicado para docentes con búsqueda instantánea por código de asignatura (MAT101, MEC205…), agrupación por área y acceso protegido por credenciales.',
+            },
+          ].map((item) => (
+            <div
+              key={item.version}
+              className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] flex items-start gap-5"
+            >
+              <div className="shrink-0 text-center">
+                <span className={`inline-block text-[10px] font-black text-white px-2.5 py-1 rounded-full ${item.badgeColor} mb-1`}>{item.badge}</span>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{item.version}</p>
+                <p className="text-[10px] text-slate-400 font-medium">{item.date}</p>
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm font-extrabold text-slate-900 mb-1">{item.title}</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
+    );
+  }
+
   const handleConfirmSubject = () => {
     const specialty = selectedSubject === 'Funciones y Geometría' ? 'mecanica' : 'administracion';
     updateProgress({ 
