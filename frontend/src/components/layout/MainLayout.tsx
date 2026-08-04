@@ -3,8 +3,7 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import {
   BookOpen, LayoutDashboard, Home, BookOpenCheck,
   GitMerge, FileQuestion, MessageSquare, BarChart2,
-  ChevronDown, ChevronRight, GraduationCap, LogOut,
-  PlayCircle, Clock, ArrowRight, CheckCircle2
+  ChevronDown, ChevronRight, GraduationCap, LogOut, Menu
 } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 import logo from '../../assets/logo.jpeg';
@@ -17,6 +16,7 @@ const MainLayout: React.FC = () => {
   const p         = store;
 
   const [expandedUnit, setExpandedUnit] = useState<number | null>(1);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // ── Progress calculations ──────────────────────────────────────────────────
   const m1Pct = p.m1Completed ? 100 : Math.round((p.m1SlotsPlaced / 3) * 55);
@@ -142,7 +142,7 @@ const MainLayout: React.FC = () => {
   return (
     <div className="flex h-screen w-full overflow-hidden font-sans text-slate-900" style={{ background: '#EEF1F6' }}>
 
-      {/* ── Sidebar ──────────────────────────────────────────────────────── */}
+      {/* ── Sidebar: exact same as FRONT Sidebar.tsx with INACAP colors ─── */}
       <aside className="w-72 shrink-0 bg-white border-r border-slate-200/60 flex flex-col p-6 h-full shadow-[4px_0_24px_-12px_rgba(0,0,0,0.05)] relative z-20 overflow-y-auto">
         <div className="flex flex-col h-full min-h-max">
 
@@ -207,77 +207,17 @@ const MainLayout: React.FC = () => {
               <button onClick={() => navigate('/feedback')} className={globalCls(cur === '/feedback')}>
                 <MessageSquare className="w-5 h-5 shrink-0" /><span>Tu opinión</span>
               </button>
-            </div>
 
-            {/* Units list */}
-            <div>
-              <button onClick={() => setExpandedUnit(expandedUnit === 1 ? null : 1)} className="w-full flex items-center justify-between px-2 mb-1.5 cursor-pointer bg-transparent border-none">
-                <h2 className="text-xs font-black text-slate-400 p-1.5 uppercase tracking-widest hover:text-[#00B4C8] transition-colors">U1: Funciones Polinómicas</h2>
-                {expandedUnit === 1 ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-              </button>
-              <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 1 ? 'max-h-96 opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'}`}>
-                <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                <button onClick={() => navigate('/unit/1/module/1')} className={subCls(cur === '/unit/1/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0" /><span>M1: Comprensión</span></button>
-                <button onClick={() => navigate('/unit/1/module/2')} className={subCls(cur === '/unit/1/module/2')}><GitMerge className="w-5 h-5 shrink-0" /><span>M2: Método</span></button>
-                <button onClick={() => navigate('/unit/1/module/3')} className={subCls(cur === '/unit/1/module/3')}><FileQuestion className="w-5 h-5 shrink-0" /><span>M3: Banco</span></button>
-              </div>
-            </div>
-
-            {/* U2 */}
-            <div>
-              <button onClick={() => setExpandedUnit(expandedUnit === 2 ? null : 2)} className="w-full flex items-center justify-between px-2 mb-1.5 cursor-pointer bg-transparent border-none">
-                <h2 className="text-xs font-black text-slate-400 p-1.5 uppercase tracking-widest hover:text-violet-500 transition-colors">U2: Func. Exponenciales</h2>
-                {expandedUnit === 2 ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-              </button>
-              <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 2 ? 'max-h-96 opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'}`}>
-                <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                <button onClick={() => navigate('/unit/2/module/1')} className={subCls(cur === '/unit/2/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0 text-violet-500" /><span>M1: Comprensión</span></button>
-                <button onClick={() => navigate('/unit/2/module/2')} className={subCls(cur === '/unit/2/module/2')}><GitMerge className="w-5 h-5 shrink-0 text-violet-500" /><span>M2: Método</span></button>
-                <button onClick={() => navigate('/unit/2/module/3')} className={subCls(cur === '/unit/2/module/3')}><FileQuestion className="w-5 h-5 shrink-0 text-violet-500" /><span>M3: Banco</span></button>
-              </div>
-            </div>
-
-            {/* U3 */}
-            <div>
-              <button onClick={() => setExpandedUnit(expandedUnit === 3 ? null : 3)} className="w-full flex items-center justify-between px-2 mb-1.5 cursor-pointer bg-transparent border-none">
-                <h2 className="text-xs font-black text-slate-400 p-1.5 uppercase tracking-widest hover:text-sky-500 transition-colors">
-                  {p.preSpecialty === 'administracion' ? 'U3: Progresiones' : 'U3: Trigonometría'}
-                </h2>
-                {expandedUnit === 3 ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-              </button>
-              <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 3 ? 'max-h-96 opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'}`}>
-                <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                <button onClick={() => navigate('/unit/3/module/1')} className={subCls(cur === '/unit/3/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0 text-sky-500" /><span>M1: Comprensión</span></button>
-                <button onClick={() => navigate('/unit/3/module/2')} className={subCls(cur === '/unit/3/module/2')}><GitMerge className="w-5 h-5 shrink-0 text-sky-500" /><span>M2: Método</span></button>
-                <button onClick={() => navigate('/unit/3/module/3')} className={subCls(cur === '/unit/3/module/3')}><FileQuestion className="w-5 h-5 shrink-0 text-sky-500" /><span>M3: Banco</span></button>
-              </div>
-            </div>
-
-            {/* U4 */}
-            {p.preSpecialty === 'administracion' && (
-              <div>
-                <button onClick={() => setExpandedUnit(expandedUnit === 4 ? null : 4)} className="w-full flex items-center justify-between px-2 mb-1.5 cursor-pointer bg-transparent border-none">
-                  <h2 className="text-xs font-black text-slate-400 p-1.5 uppercase tracking-widest hover:text-emerald-500 transition-colors">U4: Finanzas</h2>
-                  {expandedUnit === 4 ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-                </button>
-                <div className={`space-y-1.5 relative overflow-hidden transition-all duration-300 ${expandedUnit === 4 ? 'max-h-96 opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'}`}>
-                  <div className="absolute left-[24px] top-2 bottom-2 w-px bg-slate-200" />
-                  <button onClick={() => navigate('/unit/4/module/1')} className={subCls(cur === '/unit/4/module/1')}><BookOpenCheck className="w-5 h-5 shrink-0 text-emerald-500" /><span>M1: Comprensión</span></button>
-                  <button onClick={() => navigate('/unit/4/module/2')} className={subCls(cur === '/unit/4/module/2')}><GitMerge className="w-5 h-5 shrink-0 text-emerald-500" /><span>M2: Método</span></button>
-                  <button onClick={() => navigate('/unit/4/module/3')} className={subCls(cur === '/unit/4/module/3')}><FileQuestion className="w-5 h-5 shrink-0 text-emerald-500" /><span>M3: Banco</span></button>
-                </div>
-              </div>
-            )}
-
-            {/* Teacher panel (only for teacher role) */}
-            {p.role === 'teacher' && (
+            {(p.isAuthenticated || p.isTeacherUnlocked) && (
               <>
-                <div className="border-t border-slate-100 my-3" />
+                <div className="border-t border-slate-100/80 my-4" />
+
+                {/* Teacher panel */}
                 <button
                   onClick={() => navigate('/unit/1/module/4')}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-2xl font-bold transition-all duration-200 group w-full cursor-pointer bg-transparent border-none text-left ${
+                  className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all duration-200 group w-full cursor-pointer bg-transparent border-none text-left ${
                     cur === '/unit/1/module/4'
-                      ? 'bg-[#1B2A5A] text-white shadow-lg shadow-[#1B2A5A]/20'
+                      ? 'bg-[#1B2A5A] text-white shadow-xl'
                       : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
@@ -348,7 +288,7 @@ const MainLayout: React.FC = () => {
         </div>
       </aside>
 
-      {/* ── Main content ─────────────────────────────────────────────────── */}
+      {/* ── Main: EXACT same structure as FRONT App.tsx ──────────────────── */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden relative bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#E0F7FA]/40 via-slate-50/40 to-slate-100/40">
         <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
           <Outlet />
