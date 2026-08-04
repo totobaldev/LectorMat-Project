@@ -3,7 +3,7 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import {
   BookOpen, LayoutDashboard, Home, BookOpenCheck,
   GitMerge, FileQuestion, MessageSquare, BarChart2,
-  ChevronDown, ChevronRight, GraduationCap, LogOut, Menu, Clock
+  ChevronDown, ChevronRight, GraduationCap, LogOut, Menu, Clock, ArrowRight
 } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 import logo from '../../assets/logo.jpeg';
