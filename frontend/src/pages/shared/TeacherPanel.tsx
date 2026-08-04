@@ -78,7 +78,10 @@ const LockedGate: React.FC<{ onUnlock: () => void; onBack: () => void }> = ({
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.98 }}
           onClick={onUnlock}
-          className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl py-3 text-sm transition-colors cursor-pointer"
+          className="w-full flex items-center justify-center gap-2 text-white rounded-xl py-3 text-sm transition-colors cursor-pointer font-bold"
+          style={{ background: '#00B4C8', boxShadow: '0 4px 12px rgba(0,180,200,0.25)' }}
+          onMouseEnter={e => (e.currentTarget.style.background = '#0098AA')}
+          onMouseLeave={e => (e.currentTarget.style.background = '#00B4C8')}
         >
           Ingresar
           <ArrowRight className="w-4 h-4" />
@@ -125,7 +128,7 @@ const TeacherPanel: React.FC = () => {
         <div className="flex items-center gap-3">
           <img src={logo} alt="LectorMat" className="h-9 w-auto object-contain" />
           <div>
-            <span className="text-xs font-black text-blue-600 uppercase tracking-widest block">
+            <span className="text-xs font-black uppercase tracking-widest block" style={{ color: '#00B4C8' }}>
               Panel Docente
             </span>
             <span className="text-sm font-bold text-slate-700">LectorMat</span>

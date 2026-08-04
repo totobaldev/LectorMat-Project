@@ -93,7 +93,10 @@ const Login: React.FC = () => {
             type="submit"
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-2 w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl py-3 text-sm transition-colors cursor-pointer"
+            className="mt-2 w-full flex items-center justify-center gap-2 text-white font-bold rounded-xl py-3 text-sm transition-colors cursor-pointer"
+          style={{ background: '#00B4C8', boxShadow: '0 4px 12px rgba(0,180,200,0.25)' }}
+          onMouseEnter={e => (e.currentTarget.style.background = '#0098AA')}
+          onMouseLeave={e => (e.currentTarget.style.background = '#00B4C8')}
           >
             Ingresar
             <ArrowRight className="w-4 h-4" />

@@ -39,65 +39,52 @@ import U4M3 from './pages/units/U4/Module3';
 
 // ─── Protected wrappers ───────────────────────────────────────────────────────
 
-const Require: React.FC<{
-  role: 'student' | 'teacher';
-  children: React.ReactNode;
-}> = ({ role, children }) => {
-  const current = useProgressStore((s) => s.role);
-  if (current !== role) return <Navigate to="/" replace />;
+const RequireAuth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const isAuthenticated = useProgressStore((s) => s.isAuthenticated);
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
   return <>{children}</>;
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 function App() {
-  const isAuthenticated = useProgressStore((s) => s.isAuthenticated);
-  const role            = useProgressStore((s) => s.role);
-
-  // 1. Not authenticated or no role chosen → Role & Credentials Gateway
-  if (!isAuthenticated || !role) return <RoleSelection />;
-
-  // 3. Role chosen → routed area
   return (
     <BrowserRouter>
       <Routes>
+        {/* Standalone Login Page */}
+        <Route path="/login" element={<RoleSelection />} />
 
-        {/* ── Teacher ─────────────────────────────────────────────── */}
-        {role === 'teacher' && (
-          <Route path="*" element={
-            <Require role="teacher"><TeacherPanel /></Require>
-          } />
-        )}
-
-        {/* ── Student ─────────────────────────────────────────────── */}
-        {role === 'student' && (
-          <Route element={<Require role="student"><MainLayout /></Require>}>
-            <Route index path="/"               element={<HomePage />} />
-            <Route path="/dashboard"            element={<DashboardPage />} />
-            <Route path="/pre"                  element={<PreModule />} />
-            <Route path="/feedback"             element={<Feedback />} />
-            {/* U1 */}
-            <Route path="/unit/1/module/1"      element={<U1M1 />} />
-            <Route path="/unit/1/module/2"      element={<U1M2 />} />
-            <Route path="/unit/1/module/3"      element={<U1M3 />} />
-            <Route path="/unit/1/module/4"      element={<U1M4 />} />
-            {/* U2 */}
-            <Route path="/unit/2/module/1"      element={<U2M1 />} />
-            <Route path="/unit/2/module/2"      element={<U2M2 />} />
-            <Route path="/unit/2/module/3"      element={<U2M3 />} />
-            {/* U3 */}
-            <Route path="/unit/3/module/1"      element={<U3M1 />} />
-            <Route path="/unit/3/module/2"      element={<U3M2 />} />
-            <Route path="/unit/3/module/3"      element={<U3M3 />} />
-            {/* U4 */}
-            <Route path="/unit/4/module/1"      element={<U4M1 />} />
-            <Route path="/unit/4/module/2"      element={<U4M2 />} />
-            <Route path="/unit/4/module/3"      element={<U4M3 />} />
-            {/* Fallback */}
-            <Route path="*"                     element={<Navigate to="/" replace />} />
-          </Route>
-        )}
-
+        {/* Main Application Layout */}
+        <Route element={<MainLayout />}>
+          <Route index path="/"               element={<HomePage />} />
+          <Route path="/dashboard"            element={<RequireAuth><DashboardPage /></RequireAuth>} />
+          <Route path="/pre"                  element={<RequireAuth><PreModule /></RequireAuth>} />
+          <Route path="/feedback"             element={<RequireAuth><Feedback /></RequireAuth>} />
+          
+          {/* U1 */}
+          <Route path="/unit/1/module/1"      element={<RequireAuth><U1M1 /></RequireAuth>} />
+          <Route path="/unit/1/module/2"      element={<RequireAuth><U1M2 /></RequireAuth>} />
+          <Route path="/unit/1/module/3"      element={<RequireAuth><U1M3 /></RequireAuth>} />
+          <Route path="/unit/1/module/4"      element={<U1M4 />} /> {/* PIN gated internally, no role check */}
+          
+          {/* U2 */}
+          <Route path="/unit/2/module/1"      element={<RequireAuth><U2M1 /></RequireAuth>} />
+          <Route path="/unit/2/module/2"      element={<RequireAuth><U2M2 /></RequireAuth>} />
+          <Route path="/unit/2/module/3"      element={<RequireAuth><U2M3 /></RequireAuth>} />
+          
+          {/* U3 */}
+          <Route path="/unit/3/module/1"      element={<RequireAuth><U3M1 /></RequireAuth>} />
+          <Route path="/unit/3/module/2"      element={<RequireAuth><U3M2 /></RequireAuth>} />
+          <Route path="/unit/3/module/3"      element={<RequireAuth><U3M3 /></RequireAuth>} />
+          
+          {/* U4 */}
+          <Route path="/unit/4/module/1"      element={<RequireAuth><U4M1 /></RequireAuth>} />
+          <Route path="/unit/4/module/2"      element={<RequireAuth><U4M2 /></RequireAuth>} />
+          <Route path="/unit/4/module/3"      element={<RequireAuth><U4M3 /></RequireAuth>} />
+          
+          {/* Fallback */}
+          <Route path="*"                     element={<Navigate to="/" replace />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

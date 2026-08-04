@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFrontProps } from '../hooks/useFrontProps';
+import { useProgressStore } from '../store/useProgressStore';
 
 import { 
   BookOpen, Compass, Zap, CheckCircle2, MessageSquare, 
@@ -8,6 +10,8 @@ import {
 } from 'lucide-react';
 
 export default function Home() {
+  const navigate = useNavigate();
+  const isAuthenticated = useProgressStore((s) => s.isAuthenticated);
   const { setScreen, progress, updateProgress, isTeacher, setIsTeacher, currentScreen } = useFrontProps();
 
   const [isChoosingCareer, setIsChoosingCareer] = useState(false);
@@ -20,6 +24,12 @@ export default function Home() {
       setSelectedSubject(progress.preSpecialty === 'mecanica' ? 'Funciones y Geometría' : 'Funciones y Progresiones');
     }
   }, [progress.preSpecialty]);
+
+  React.useEffect(() => {
+    if (isAuthenticated && !progress.career) {
+      setIsChoosingCareer(true);
+    }
+  }, [isAuthenticated, progress.career]);
 
   const handleConfirmSubject = () => {
     const specialty = selectedSubject === 'Funciones y Geometría' ? 'mecanica' : 'administracion';
@@ -412,7 +422,13 @@ export default function Home() {
               <p className="text-[10px] font-black text-white/80 uppercase tracking-wider">Tu Carrera Seleccionada</p>
               <p className="text-sm font-extrabold text-white truncate leading-snug">{progress.career}</p>
               <button
-                onClick={() => setIsChoosingCareer(true)}
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    navigate('/login');
+                  } else {
+                    setIsChoosingCareer(true);
+                  }
+                }}
                 className="text-xs font-bold text-white hover:text-white/80 underline mt-1 block cursor-pointer bg-transparent border-none p-0"
               >
                 Cambiar carrera
@@ -758,7 +774,13 @@ export default function Home() {
             </p>
           </div>
           <button
-            onClick={() => setIsChoosingCareer(true)}
+            onClick={() => {
+              if (!isAuthenticated) {
+                navigate('/login');
+              } else {
+                setIsChoosingCareer(true);
+              }
+            }}
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-8 py-3.5 rounded-2xl text-sm shadow-md transition-all hover:-translate-y-0.5 cursor-pointer border-none mx-auto block"
           >
             Ingresar a mi Carrera

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useFrontProps } from '../../../hooks/useFrontProps';
-
-import { Lock, ArrowRight } from 'lucide-react';
+import { Lock, ArrowRight, Mail, Eye, EyeOff } from 'lucide-react';
 
 export default function Module4() {
   const { setScreen, progress, updateProgress, isTeacher, setIsTeacher, currentScreen } = useFrontProps();
 
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'Inacap825') {
+    // Validates a real email format and correct password
+    if (email.includes('@') && password === 'Inacap825') {
       setIsTeacher(true);
       setError(false);
     } else {
@@ -23,35 +25,78 @@ export default function Module4() {
   if (!isTeacher) {
     return (
       <div className="p-8 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[80vh]">
-        <div className="bg-white border border-slate-200 rounded-3xl p-10 max-w-md w-full shadow-lg text-center animate-in fade-in zoom-in-95 duration-300">
-          <div className="w-20 h-20 mx-auto bg-slate-100 text-slate-600 rounded-full flex items-center justify-center mb-6">
-            <Lock className="w-8 h-8" />
+        <div className="bg-white border border-slate-200 rounded-[2rem] p-10 max-w-md w-full shadow-[0_8px_30px_rgba(0,0,0,0.04)] text-center animate-in fade-in zoom-in-95 duration-300">
+          <div className="w-16 h-16 mx-auto bg-[#E0F7FA] text-[#00B4C8] rounded-2xl flex items-center justify-center mb-6">
+            <Lock className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Acceso Restringido</h2>
-          <p className="text-slate-500 mb-8">Por favor, ingrese la clave de docente para acceder a las estadísticas del curso.</p>
+          <h2 className="text-2xl font-black text-slate-900 mb-2">Acceso Restringido</h2>
+          <p className="text-sm text-slate-500 mb-8">Por favor, ingrese sus credenciales de docente para acceder a las estadísticas del curso.</p>
           
-          <form onSubmit={handleLogin} className="flex flex-col gap-4">
-            <div>
-              <input 
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Contraseña"
-                className={`w-full bg-slate-50 border ${error ? 'border-red-400 ring-2 ring-red-100' : 'border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20'} rounded-xl px-4 py-3.5 text-lg font-bold text-slate-900 outline-none transition-all text-center tracking-widest`}
-              />
-              {error && <p className="text-sm font-bold text-red-500 mt-2">Clave incorrecta. Intente nuevamente.</p>}
+          <form onSubmit={handleLogin} className="flex flex-col gap-5 text-left">
+            {/* Email Field */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                Correo Docente
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                <input 
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="ejemplo@inacap.cl"
+                  required
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 pl-10 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#00B4C8] focus:ring-2 focus:ring-[#00B4C8]/10 transition"
+                />
+              </div>
             </div>
+
+            {/* Password Field */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                Contraseña
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                <input 
+                  type={showPass ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 pl-10 text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#00B4C8] focus:ring-2 focus:ring-[#00B4C8]/10 transition"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPass(!showPass)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {error && (
+              <p className="text-xs font-bold text-red-500 text-center mt-1">
+                Credenciales incorrectas. Intente nuevamente.
+              </p>
+            )}
+
             <button 
               type="submit"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-sm shadow-indigo-600/20 transition-colors cursor-pointer flex items-center justify-center gap-2 mt-2"
+              className="w-full text-white font-extrabold py-3.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 mt-2"
+              style={{
+                background: 'linear-gradient(to right, #00B4C8, #0098AA)',
+                boxShadow: '0 4px 15px rgba(0,180,200,0.3)',
+              }}
             >
-              Ingresar <ArrowRight className="w-5 h-5" />
+              Ingresar <ArrowRight className="w-4 h-4" />
             </button>
           </form>
           
           <button 
             onClick={() => setScreen('home')}
-            className="mt-6 text-sm text-slate-500 font-bold hover:text-slate-700 transition-colors cursor-pointer border-none bg-transparent"
+            className="mt-6 text-sm text-slate-400 font-bold hover:text-slate-600 transition-colors cursor-pointer border-none bg-transparent"
           >
             &larr; Volver al inicio
           </button>
