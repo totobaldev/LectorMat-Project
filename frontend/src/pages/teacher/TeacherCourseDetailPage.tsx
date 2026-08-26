@@ -38,7 +38,7 @@ export default function TeacherCourseDetailPage() {
   };
 
   const handleEnroll = () => {
-    if (!courseId || !selectedStudentId) return;
+    if (!courseId || !selectedStudentId || !course) return;
     const student = globalStudents.find(s => s.id === selectedStudentId);
     if (!student) return;
 

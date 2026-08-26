@@ -45,7 +45,7 @@ export default function U3Module1() {
   const SLOTS = isAdm ? ADM_SLOTS : MEC_SLOTS;
 
   // Initialize placements state dynamically based on active specialty
-  const [placements, setPlacements] = useState<Record<string, string | null>>(() => {
+  const [placements, setPlacements] = useState<Record<string, string | null>>((): Record<string, string | null> => {
     if (progress.preSpecialty === 'administracion') {
       return { a1: null, n: null, d: null };
     }
