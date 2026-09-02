@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { GraduationCap, Mail, Lock, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
-import logo from '../../assets/logo.jpeg';
+import { BrandMark } from '../../components/brand/BrandMark';
+import { LectorMatIcon } from '../../components/brand/LectorMatIcon';
+import { ActionButton } from '../../components/ui/ActionButton';
+import { StatusBadge } from '../../components/ui/StatusBadge';
 
 // ─── Auth Gateway (Student only — teacher panel accessed from sidebar) ─────────
 
@@ -36,9 +39,9 @@ const RoleSelection: React.FC = () => {
         transition={{ duration: 0.4 }}
         className="flex flex-col items-center gap-3 mb-8"
       >
-        <img src={logo} alt="LectorMat" className="h-20 w-auto object-contain" />
+        <BrandMark compact markClassName="h-20 w-20" />
         <div className="text-center">
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">LectorMat</h1>
+          <h1 className="text-3xl font-black text-slate-950 tracking-tight">Lector<span className="text-orange-500">Mat</span></h1>
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
             Nivelación Matemática Técnico-Profesional
           </p>
@@ -58,13 +61,9 @@ const RoleSelection: React.FC = () => {
         >
           {/* Card header */}
           <div className="flex flex-col items-center gap-3 text-center border-b border-slate-100 pb-6">
-            <span
-              className="inline-flex items-center gap-1.5 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider border"
-              style={{ background: '#E0F7FA', color: '#00B4C8', borderColor: '#B2EBF2' }}
-            >
-              <GraduationCap className="w-3.5 h-3.5" />
+            <StatusBadge tone="blue" icon={<LectorMatIcon name="reading" size={14} />}>
               Acceso Estudiante
-            </span>
+            </StatusBadge>
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
               Credenciales de Acceso
             </h2>
@@ -77,38 +76,41 @@ const RoleSelection: React.FC = () => {
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             {/* Email */}
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-slate-600 uppercase tracking-wider">
+              <label htmlFor="student-identity" className="text-xs font-bold text-slate-600 uppercase tracking-wider">
                 Correo o RUT
               </label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
+                  id="student-identity"
                   type="text"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="correo@inacap.cl"
-                  className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none transition-all focus:border-[#00B4C8] focus:ring-4 focus:ring-[#00B4C8]/10 focus:bg-white"
+                  className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white"
                 />
               </div>
             </div>
 
             {/* Password */}
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-slate-600 uppercase tracking-wider">
+              <label htmlFor="student-password" className="text-xs font-bold text-slate-600 uppercase tracking-wider">
                 Contraseña
               </label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
+                  id="student-password"
                   type={showPass ? 'text' : 'password'}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-11 pr-12 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none transition-all focus:border-[#00B4C8] focus:ring-4 focus:ring-[#00B4C8]/10 focus:bg-white"
+                  className="w-full pl-11 pr-12 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(v => !v)}
+                  aria-label={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                 >
                   {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -118,33 +120,35 @@ const RoleSelection: React.FC = () => {
 
             {/* Remember */}
             <label className="flex items-center gap-3 cursor-pointer select-none">
-              <button
-                type="button"
-                onClick={() => setRemember(v => !v)}
+              <input
+                type="checkbox"
+                checked={remember}
+                onChange={(event) => setRemember(event.target.checked)}
+                className="sr-only"
+              />
+              <span
+                aria-hidden="true"
                 className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
                   remember
-                    ? 'border-[#00B4C8] bg-[#00B4C8]'
+                    ? 'border-blue-600 bg-blue-600'
                     : 'border-slate-300 bg-white'
                 }`}
               >
                 {remember && <CheckCircle2 className="w-3 h-3 text-white" />}
-              </button>
+              </span>
               <span className="text-sm text-slate-600">Mantener sesión activa</span>
             </label>
 
             {/* Submit */}
-            <motion.button
+            <ActionButton
               type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full py-4 rounded-2xl font-extrabold text-white text-sm tracking-wide transition-all"
-              style={{
-                background: 'linear-gradient(to right, #00B4C8, #0098AA)',
-                boxShadow: '0 4px 20px rgba(0,180,200,0.35)',
-              }}
+              variant="student"
+              size="lg"
+              fullWidth
+              leading={<LectorMatIcon name="reading" size={20} />}
             >
               Ingresar a LectorMat
-            </motion.button>
+            </ActionButton>
           </form>
         </div>
       </motion.div>

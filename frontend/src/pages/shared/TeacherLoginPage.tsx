@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
-import logo from '../../assets/logo.jpeg';
+import { BrandMark } from '../../components/brand/BrandMark';
+import { LectorMatIcon } from '../../components/brand/LectorMatIcon';
+import { ActionButton } from '../../components/ui/ActionButton';
+import { StatusBadge } from '../../components/ui/StatusBadge';
 
 // ── Mock teacher credentials (frontend-only) ────────────────────────────────
 const MOCK_TEACHERS = [
@@ -61,9 +64,9 @@ const TeacherLoginPage: React.FC = () => {
         transition={{ duration: 0.35 }}
         className="flex flex-col items-center gap-3 mb-8"
       >
-        <img src={logo} alt="LectorMat" className="h-20 w-auto object-contain" />
+        <BrandMark compact markClassName="h-20 w-20" />
         <div className="text-center">
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">LectorMat</h1>
+          <h1 className="text-3xl font-black text-slate-950 tracking-tight">Lector<span className="text-orange-500">Mat</span></h1>
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
             Portal Docente
           </p>
@@ -83,13 +86,9 @@ const TeacherLoginPage: React.FC = () => {
         >
           {/* Card header */}
           <div className="flex flex-col items-center gap-3 text-center border-b border-slate-100 pb-6">
-            <span
-              className="inline-flex items-center gap-1.5 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider border"
-              style={{ background: '#FFF7ED', color: '#EA580C', borderColor: '#FED7AA' }}
-            >
-              <LayoutDashboard className="w-3.5 h-3.5" />
+            <StatusBadge tone="orange" icon={<LectorMatIcon name="teacher" size={14} />}>
               Acceso Docente
-            </span>
+            </StatusBadge>
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
               Credenciales Docente
             </h2>
@@ -110,7 +109,7 @@ const TeacherLoginPage: React.FC = () => {
 
             {/* Email */}
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-slate-600 uppercase tracking-wider">
+              <label htmlFor="teacher-email" className="text-xs font-bold text-slate-600 uppercase tracking-wider">
                 Correo Institucional
               </label>
               <div className="relative">
@@ -129,7 +128,7 @@ const TeacherLoginPage: React.FC = () => {
 
             {/* Password */}
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-slate-600 uppercase tracking-wider">
+              <label htmlFor="teacher-password" className="text-xs font-bold text-slate-600 uppercase tracking-wider">
                 Contraseña
               </label>
               <div className="relative">
@@ -146,6 +145,7 @@ const TeacherLoginPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowPass((v) => !v)}
+                  aria-label={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer border-none bg-transparent"
                 >
                   {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -154,21 +154,16 @@ const TeacherLoginPage: React.FC = () => {
             </div>
 
             {/* Submit */}
-            <motion.button
+            <ActionButton
               type="submit"
               disabled={loading}
-              whileHover={{ scale: loading ? 1 : 1.02 }}
-              whileTap={{ scale: loading ? 1 : 0.98 }}
-              className="w-full py-4 rounded-2xl font-extrabold text-white text-sm tracking-wide transition-all disabled:opacity-60 cursor-pointer border-none"
-              style={{
-                background: loading
-                  ? '#fb923c'
-                  : 'linear-gradient(to right, #f97316, #ea580c)',
-                boxShadow: '0 4px 20px rgba(249,115,22,0.35)',
-              }}
+              variant="teacher"
+              size="lg"
+              fullWidth
+              leading={<LectorMatIcon name="teacher" size={20} />}
             >
               {loading ? 'Verificando…' : 'Ingresar al Panel Docente'}
-            </motion.button>
+            </ActionButton>
           </form>
         </div>
       </motion.div>

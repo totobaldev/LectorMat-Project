@@ -3,34 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { useFrontProps } from '../hooks/useFrontProps';
 import { useProgressStore } from '../store/useProgressStore';
 
-import { 
-  BookOpen, Compass, Zap, CheckCircle2, MessageSquare, 
-  LayoutDashboard, ArrowRight, ArrowLeft, GraduationCap, 
+import {
+  BookOpen, Compass, Zap,
+  ArrowRight, ArrowLeft,
   Briefcase, Wrench, Check 
 } from 'lucide-react';
+import { LectorMatIcon } from '../components/brand/LectorMatIcon';
+import { ActionButton } from '../components/ui/ActionButton';
+import { StatusBadge } from '../components/ui/StatusBadge';
 
 export default function Home() {
   const navigate = useNavigate();
   const isAuthenticated = useProgressStore((s) => s.isAuthenticated);
   const isTeacherUnlocked = useProgressStore((s) => s.isTeacherUnlocked);
-  const { setScreen, progress, updateProgress, isTeacher, setIsTeacher, currentScreen } = useFrontProps();
+  const { setScreen, progress, updateProgress } = useFrontProps();
 
-  const [isChoosingCareer, setIsChoosingCareer] = useState(false);
+  const [isChoosingCareer, setIsChoosingCareer] = useState(() => isAuthenticated && !progress.career);
   const [selectedSubject, setSelectedSubject] = useState<'Funciones y Progresiones' | 'Funciones y Geometría'>(
     progress.preSpecialty === 'mecanica' ? 'Funciones y Geometría' : 'Funciones y Progresiones'
   );
-
-  React.useEffect(() => {
-    if (progress.preSpecialty) {
-      setSelectedSubject(progress.preSpecialty === 'mecanica' ? 'Funciones y Geometría' : 'Funciones y Progresiones');
-    }
-  }, [progress.preSpecialty]);
-
-  React.useEffect(() => {
-    if (isAuthenticated && !progress.career) {
-      setIsChoosingCareer(true);
-    }
-  }, [isAuthenticated, progress.career]);
 
   const role = useProgressStore((s) => s.role);
 
@@ -38,48 +29,53 @@ export default function Home() {
   // Only authenticated STUDENTS bypass this to see their progress dashboard.
   if (!(isAuthenticated && role === 'student')) {
     return (
-      <div className="min-h-full bg-slate-50 flex flex-col">
+      <div className="min-h-full bg-slate-50 flex flex-col overflow-hidden">
         {/* Hero */}
-        <section className="flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20 gap-8">
-          <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-600">
+        <section className="flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20 gap-8 relative">
+          <div className="absolute -top-20 left-[12%] h-44 w-44 rounded-[3rem] rotate-12 bg-blue-100/50" aria-hidden="true" />
+          <div className="absolute top-16 right-[10%] h-20 w-20 rounded-[1.75rem] -rotate-12 bg-orange-100/70" aria-hidden="true" />
+          <StatusBadge tone="blue" icon={<LectorMatIcon name="math" size={13} />} className="relative z-10">
             Plataforma de Nivelación Matemática
-          </span>
-          <div className="space-y-4 max-w-2xl">
-            <h1 className="text-5xl sm:text-6xl font-black text-slate-950 tracking-tight leading-none">
+          </StatusBadge>
+          <div className="space-y-4 max-w-2xl relative z-10">
+            <h1 className="text-4xl sm:text-6xl font-black text-slate-950 tracking-tight leading-none">
               Bienvenido a{' '}
-              <span className="text-blue-600">LectorMat</span>
+              <span className="text-blue-600">Lector</span><span className="text-orange-500">Mat</span>
             </h1>
             <p className="text-slate-500 text-lg font-medium leading-relaxed">
               Aprende matemática aplicada a tu carrera técnico-profesional con actividades interactivas, lectura comprensiva y ejercicios adaptativos.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4 relative z-10">
             {role === 'teacher' ? (
               /* Teacher already logged in */
-              <button
+              <ActionButton
                 onClick={() => navigate('/teacher/courses')}
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-orange-500 text-white font-extrabold text-sm shadow-lg shadow-orange-500/25 hover:bg-orange-600 transition-all duration-200 cursor-pointer border-none"
+                variant="teacher"
+                size="lg"
+                leading={<LectorMatIcon name="teacher" size={20} />}
               >
-                <LayoutDashboard className="w-5 h-5" />
                 Ir a mi Panel
-              </button>
+              </ActionButton>
             ) : (
               /* Unauthenticated: show both access buttons */
               <>
-                <button
+                <ActionButton
                   onClick={() => navigate('/login')}
-                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-blue-600 text-white font-extrabold text-sm shadow-lg shadow-blue-600/25 hover:bg-blue-700 transition-all duration-200 cursor-pointer border-none"
+                  variant="student"
+                  size="lg"
+                  leading={<LectorMatIcon name="reading" size={20} />}
                 >
-                  <GraduationCap className="w-5 h-5" />
                   Ingresar como Estudiante
-                </button>
-                <button
+                </ActionButton>
+                <ActionButton
                   onClick={() => navigate('/teacher/login')}
-                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-orange-500 text-white font-extrabold text-sm shadow-lg shadow-orange-500/25 hover:bg-orange-600 transition-all duration-200 cursor-pointer border-none"
+                  variant="teacher"
+                  size="lg"
+                  leading={<LectorMatIcon name="teacher" size={20} />}
                 >
-                  <LayoutDashboard className="w-5 h-5" />
                   Acceso Docente
-                </button>
+                </ActionButton>
               </>
             )}
           </div>
@@ -89,30 +85,30 @@ export default function Home() {
         <section className="px-6 pb-16 max-w-5xl mx-auto w-full grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
             {
-              icon: BookOpen,
-              color: 'blue',
+              icon: 'reading' as const,
+              surface: 'bg-blue-50 text-blue-600 ring-blue-100',
               title: 'Comprensión Lectora',
               desc: 'Módulos de lectura matemática contextualizada a tu especialidad vocacional.',
             },
             {
-              icon: Compass,
-              color: 'orange',
+              icon: 'method' as const,
+              surface: 'bg-orange-50 text-orange-600 ring-orange-100',
               title: 'Método Interactivo',
               desc: 'Árboles de decisión y actividades H5P que guían tu razonamiento paso a paso.',
             },
             {
-              icon: Zap,
-              color: 'emerald',
+              icon: 'challenge' as const,
+              surface: 'bg-emerald-50 text-emerald-600 ring-emerald-100',
               title: 'Banco de Ejercicios',
               desc: 'Problemas escalonados por nivel con retroalimentación inmediata y progreso visible.',
             },
-          ].map(({ icon: Icon, color, title, desc }) => (
+          ].map(({ icon, surface, title, desc }) => (
             <div
               key={title}
-              className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col gap-4"
+              className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col gap-4 transition-transform duration-200 hover:-translate-y-1"
             >
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-${color}-50`}>
-                <Icon className={`w-7 h-7 text-${color}-600`} />
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ring-1 ring-inset ${surface}`}>
+                <LectorMatIcon name={icon} size={30} />
               </div>
               <div>
                 <h3 className="text-base font-extrabold text-slate-900">{title}</h3>
@@ -130,7 +126,7 @@ export default function Home() {
               version: 'v1.3.0',
               date: 'Agosto 2026',
               badge: 'Nuevo',
-              badgeColor: 'bg-blue-600',
+              tone: 'blue' as const,
               title: 'Módulo H5P para Docentes',
               desc: 'Los docentes ahora pueden subir actividades interactivas H5P directamente desde el Panel Docente, organizarlas en secciones y gestionar un banco de contenido centralizado.',
             },
@@ -138,7 +134,7 @@ export default function Home() {
               version: 'v1.2.0',
               date: 'Julio 2026',
               badge: 'Mejora',
-              badgeColor: 'bg-emerald-500',
+              tone: 'emerald' as const,
               title: 'Continuidad de Aprendizaje',
               desc: 'El sidebar del estudiante ahora muestra una ProgressCard inteligente que detecta automáticamente en qué módulo se quedó el estudiante y permite reanudar con un clic.',
             },
@@ -146,7 +142,7 @@ export default function Home() {
               version: 'v1.1.0',
               date: 'Junio 2026',
               badge: 'Funcionalidad',
-              badgeColor: 'bg-orange-500',
+              tone: 'orange' as const,
               title: 'Panel Docente con Búsqueda de Cursos',
               desc: 'Panel dedicado para docentes con búsqueda instantánea por código de asignatura (MAT101, MEC205…), agrupación por área y acceso protegido por credenciales.',
             },
@@ -156,7 +152,7 @@ export default function Home() {
               className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] flex items-start gap-5"
             >
               <div className="shrink-0 text-center">
-                <span className={`inline-block text-[10px] font-black text-white px-2.5 py-1 rounded-full ${item.badgeColor} mb-1`}>{item.badge}</span>
+                <StatusBadge tone={item.tone} className="mb-1">{item.badge}</StatusBadge>
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{item.version}</p>
                 <p className="text-[10px] text-slate-400 font-medium">{item.date}</p>
               </div>
@@ -199,6 +195,7 @@ export default function Home() {
     careerName: 'Ingeniería en Administración' | 'Administración' | 'Técnico en Mecánica y Electromovilidad Automotriz' | 'Ingeniería en Mecánica y Electromovilidad Automotriz', 
     specialtyName: 'mecanica' | 'administracion'
   ) => {
+    setSelectedSubject(specialtyName === 'mecanica' ? 'Funciones y Geometría' : 'Funciones y Progresiones');
     updateProgress({ 
       career: careerName,
       preSpecialty: specialtyName,
@@ -206,20 +203,6 @@ export default function Home() {
     });
     setIsChoosingCareer(false);
   };
-
-  const Badge = ({ completed, title, icon: Icon, color }: any) => (
-    <div className={`p-4 rounded-2xl border flex flex-col items-center text-center gap-3 transition-colors ${completed ? `bg-${color}-50 border-${color}-100 shadow-sm` : 'bg-slate-50 border-slate-100 grayscale opacity-70'}`}>
-      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${completed ? `bg-${color}-600 text-white shadow-md shadow-${color}-200` : 'bg-slate-200 text-slate-400'}`}>
-        <Icon className="w-7 h-7" />
-      </div>
-      <div>
-        <p className="text-sm font-extrabold text-slate-900 leading-tight">{title}</p>
-        <div className="mt-2 flex justify-center">
-          {completed ? <CheckCircle2 className={`w-5 h-5 text-${color}-600`} /> : <div className="w-5 h-5 rounded-full border-2 border-slate-300"></div>}
-        </div>
-      </div>
-    </div>
-  );
 
   if (isChoosingCareer) {
     return (
@@ -541,9 +524,9 @@ export default function Home() {
       {/* HEADER DE BIENVENIDA Y CARRERA */}
       <section className="flex flex-col md:flex-row md:items-center md:justify-between bg-white rounded-[2rem] p-6 sm:p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] gap-6 relative overflow-hidden">
         <div className="space-y-1.5 relative z-10 flex-1">
-          <span className="text-[10px] font-black text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">
+          <StatusBadge tone="blue" icon={<LectorMatIcon name="reading" size={13} />}>
             Plataforma Transforma 2026
-          </span>
+          </StatusBadge>
           <h1 className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight leading-none mt-2">¡Bienvenido a LectorMat!</h1>
           <p className="text-slate-600 text-sm sm:text-base font-medium mt-3 leading-relaxed">
             LectorMat es una plataforma interactiva diseñada para ayudarte a comprender mejor los enunciados de los problemas matemáticos. Muchas veces el error no está en el cálculo, sino en no entender bien qué te está pidiendo el problema. Por eso, LectorMat te guía paso a paso en la lectura comprensiva de cada enunciado, antes de que llegues a la parte del cálculo.
@@ -552,11 +535,9 @@ export default function Home() {
 
         {/* Bloque Elegir Carrera (Only visible if already configured and logged in) */}
         {(isAuthenticated || isTeacherUnlocked) && progress.career && (
-          <div className={`relative z-10 flex items-center gap-4 p-4 sm:p-5 rounded-2xl border min-w-[280px] md:min-w-[340px] shrink-0 ${
-            progress.preSpecialty === 'mecanica' ? 'bg-emerald-600 border-emerald-700 text-white' : 'bg-indigo-600 border-indigo-700 text-white'
-          }`}>
+          <div className="relative z-10 flex items-center gap-4 p-4 sm:p-5 rounded-2xl border min-w-[280px] md:min-w-[340px] shrink-0 bg-blue-600 border-blue-700 text-white shadow-[0_14px_30px_-18px_rgba(37,99,235,0.9)]">
             <div className="w-12 h-12 rounded-xl bg-white/20 text-white flex items-center justify-center shrink-0">
-              <GraduationCap className="w-6 h-6" />
+              <LectorMatIcon name="career" size={25} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[10px] font-black text-white/80 uppercase tracking-wider">Tu Carrera Seleccionada</p>
@@ -583,42 +564,37 @@ export default function Home() {
       {(isAuthenticated || isTeacherUnlocked) && progress.subject ? (
         <>
           <section className="flex flex-col gap-6">
-            <div className="bg-gradient-to-br from-amber-500 via-orange-500 to-indigo-700 p-6 sm:p-8 rounded-[2rem] border border-amber-200 shadow-lg relative overflow-hidden text-white">
+            <div className="bg-blue-600 p-6 sm:p-8 rounded-[2rem] border border-blue-500 shadow-[0_18px_40px_-24px_rgba(37,99,235,0.9)] relative overflow-hidden text-white">
               <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div className="space-y-2 max-w-3xl">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-black text-amber-900 bg-amber-100 px-3 py-1 rounded-full uppercase tracking-wider">
+                    <StatusBadge tone="amber" icon={<LectorMatIcon name="progress" size={13} />}>
                       Recomendado para comenzar
-                    </span>
-                    <span className="text-[10px] font-black text-indigo-100 bg-indigo-900/40 px-3 py-1 rounded-full uppercase tracking-wider">
+                    </StatusBadge>
+                    <span className="text-[10px] font-black text-blue-50 bg-blue-950/40 px-3 py-1 rounded-full uppercase tracking-wider ring-1 ring-inset ring-white/15">
                       Lectura Crítica
                     </span>
                   </div>
                   <h1 className="text-3xl font-extrabold tracking-tight">Nivelación de Comprensión LectorMat</h1>
-                  <p className="text-orange-100 text-sm leading-relaxed font-medium">
+                  <p className="text-blue-100 text-sm leading-relaxed font-medium">
                     Desarrolla tus habilidades de prelectura, lectura activa y traducción a modelos conceptuales aplicados a tu especialidad (Administración o Área Mecánica). ¡Crucial para evitar errores en las unidades matemáticas!
                   </p>
                 </div>
                 
-                <button
+                <ActionButton
                   onClick={() => setScreen('pre_m1')}
-                  className="bg-white hover:bg-slate-100 text-indigo-950 font-extrabold px-8 py-4 rounded-2xl shadow-md shrink-0 flex items-center gap-2 transition-all hover:-translate-y-0.5 self-start md:self-auto cursor-pointer border-none text-sm"
+                  variant="secondary"
+                  size="lg"
+                  className="shrink-0 self-start md:self-auto"
+                  leading={<LectorMatIcon name="reading" size={21} className="text-blue-600" />}
+                  trailing={<ArrowRight className="w-5 h-5 text-blue-600" />}
                 >
-                  {progress.preCompleted ? (
-                    <>
-                      <span>Repetir Diagnóstico</span>
-                      <ArrowRight className="w-5 h-5 text-indigo-700" />
-                    </>
-                  ) : (
-                    <>
-                      <span>Iniciar Módulo Comprensión Lectora Aplicada</span>
-                      <ArrowRight className="w-5 h-5 text-indigo-700 animate-pulse" />
-                    </>
-                  )}
-                </button>
+                  {progress.preCompleted ? 'Repetir Diagnóstico' : 'Iniciar Módulo Comprensión Lectora Aplicada'}
+                </ActionButton>
               </div>
               
-              <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl opacity-30 transform translate-x-1/4 -translate-y-1/4"></div>
+              <div className="absolute -top-12 right-8 w-40 h-40 rounded-[2.5rem] rotate-12 bg-white/10" aria-hidden="true"></div>
+              <div className="absolute -bottom-10 right-52 w-24 h-24 rounded-full bg-orange-400/35" aria-hidden="true"></div>
             </div>
           </section>
 
@@ -626,11 +602,7 @@ export default function Home() {
           <div className="bg-white rounded-[2.5rem] border border-slate-100 p-6 sm:p-10 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.03)] space-y-10 relative overflow-hidden">
             
             {/* Banner de Asignatura y Carrera */}
-            <div className={`p-6 sm:p-8 rounded-3xl text-white relative overflow-hidden flex flex-col lg:flex-row lg:items-center gap-6 ${
-              progress.preSpecialty === 'mecanica' 
-                ? 'bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800' 
-                : 'bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800'
-            }`}>
+            <div className="p-6 sm:p-8 rounded-3xl text-white relative overflow-hidden flex flex-col lg:flex-row lg:items-center gap-6 bg-slate-950 border border-slate-800">
               <div className="flex-1 relative z-10 flex flex-col sm:flex-row gap-4">
                 {/* Caja de Carrera */}
                 <div className="flex-1 space-y-1 bg-white/10 p-5 rounded-2xl border border-white/20 backdrop-blur-sm">
@@ -659,7 +631,8 @@ export default function Home() {
                   Modificar Selección
                 </button>
               </div>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl opacity-30 transform translate-x-1/3 -translate-y-1/3"></div>
+              <div className="absolute -top-10 right-8 w-36 h-36 bg-blue-500/20 rounded-[2.5rem] rotate-12" aria-hidden="true"></div>
+              <div className="absolute bottom-5 right-48 w-12 h-12 bg-orange-500/40 rounded-2xl -rotate-12" aria-hidden="true"></div>
             </div>
 
             <div className="space-y-10">
@@ -904,8 +877,8 @@ export default function Home() {
         </>
       ) : (
         <div className="bg-white border border-slate-100 rounded-[2rem] p-8 sm:p-12 text-center max-w-2xl mx-auto my-6 space-y-6 shadow-sm">
-          <div className="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto">
-            <GraduationCap className="w-8 h-8" />
+          <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center mx-auto ring-1 ring-inset ring-blue-100">
+            <LectorMatIcon name="career" size={34} />
           </div>
           <div className="space-y-2">
             <h3 className="text-2xl font-black text-slate-900">Comienza tu Ruta de Aprendizaje</h3>
@@ -913,7 +886,7 @@ export default function Home() {
               Por favor, selecciona tu carrera profesional para acceder a tu asignatura.
             </p>
           </div>
-          <button
+          <ActionButton
             onClick={() => {
               if (!isAuthenticated && !isTeacherUnlocked) {
                 navigate('/login');
@@ -921,10 +894,13 @@ export default function Home() {
                 setIsChoosingCareer(true);
               }
             }}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-8 py-3.5 rounded-2xl text-sm shadow-md transition-all hover:-translate-y-0.5 cursor-pointer border-none mx-auto block"
+            variant="student"
+            size="lg"
+            leading={<LectorMatIcon name="career" size={20} />}
+            className="mx-auto"
           >
             Ingresar a mi Carrera
-          </button>
+          </ActionButton>
         </div>
       )}
     </div>

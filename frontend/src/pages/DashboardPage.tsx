@@ -1,10 +1,12 @@
 import React from 'react';
 import { useFrontProps } from '../hooks/useFrontProps';
 
-import { TrendingUp, AlertTriangle, Lightbulb, BookOpen, Compass, Zap, CheckCircle2, Award, Star, ShieldCheck } from 'lucide-react';
+import { AlertTriangle, Lightbulb, CheckCircle2 } from 'lucide-react';
+import { LectorMatIcon } from '../components/brand/LectorMatIcon';
+import { StatusBadge } from '../components/ui/StatusBadge';
 
 export default function Dashboard() {
-  const { setScreen, progress, updateProgress, isTeacher, setIsTeacher, currentScreen } = useFrontProps();
+  const { setScreen, progress } = useFrontProps();
 
   const m1Pct = progress.m1Completed ? 100 : Math.round((progress.m1SlotsPlaced / 3) * 55);
   const m2Pct = progress.m2Completed ? 100 : Math.min(85, progress.m2NodesVisited * 30);
@@ -22,7 +24,7 @@ export default function Dashboard() {
     tips.push({
       title: "Completa la Nivelación de Lectura",
       desc: "Te sugerimos iniciar el Módulo de Comprensión Lectora Aplicada para entrenar la extracción de datos y variables en tu especialidad antes de las matemáticas.",
-      icon: <BookOpen className="w-5 h-5 text-amber-500" />,
+      icon: <LectorMatIcon name="reading" size={22} className="text-blue-600" />,
       action: () => setScreen('pre_m1')
     });
   }
@@ -30,7 +32,7 @@ export default function Dashboard() {
     tips.push({
       title: "Mejora en Comprensión",
       desc: "Vuelve al módulo de Comprensión y revisa cómo identificar el cateto opuesto y adyacente según el ángulo. Es la base de todo.",
-      icon: <BookOpen className="w-5 h-5 text-indigo-500" />,
+      icon: <LectorMatIcon name="reading" size={22} className="text-blue-600" />,
       action: () => setScreen('m1')
     });
   }
@@ -38,7 +40,7 @@ export default function Dashboard() {
     tips.push({
       title: "Practica el Árbol de Decisión",
       desc: "Un error común es usar Seno cuando necesitas Coseno. La clave está en los datos que te dan en el Método paso a paso.",
-      icon: <Compass className="w-5 h-5 text-emerald-500" />,
+      icon: <LectorMatIcon name="method" size={22} className="text-orange-600" />,
       action: () => setScreen('m2')
     });
   }
@@ -46,7 +48,7 @@ export default function Dashboard() {
     tips.push({
       title: "Enfrenta problemas sin pistas",
       desc: "Dirígete al Banco interactivo e intenta resolver un par de problemas sin mirar la fórmula. Te dará seguridad.",
-      icon: <Zap className="w-5 h-5 text-orange-500" />,
+      icon: <LectorMatIcon name="challenge" size={22} className="text-orange-600" />,
       action: () => setScreen('m3')
     });
   }
@@ -56,19 +58,21 @@ export default function Dashboard() {
     tips.push({
       title: "¡Excelente desempeño!",
       desc: "Has dominado esta unidad. Estás listo para avanzar o ayudar a tus compañeros.",
-      icon: <TrendingUp className="w-5 h-5 text-sky-500" />,
+      icon: <LectorMatIcon name="progress" size={22} className="text-emerald-600" />,
       action: null
     });
   }
 
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto flex flex-col gap-6 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gradient-to-r from-sky-50 to-indigo-50 p-6 sm:p-8 rounded-[2rem] border border-sky-100 shadow-sm relative overflow-hidden">
+      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-6 sm:p-8 rounded-[2rem] border border-blue-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
         <div className="relative z-10 space-y-1">
+          <StatusBadge tone="blue" icon={<LectorMatIcon name="statistics" size={13} />}>Progreso</StatusBadge>
           <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Mi Avance</h1>
-          <p className="text-sky-600 font-medium">Análisis de tu desempeño en la Unidad 3</p>
+          <p className="text-blue-600 font-medium">Análisis de tu desempeño en la Unidad 3</p>
         </div>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-sky-200 rounded-full blur-3xl opacity-40 transform translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute -top-12 right-12 w-36 h-36 bg-blue-50 rounded-[2.5rem] rotate-12" aria-hidden="true"></div>
+        <LectorMatIcon name="progress" size={88} className="absolute right-12 top-1/2 -translate-y-1/2 text-blue-100" />
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
@@ -87,7 +91,7 @@ export default function Dashboard() {
                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
                 <path
-                  className="text-sky-500 transition-all duration-1000 ease-out"
+                  className="text-blue-600 transition-all duration-1000 ease-out"
                   strokeWidth="3"
                   strokeDasharray={`${overall}, 100`}
                   strokeLinecap="round"
@@ -146,14 +150,14 @@ export default function Dashboard() {
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Low Performance / Alerts */}
           {overall < 100 && (
-            <div className="bg-rose-50 border border-rose-100 rounded-[2rem] p-7 shadow-sm">
+            <div className="bg-amber-50 border border-amber-100 rounded-[2rem] p-7 shadow-sm">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-white text-amber-600 border border-amber-200 flex items-center justify-center shrink-0">
                   <AlertTriangle className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-extrabold text-rose-900 mb-1">Áreas de bajo desempeño</h3>
-                  <p className="text-rose-700 text-sm leading-relaxed mb-4">
+                  <h3 className="text-lg font-extrabold text-amber-950 mb-1">Próximo foco de mejora</h3>
+                  <p className="text-amber-800 text-sm leading-relaxed mb-4">
                     Hemos detectado {needsM1 ? 'dificultades iniciales en la identificación de datos (M1).' : needsM2 ? 'errores al elegir la fórmula trigonométrica correcta (M2).' : 'baja consistencia al resolver problemas sin guías (M3).'} Abajo encontrarás tips para superarlo.
                   </p>
                 </div>
@@ -194,8 +198,8 @@ export default function Dashboard() {
 
       <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-7 w-full mt-2">
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
-            <Award className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center ring-1 ring-inset ring-orange-100">
+                <LectorMatIcon name="achievements" size={22} />
           </div>
           <div>
             <h2 className="text-xl font-extrabold text-slate-900">Insignias y Reconocimientos</h2>
@@ -206,7 +210,7 @@ export default function Dashboard() {
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
           <div className={`p-5 rounded-2xl border flex flex-col items-center text-center gap-3 transition-colors ${progress.preCompleted ? 'bg-amber-50 border-amber-100 shadow-sm' : 'bg-slate-50 border-slate-100 grayscale opacity-70'}`}>
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${progress.preCompleted ? 'bg-amber-500 text-white shadow-md shadow-amber-200' : 'bg-slate-200 text-slate-400'}`}>
-              <Award className="w-7 h-7" />
+              <LectorMatIcon name="achievements" size={30} />
             </div>
             <div>
               <p className="text-sm font-extrabold text-slate-900 leading-tight">Lector de<br/>Especialidad</p>
@@ -225,7 +229,7 @@ export default function Dashboard() {
 
           <div className={`p-5 rounded-2xl border flex flex-col items-center text-center gap-3 transition-colors ${progress.m1Completed ? 'bg-indigo-50 border-indigo-100 shadow-sm' : 'bg-slate-50 border-slate-100 grayscale opacity-70'}`}>
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${progress.m1Completed ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'bg-slate-200 text-slate-400'}`}>
-              <BookOpen className="w-7 h-7" />
+              <LectorMatIcon name="reading" size={30} />
             </div>
             <div>
               <p className="text-sm font-extrabold text-slate-900 leading-tight">Lector<br/>Experto</p>
@@ -237,7 +241,7 @@ export default function Dashboard() {
           
           <div className={`p-5 rounded-2xl border flex flex-col items-center text-center gap-3 transition-colors ${progress.m2Completed ? 'bg-emerald-50 border-emerald-100 shadow-sm' : 'bg-slate-50 border-slate-100 grayscale opacity-70'}`}>
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${progress.m2Completed ? 'bg-emerald-500 text-white shadow-md shadow-emerald-200' : 'bg-slate-200 text-slate-400'}`}>
-              <Compass className="w-7 h-7" />
+              <LectorMatIcon name="method" size={30} />
             </div>
             <div>
               <p className="text-sm font-extrabold text-slate-900 leading-tight">Estratega<br/>Avanzado</p>
@@ -249,7 +253,7 @@ export default function Dashboard() {
 
           <div className={`p-5 rounded-2xl border flex flex-col items-center text-center gap-3 transition-colors ${progress.m3Completed ? 'bg-orange-50 border-orange-100 shadow-sm' : 'bg-slate-50 border-slate-100 grayscale opacity-70'}`}>
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${progress.m3Completed ? 'bg-orange-500 text-white shadow-md shadow-orange-200' : 'bg-slate-200 text-slate-400'}`}>
-              <Zap className="w-7 h-7" />
+              <LectorMatIcon name="challenge" size={30} />
             </div>
             <div>
               <p className="text-sm font-extrabold text-slate-900 leading-tight">Resolutor<br/>Rápido</p>
@@ -261,7 +265,7 @@ export default function Dashboard() {
 
           <div className={`p-5 rounded-2xl border flex flex-col items-center text-center gap-3 transition-colors ${overall === 100 ? 'bg-amber-50 border-amber-100 shadow-sm' : 'bg-slate-50 border-slate-100 grayscale opacity-70'}`}>
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${overall === 100 ? 'bg-amber-400 text-amber-900 shadow-md shadow-amber-200' : 'bg-slate-200 text-slate-400'}`}>
-              <Star className="w-7 h-7" />
+              <LectorMatIcon name="reward" size={30} />
             </div>
             <div>
               <p className="text-sm font-extrabold text-slate-900 leading-tight">Maestro<br/>de Unidad</p>
