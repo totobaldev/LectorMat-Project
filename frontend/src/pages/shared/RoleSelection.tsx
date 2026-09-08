@@ -1,30 +1,72 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
+import { useTeacherStore } from '../../store/useTeacherStore';
 import { BrandMark } from '../../components/brand/BrandMark';
 import { LectorMatIcon } from '../../components/brand/LectorMatIcon';
 import { ActionButton } from '../../components/ui/ActionButton';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 
-// ─── Auth Gateway (Student only — teacher panel accessed from sidebar) ─────────
+// ─── Auth Gateway (Student login with generated credentials) ─────────────────
 
 const RoleSelection: React.FC = () => {
   const navigate = useNavigate();
   const setRole = useProgressStore((s) => s.setRole);
   const login   = useProgressStore((s) => s.login);
+  const setStudentSession = useProgressStore((s) => s.setStudentSession);
+  const updateProgress = useProgressStore((s) => s.updateProgress);
+  const teacherCourses = useTeacherStore((s) => s.teacherCourses);
 
   const [email, setEmail]         = useState('');
   const [password, setPassword]   = useState('');
   const [remember, setRemember]   = useState(true);
   const [showPass, setShowPass]   = useState(false);
+  const [errorMsg, setErrorMsg]   = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg('');
+
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPass = password.trim();
+
+    if (!cleanEmail) {
+      setErrorMsg('Ingresa tu correo institucional o usuario.');
+      return;
+    }
+
+    // Search across enrolled students in teacher store
+    const allEnrolled = teacherCourses.flatMap((c) => c.enrolledStudents || []);
+    const matchingStudent = allEnrolled.find(
+      (s) => s.email.toLowerCase() === cleanEmail || s.username?.toLowerCase() === cleanEmail
+    );
+
+    if (matchingStudent && matchingStudent.password) {
+      if (cleanPass !== matchingStudent.password) {
+        setErrorMsg(
+          `Contraseña incorrecta para ${matchingStudent.name}. Recuerda usar el formato NOMBREapellido (ej: JOAQUINalbornoz).`
+        );
+        return;
+      }
+    }
+
+    const studentDisplayName = matchingStudent?.name || cleanEmail;
+    setStudentSession(cleanEmail, studentDisplayName);
+
+    if (matchingStudent?.career) {
+      const isMech = matchingStudent.career.toLowerCase().includes('mecánica');
+      updateProgress({
+        career: matchingStudent.career,
+        preSpecialty: isMech ? 'mecanica' : 'administracion',
+        subject: isMech ? 'Funciones y Geometría' : 'Funciones y Progresiones'
+      });
+    }
+
     setRole('student');
     login();
-    navigate('/');
+    navigate('/courses');
   };
 
   return (
@@ -74,6 +116,13 @@ const RoleSelection: React.FC = () => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            {errorMsg && (
+              <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs font-bold text-red-700 animate-in fade-in duration-200">
+                <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <span>{errorMsg}</span>
+              </div>
+            )}
+
             {/* Email */}
             <div className="flex flex-col gap-2">
               <label htmlFor="student-identity" className="text-xs font-bold text-slate-600 uppercase tracking-wider">

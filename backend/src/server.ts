@@ -22,6 +22,9 @@ app.use(
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+import coursesRouter from './routes/coursesRoutes';
+import authRouter from './routes/authRoutes';
+
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
 // Health check
@@ -34,10 +37,9 @@ app.get('/api/health', (_req: Request, res: Response) => {
   });
 });
 
-// TODO: mount feature routers here
-// app.use('/api/users',     usersRouter);
-// app.use('/api/exercises', exercisesRouter);
-// app.use('/api/progress',  progressRouter);
+// Feature routers
+app.use('/api/courses', coursesRouter);
+app.use('/api/auth', authRouter);
 
 // ─── 404 Handler ─────────────────────────────────────────────────────────────
 
@@ -58,9 +60,12 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   });
 });
 
+import { initDatabase } from './config/db';
+
 // ─── Start ────────────────────────────────────────────────────────────────────
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await initDatabase();
   console.log(
     `\n🟢 LectorMat API running\n   → http://localhost:${PORT}/api/health\n   → ENV: ${process.env.NODE_ENV}\n`
   );

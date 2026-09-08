@@ -32,6 +32,9 @@ export interface ProgressState {
 
   // ── Role Gateway ──────────────────────────────────────────────────────────
   role: AppRole;
+  studentEmail: string | null;
+  studentName: string | null;
+  setStudentSession: (email: string, name: string) => void;
 
   // ── Identity ──────────────────────────────────────────────────────────────
   selectedCareer: string | null;
@@ -136,6 +139,8 @@ export const useProgressStore = create<ProgressState>()(
       isAuthenticated: false,
       isTeacherUnlocked: false,
       role: null,
+      studentEmail: null,
+      studentName: null,
       selectedCareer: null,
       selectedArea: null,
       activeModule: 'M1',
@@ -178,9 +183,12 @@ export const useProgressStore = create<ProgressState>()(
 
        // Auth actions
       login: () => set({ isAuthenticated: true }),
+      setStudentSession: (email, name) => set({ studentEmail: email, studentName: name }),
       logout: () => set({ 
         isAuthenticated: false, 
         role: null, 
+        studentEmail: null,
+        studentName: null,
         isTeacherUnlocked: false,
         career: null,
         subject: null,
@@ -261,6 +269,8 @@ export const useProgressStore = create<ProgressState>()(
 
       clearSession: () =>
         set({
+          studentEmail: null,
+          studentName: null,
           selectedCareer: null,
           selectedArea: null,
           activeModule: 'M1',
@@ -289,6 +299,8 @@ export const useProgressStore = create<ProgressState>()(
         isAuthenticated: state.isAuthenticated,
         isTeacherUnlocked: state.isTeacherUnlocked,
         role: state.role,
+        studentEmail: state.studentEmail,
+        studentName: state.studentName,
         selectedCareer: state.selectedCareer,
         selectedArea: state.selectedArea,
         activeModule: state.activeModule,

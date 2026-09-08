@@ -1,38 +1,64 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, ChevronRight, Package, Upload, CheckCircle2, X, AlertCircle } from 'lucide-react';
-import { useTeacherStore } from '../../store/useTeacherStore';
-
-// ─────────────────────────────────────────────────────────────────────────────
+import { ArrowLeft, CheckCircle2, FileText, FileCode2, Package, Upload } from 'lucide-react';
+import { useTeacherStore, type ModuleCategory, type ResourceType } from '../../store/useTeacherStore';
 
 export default function TeacherH5PResourceForm() {
   const { courseId } = useParams<{ courseId: string }>();
   const [searchParams] = useSearchParams();
+
   const sectionId = searchParams.get('sectionId') ?? '';
+  const initialUnitId = searchParams.get('unitId') ?? '';
+  const initialModuleType = (searchParams.get('moduleType') as ModuleCategory) || 'comprension';
+  const initialResourceType = (searchParams.get('resourceType') as ResourceType) || 'pdf';
+
   const navigate = useNavigate();
 
-  const { teacherCourses, addH5PResource } = useTeacherStore();
+  const { teacherCourses, addResource } = useTeacherStore();
   const course = teacherCourses.find((c) => c.id === courseId);
   const section = course?.sections.find((s) => s.id === sectionId);
 
-  // Form state
+  // Form State
+  const [selectedUnitId, setSelectedUnitId] = useState(initialUnitId || section?.units[0]?.id || '');
+  const [moduleType, setModuleType] = useState<ModuleCategory>(initialModuleType);
+  const [resourceType, setResourceType] = useState<ResourceType>(initialResourceType);
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [dragOver, setDragOver] = useState(false);
-  const [errors, setErrors] = useState<{ name?: string; file?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string; file?: string; unit?: string }>({});
   const [saved, setSaved] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const getAcceptedExtensions = (type: ResourceType) => {
+    switch (type) {
+      case 'pdf': return '.pdf';
+      case 'word': return '.doc,.docx';
+      case 'h5p': return '.h5p';
+    }
+  };
+
   const handleFile = (f: File) => {
-    if (!f.name.endsWith('.h5p')) {
+    const ext = f.name.split('.').pop()?.toLowerCase() || '';
+
+    if (resourceType === 'pdf' && ext !== 'pdf') {
+      setErrors((e) => ({ ...e, file: 'Solo se aceptan archivos con extensión .pdf' }));
+      return;
+    }
+    if (resourceType === 'word' && ext !== 'doc' && ext !== 'docx') {
+      setErrors((e) => ({ ...e, file: 'Solo se aceptan archivos con extensión .doc o .docx' }));
+      return;
+    }
+    if (resourceType === 'h5p' && ext !== 'h5p') {
       setErrors((e) => ({ ...e, file: 'Solo se aceptan archivos con extensión .h5p' }));
       return;
     }
+
     setFile(f);
     setErrors((e) => ({ ...e, file: undefined }));
-    if (!name.trim()) setName(f.name.replace('.h5p', ''));
+    if (!name.trim()) setName(f.name.replace(/\.[^/.]+$/, ''));
   };
 
   const onDrop = useCallback((ev: React.DragEvent) => {
@@ -40,29 +66,37 @@ export default function TeacherH5PResourceForm() {
     setDragOver(false);
     const f = ev.dataTransfer.files[0];
     if (f) handleFile(f);
-  }, []);
+  }, [resourceType]);
 
   const onDragOver = (ev: React.DragEvent) => { ev.preventDefault(); setDragOver(true); };
   const onDragLeave = () => setDragOver(false);
 
   const validate = () => {
-    const e: { name?: string; file?: string } = {};
-    if (!name.trim()) e.name = 'El nombre es obligatorio.';
-    if (!file) e.file = 'Debes seleccionar un archivo .h5p';
+    const e: { name?: string; file?: string; unit?: string } = {};
+    if (!name.trim()) e.name = 'El nombre del recurso es obligatorio.';
+    if (!file) e.file = `Debes seleccionar un archivo ${getAcceptedExtensions(resourceType)}`;
+    if (section?.units && section.units.length > 0 && !selectedUnitId) {
+      e.unit = 'Debes seleccionar una Unidad.';
+    }
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
   const handleSave = () => {
     if (!validate() || !courseId || !sectionId || !file) return;
-    addH5PResource(courseId, sectionId, {
+
+    const targetUnitId = selectedUnitId || section?.units[0]?.id || 'u_default';
+
+    addResource(courseId, sectionId, targetUnitId, moduleType, {
       name: name.trim(),
       description: description.trim(),
+      resourceType,
       fileName: file.name,
       fileSize: file.size,
     });
+
     setSaved(true);
-    setTimeout(() => navigate(`/teacher/courses/${courseId}`), 1400);
+    setTimeout(() => navigate(`/teacher/courses/${courseId}`), 1200);
   };
 
   if (!course || !section) {
@@ -78,197 +112,209 @@ export default function TeacherH5PResourceForm() {
 
   if (saved) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center gap-5 p-10 text-center">
+      <div className="flex-1 flex flex-col items-center justify-center gap-5 p-10 text-center min-h-[60vh]">
         <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center">
           <CheckCircle2 className="w-10 h-10 text-emerald-500" />
         </div>
-        <h2 className="text-2xl font-black text-slate-900">¡Recurso guardado!</h2>
-        <p className="text-slate-500 text-sm font-medium">Redirigiendo al curso…</p>
+        <h2 className="text-2xl font-black text-slate-900">¡Recurso añadido con éxito!</h2>
+        <p className="text-slate-500 text-sm font-medium">Redirigiendo a las unidades del curso…</p>
       </div>
     );
   }
 
   return (
-    <div className="p-6 sm:p-10 max-w-3xl mx-auto flex flex-col gap-8 pb-16 w-full">
+    <div className="p-6 sm:p-10 max-w-3xl mx-auto flex flex-col gap-8 pb-16 w-full animate-in fade-in duration-300">
 
-      {/* ── Breadcrumb ────────────────────────────────────────────────────── */}
-      <nav className="flex items-center gap-2 text-sm font-bold text-slate-400 flex-wrap">
+      {/* ── Header ───────────────────────────────────────────────────────── */}
+      <nav className="flex items-center gap-2 text-sm font-bold text-slate-400">
         <button
-          onClick={() => navigate('/teacher/courses')}
+          onClick={() => navigate(`/teacher/courses/${courseId}`)}
           className="flex items-center gap-1.5 hover:text-[#1B2A5A] transition-colors cursor-pointer bg-transparent border-none"
         >
           <ArrowLeft className="w-4 h-4" />
-          Mis Cursos
+          Volver al Curso
         </button>
-        <ChevronRight className="w-4 h-4" />
-        <button
-          onClick={() => navigate(`/teacher/courses/${courseId}`)}
-          className="hover:text-[#1B2A5A] transition-colors cursor-pointer bg-transparent border-none truncate max-w-[160px]"
-        >
-          {course.name}
-        </button>
-        <ChevronRight className="w-4 h-4" />
-        <span className="text-slate-600 truncate max-w-[140px]">{section.title}</span>
-        <ChevronRight className="w-4 h-4" />
-        <span className="text-slate-700">Añadir H5P</span>
       </nav>
 
-      {/* ── Header ────────────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)]">
-        <div className="flex items-center gap-4 mb-1">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center">
-            <Package className="w-6 h-6 text-emerald-600" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-black text-slate-900">Añadir actividad H5P</h1>
-            <p className="text-sm text-slate-500 font-medium">
-              en <span className="font-extrabold text-slate-700">{section.title}</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Form ──────────────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] flex flex-col gap-7">
-
-        {/* Nombre */}
-        <div className="flex flex-col gap-2">
-          <label className="text-xs font-black text-slate-700 uppercase tracking-wider" htmlFor="h5p-name">
-            Nombre <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="h5p-name"
-            type="text"
-            value={name}
-            onChange={(e) => { setName(e.target.value); setErrors((er) => ({ ...er, name: undefined })); }}
-            placeholder="ej. Funciones Polinómicas – Comprensión Lectora"
-            className={`w-full px-4 py-3.5 rounded-2xl border bg-slate-50 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 transition-all ${
-              errors.name
-                ? 'border-red-300 focus:ring-red-200'
-                : 'border-slate-200 focus:ring-[#1B2A5A]/25 focus:border-[#1B2A5A]/40'
-            }`}
-          />
-          {errors.name && (
-            <span className="flex items-center gap-1 text-xs text-red-500 font-bold">
-              <AlertCircle className="w-3.5 h-3.5" />{errors.name}
-            </span>
-          )}
-        </div>
-
-        {/* Descripción */}
-        <div className="flex flex-col gap-2">
-          <label className="text-xs font-black text-slate-700 uppercase tracking-wider" htmlFor="h5p-desc">
-            Descripción
-          </label>
-          <textarea
-            id="h5p-desc"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Describe el objetivo de esta actividad interactiva..."
-            rows={3}
-            className="w-full px-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1B2A5A]/25 focus:border-[#1B2A5A]/40 transition-all resize-none"
-          />
-        </div>
-
-        {/* Paquete H5P */}
-        <div className="flex flex-col gap-2">
-          <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
-            Paquete de Archivo <span className="text-red-500">*</span>
-          </label>
-          <p className="text-xs text-slate-400 font-medium -mt-1">
-            Tipo de archivo aceptado: <span className="font-black text-slate-600">Archivo (H5P) .h5p</span>
+      <div className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] flex flex-col gap-8">
+        <div>
+          <h1 className="text-2xl font-black text-slate-900">Añadir Recurso / Material</h1>
+          <p className="text-sm text-slate-500 mt-1">
+            Sección <span className="font-extrabold text-slate-800">{section.title}</span> — Agrega material en PDF, Word o H5P a los módulos de ejercicios.
           </p>
-
-          {/* Drop zone */}
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={() => fileInputRef.current?.click()}
-            onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}
-            onDrop={onDrop}
-            onDragOver={onDragOver}
-            onDragLeave={onDragLeave}
-            className={`relative flex flex-col items-center justify-center gap-3 px-6 py-10 rounded-3xl border-2 border-dashed cursor-pointer transition-all duration-200 ${
-              dragOver
-                ? 'border-emerald-400 bg-emerald-50 scale-[1.01]'
-                : file
-                ? 'border-emerald-300 bg-emerald-50/60'
-                : errors.file
-                ? 'border-red-300 bg-red-50/30'
-                : 'border-slate-200 bg-slate-50 hover:border-emerald-300 hover:bg-emerald-50/30'
-            }`}
-          >
-            {file ? (
-              <>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
-                  <CheckCircle2 className="w-7 h-7 text-emerald-600" />
-                </div>
-                <div className="text-center">
-                  <p className="font-extrabold text-slate-800 text-sm">{file.name}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    {file.size < 1048576
-                      ? `${Math.round(file.size / 1024)} KB`
-                      : `${(file.size / 1048576).toFixed(1)} MB`}
-                  </p>
-                </div>
-                <button
-                  onClick={(e) => { e.stopPropagation(); setFile(null); }}
-                  className="absolute top-3 right-3 w-7 h-7 rounded-lg bg-slate-200 hover:bg-slate-300 flex items-center justify-center cursor-pointer border-none transition-colors"
-                >
-                  <X className="w-3.5 h-3.5 text-slate-600" />
-                </button>
-              </>
-            ) : (
-              <>
-                <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center">
-                  <Upload className="w-7 h-7 text-slate-400" />
-                </div>
-                <div className="text-center">
-                  <p className="font-extrabold text-slate-700 text-sm">
-                    Arrastra tu archivo .h5p aquí
-                  </p>
-                  <p className="text-xs text-slate-400 mt-1">o haz clic para seleccionarlo</p>
-                </div>
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 border border-slate-200 px-3 py-1 rounded-full bg-white">
-                  .h5p
-                </span>
-              </>
-            )}
-          </div>
-
-          {/* Hidden file input */}
-          <input
-            ref={fileInputRef}
-            id="h5p-file-input"
-            type="file"
-            accept=".h5p"
-            className="hidden"
-            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
-          />
-
-          {errors.file && (
-            <span className="flex items-center gap-1 text-xs text-red-500 font-bold">
-              <AlertCircle className="w-3.5 h-3.5" />{errors.file}
-            </span>
-          )}
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center justify-end gap-3 pt-2 border-t border-slate-100">
-          <button
-            onClick={() => navigate(`/teacher/courses/${courseId}`)}
-            className="px-5 py-2.5 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer border-none bg-transparent"
-          >
-            Cancelar
-          </button>
-          <button
-            id="btn-save-h5p"
-            onClick={handleSave}
-            className="px-7 py-3 rounded-2xl bg-emerald-600 text-white font-extrabold text-sm hover:bg-emerald-700 transition-colors cursor-pointer border-none shadow-md shadow-emerald-600/20 flex items-center gap-2"
-          >
-            <Package className="w-4 h-4" />
-            Guardar recurso
-          </button>
+        {/* ── Form Body ────────────────────────────────────────────────────── */}
+        <div className="flex flex-col gap-6">
+
+          {/* Type Selector Tabs */}
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
+              1. Tipo de Recurso
+            </label>
+            <div className="grid grid-cols-3 gap-3">
+              <button
+                type="button"
+                onClick={() => { setResourceType('pdf'); setFile(null); }}
+                className={`flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border-2 font-extrabold text-xs transition-all cursor-pointer ${
+                  resourceType === 'pdf'
+                    ? 'border-rose-500 bg-rose-50 text-rose-700 shadow-sm'
+                    : 'border-slate-100 bg-slate-50 text-slate-500 hover:bg-slate-100'
+                }`}
+              >
+                <FileText className="w-4 h-4 text-rose-600" />
+                <span>Documento PDF</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setResourceType('word'); setFile(null); }}
+                className={`flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border-2 font-extrabold text-xs transition-all cursor-pointer ${
+                  resourceType === 'word'
+                    ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm'
+                    : 'border-slate-100 bg-slate-50 text-slate-500 hover:bg-slate-100'
+                }`}
+              >
+                <FileCode2 className="w-4 h-4 text-blue-600" />
+                <span>Documento Word</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setResourceType('h5p'); setFile(null); }}
+                className={`flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border-2 font-extrabold text-xs transition-all cursor-pointer ${
+                  resourceType === 'h5p'
+                    ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm'
+                    : 'border-slate-100 bg-slate-50 text-slate-500 hover:bg-slate-100'
+                }`}
+              >
+                <Package className="w-4 h-4 text-emerald-600" />
+                <span>Actividad H5P</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Unit & Module Selector */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {section.units && section.units.length > 0 && (
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
+                  2. Unidad Destino
+                </label>
+                <select
+                  value={selectedUnitId}
+                  onChange={(e) => setSelectedUnitId(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1B2A5A]/30"
+                >
+                  {section.units.map((u) => (
+                    <option key={u.id} value={u.id}>{u.title}</option>
+                  ))}
+                </select>
+                {errors.unit && <p className="text-xs text-rose-500 font-bold">{errors.unit}</p>}
+              </div>
+            )}
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
+                3. Módulo de Ejercicios
+              </label>
+              <select
+                value={moduleType}
+                onChange={(e) => setModuleType(e.target.value as ModuleCategory)}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1B2A5A]/30"
+              >
+                <option value="comprension">📖 Comprensión (Básico)</option>
+                <option value="metodo">🧭 Método (Intermedio)</option>
+                <option value="interactivo">⚡ Interactivo (Avanzado)</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Title & Description Inputs */}
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
+              Título del Recurso
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Ej: Guía Teórica de Razones Trigonométricas"
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1B2A5A]/30"
+            />
+            {errors.name && <p className="text-xs text-rose-500 font-bold">{errors.name}</p>}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
+              Descripción u Objetivos
+            </label>
+            <textarea
+              rows={3}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Escribe una breve descripción del material para los estudiantes..."
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-xs font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1B2A5A]/30"
+            />
+          </div>
+
+          {/* File Upload Area */}
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
+              Archivo ({getAcceptedExtensions(resourceType)})
+            </label>
+            <div
+              onDrop={onDrop}
+              onDragOver={onDragOver}
+              onDragLeave={onDragLeave}
+              onClick={() => fileInputRef.current?.click()}
+              className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer ${
+                dragOver ? 'border-orange-500 bg-orange-50/30' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/60'
+              }`}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept={getAcceptedExtensions(resourceType)}
+                onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
+                className="hidden"
+              />
+
+              {file ? (
+                <div className="flex items-center justify-center gap-3">
+                  <span className="font-extrabold text-xs text-slate-800">{file.name}</span>
+                  <span className="text-[11px] font-bold text-slate-400">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center gap-2">
+                  <Upload className="w-8 h-8 text-slate-400" />
+                  <p className="text-xs font-extrabold text-slate-700">
+                    Haz clic aquí o arrastra tu archivo {getAcceptedExtensions(resourceType)}
+                  </p>
+                </div>
+              )}
+            </div>
+            {errors.file && <p className="text-xs text-rose-500 font-bold">{errors.file}</p>}
+          </div>
+
+          {/* Form Action Buttons */}
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={() => navigate(`/teacher/courses/${courseId}`)}
+              className="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer border-none bg-transparent"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              onClick={handleSave}
+              className="px-6 py-2.5 rounded-xl bg-[#1B2A5A] text-white font-extrabold text-xs hover:bg-[#263d7a] transition-colors cursor-pointer border-none shadow-md"
+            >
+              Guardar Recurso
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

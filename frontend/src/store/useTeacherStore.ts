@@ -2,16 +2,25 @@ import { create } from 'zustand';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
-export interface H5PResource {
+export type ModuleCategory = 'comprension' | 'metodo' | 'interactivo';
+export type ResourceType = 'h5p' | 'pdf' | 'word';
+
+export interface SectionResource {
   id: string;
   name: string;
   description: string;
-  fileName: string;         // e.g. "interaction.h5p"
-  fileSize?: number;        // bytes, optional
-  createdAt: string;        // ISO date string
+  resourceType: ResourceType; // 'h5p' | 'pdf' | 'word'
+  fileName: string;
+  fileSize?: number;
+  createdAt: string;
   courseId: string;
   sectionId: string;
+  unitId?: string;
+  moduleType?: ModuleCategory; // 'comprension' | 'metodo' | 'interactivo'
 }
+
+// Legacy alias for backward compatibility
+export type H5PResource = SectionResource;
 
 export interface CourseStudent {
   id: string;
@@ -19,13 +28,30 @@ export interface CourseStudent {
   email: string;
   career: string;
   dateEnrolled: string;
+  sectionId?: string;
+  sectionTitle?: string;
+  username?: string;
+  password?: string;
+}
+
+export interface SectionUnit {
+  id: string;
+  title: string;              // e.g. "Unidad 3: Trigonometría y Geometría"
+  subtitle?: string;           // e.g. "Programa Transforma 2026"
+  order: number;
+  modules: {
+    comprension: SectionResource[];
+    metodo: SectionResource[];
+    interactivo: SectionResource[];
+  };
 }
 
 export interface CourseSection {
   id: string;
-  title: string;            // e.g. "Sección 1: Introducción"
+  title: string;              // e.g. "C1", "C4"
   order: number;
-  resources: H5PResource[];
+  units: SectionUnit[];
+  resources: SectionResource[]; // fallback direct section resources
 }
 
 export interface TeacherCourse {
@@ -37,7 +63,6 @@ export interface TeacherCourse {
   enrolledStudents: CourseStudent[];
 }
 
-/** Legacy Course type for CourseSearch/CourseCard components — preserved */
 export interface Course {
   id: string;
   code: string;
@@ -48,30 +73,41 @@ export interface Course {
 }
 
 export interface TeacherState {
-  // Legacy course search state
   courses: Course[];
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 
-  // Teacher course management
   teacherCourses: TeacherCourse[];
   addTeacherCourse: (name: string, description: string) => void;
   addSection: (courseId: string, title: string) => void;
+  addUnit: (courseId: string, sectionId: string, title: string, subtitle?: string) => void;
+  removeUnit: (courseId: string, sectionId: string, unitId: string) => void;
+  addResource: (
+    courseId: string,
+    sectionId: string,
+    unitId: string,
+    moduleType: ModuleCategory,
+    resource: { name: string; description: string; resourceType: ResourceType; fileName: string; fileSize?: number }
+  ) => void;
   addH5PResource: (
     courseId: string,
     sectionId: string,
-    resource: Omit<H5PResource, 'id' | 'createdAt' | 'courseId' | 'sectionId'>
+    resource: Omit<SectionResource, 'id' | 'createdAt' | 'courseId' | 'sectionId'>
   ) => void;
+  removeResource: (courseId: string, sectionId: string, unitId: string, moduleType: ModuleCategory, resourceId: string) => void;
 
-  // Participant management
-  enrollStudent: (courseId: string, name: string, email: string, career: string) => void;
+  enrollStudent: (courseId: string, name: string, email: string, career?: string, sectionId?: string, password?: string) => void;
+  importSectionStudents: (
+    courseId: string,
+    sectionId: string,
+    students: Array<{ name: string; email: string; career?: string; username?: string; password?: string }>
+  ) => void;
   unenrollStudent: (courseId: string, studentId: string) => void;
 
-  // Content bank
-  getAllH5PResources: () => H5PResource[];
+  getAllH5PResources: () => SectionResource[];
 }
 
-// ── Mock legacy data & Global Users ────────────────────────────────────────────
+// ── Initial Mock Data ──────────────────────────────────────────────────────────
 
 export interface GlobalStudent {
   id: string;
@@ -88,182 +124,309 @@ export const globalStudents: GlobalStudent[] = [
   { id: 'usr_5', name: 'Camila Silva', email: 'c.silva@inacapmail.cl', career: 'Gastronomía Internacional' },
 ];
 
-
-export const mockCourses: Course[] = [
-  {
-    id: 'c1',
-    code: 'MAT101',
-    name: 'Matemática Básica Aplicada',
-    area: 'Ciencias Básicas',
-    career: 'Ingeniería en Administración',
-    enrolledStudents: 32,
-  },
-  {
-    id: 'c2',
-    code: 'MAT201',
-    name: 'Funciones y Geometría',
-    area: 'Matemática Aplicada',
-    career: 'Técnico en Mecánica y Electromovilidad Automotriz',
-    enrolledStudents: 28,
-  },
-  {
-    id: 'c3',
-    code: 'FIN302',
-    name: 'Finanzas Pyme',
-    area: 'Administración y Finanzas',
-    career: 'Administración',
-    enrolledStudents: 45,
-  },
-  {
-    id: 'c4',
-    code: 'MEC205',
-    name: 'Termodinámica y Motores',
-    area: 'Mecánica Automotriz',
-    career: 'Ingeniería en Mecánica y Electromovilidad Automotriz',
-    enrolledStudents: 24,
-  },
-];
-
-// ── Mock teacher courses ───────────────────────────────────────────────────────
-
-const mockTeacherCourses: TeacherCourse[] = [
+const INITIAL_COURSES: TeacherCourse[] = [
   {
     id: 'tc1',
-    name: 'Matemática Básica Aplicada · MAT101',
-    description: 'Nivelación matemática para primer año de ingeniería. Cubre álgebra, funciones y aplicaciones.',
-    createdAt: '2026-07-15T10:00:00Z',
+    name: 'Trigonometría y Geometría',
+    description: 'Curso de trigonometría básica y sus aplicaciones geométricas.',
+    createdAt: new Date().toISOString(),
     sections: [
       {
-        id: 'sec1',
-        title: 'Sección 1: Funciones Polinómicas',
+        id: 'c1',
+        title: 'C1',
         order: 1,
-        resources: [
+        units: [
           {
-            id: 'r1',
-            name: 'Introducción a Funciones Polinómicas',
-            description: 'Actividad interactiva de comprensión lectora sobre funciones.',
-            fileName: 'funciones-intro.h5p',
-            fileSize: 245760,
-            createdAt: '2026-07-16T09:00:00Z',
-            courseId: 'tc1',
-            sectionId: 'sec1',
-          },
+            id: 'u3',
+            title: 'Unidad 3: Trigonometría y Geometría',
+            subtitle: 'Programa Transforma 2026',
+            order: 1,
+            modules: {
+              comprension: [
+                {
+                  id: 'res_1',
+                  name: 'Deducción de Medidas y Distancias',
+                  description: 'Guía práctica en formato PDF.',
+                  resourceType: 'pdf',
+                  fileName: 'Guia_Trigonometria_U3.pdf',
+                  fileSize: 1548576,
+                  createdAt: new Date().toISOString(),
+                  courseId: 'tc1',
+                  sectionId: 'c1',
+                  unitId: 'u3',
+                  moduleType: 'comprension'
+                }
+              ],
+              metodo: [
+                {
+                  id: 'res_2',
+                  name: 'Clasificador de Teoremas y Funciones',
+                  description: 'Documento Word con tablas y teoría.',
+                  resourceType: 'word',
+                  fileName: 'Clasificador_Teoremas.docx',
+                  fileSize: 854000,
+                  createdAt: new Date().toISOString(),
+                  courseId: 'tc1',
+                  sectionId: 'c1',
+                  unitId: 'u3',
+                  moduleType: 'metodo'
+                }
+              ],
+              interactivo: [
+                {
+                  id: 'res_3',
+                  name: 'Resolución de problemas de Trigonometría aplicados',
+                  description: 'Actividad interactiva paquete H5P.',
+                  resourceType: 'h5p',
+                  fileName: 'Trigonometria_Interactivas.h5p',
+                  fileSize: 4200000,
+                  createdAt: new Date().toISOString(),
+                  courseId: 'tc1',
+                  sectionId: 'c1',
+                  unitId: 'u3',
+                  moduleType: 'interactivo'
+                }
+              ]
+            }
+          }
         ],
+        resources: []
       },
+      {
+        id: 'c4',
+        title: 'C4',
+        order: 2,
+        units: [],
+        resources: []
+      }
     ],
-    enrolledStudents: [
-      {
-        id: 'std1',
-        name: 'Juan Vega',
-        email: 'j.vega@inacapmail.cl',
-        career: 'Técnico en Mecánica y Electromovilidad Automotriz',
-        dateEnrolled: '2026-07-20T08:00:00Z',
-      },
-      {
-        id: 'std2',
-        name: 'María Rojas',
-        email: 'm.rojas@inacapmail.cl',
-        career: 'Ingeniería en Administración',
-        dateEnrolled: '2026-07-21T09:30:00Z',
-      },
-      {
-        id: 'std3',
-        name: 'Carlos Torres',
-        email: 'c.torres@inacapmail.cl',
-        career: 'Técnico en Mecánica y Electromovilidad Automotriz',
-        dateEnrolled: '2026-07-22T11:00:00Z',
-      },
-    ],
-  },
+    enrolledStudents: []
+  }
 ];
 
-// ── Store ──────────────────────────────────────────────────────────────────────
-
-let _idCounter = 100;
-const uid = () => `id-${++_idCounter}`;
-
 export const useTeacherStore = create<TeacherState>((set, get) => ({
-  // Legacy
-  courses: mockCourses,
+  courses: [],
   searchQuery: '',
-  setSearchQuery: (query: string) => set({ searchQuery: query }),
+  setSearchQuery: (query) => set({ searchQuery: query }),
 
-  // Teacher courses
-  teacherCourses: mockTeacherCourses,
+  teacherCourses: INITIAL_COURSES,
 
   addTeacherCourse: (name, description) =>
-    set((state) => ({
-      teacherCourses: [
-        ...state.teacherCourses,
-        {
-          id: uid(),
-          name,
-          description,
-          createdAt: new Date().toISOString(),
-          sections: [],
-          enrolledStudents: [],
-        },
-      ],
-    })),
+    set((state) => {
+      const newCourse: TeacherCourse = {
+        id: `tc-${Date.now()}`,
+        name,
+        description,
+        createdAt: new Date().toISOString(),
+        sections: [
+          { id: `c-${Date.now()}-1`, title: 'C1', order: 1, units: [], resources: [] },
+          { id: `c-${Date.now()}-2`, title: 'C4', order: 2, units: [], resources: [] },
+        ],
+        enrolledStudents: [],
+      };
+      return { teacherCourses: [newCourse, ...state.teacherCourses] };
+    }),
 
   addSection: (courseId, title) =>
     set((state) => ({
       teacherCourses: state.teacherCourses.map((c) => {
         if (c.id !== courseId) return c;
-        const order = c.sections.length + 1;
-        return {
-          ...c,
-          sections: [
-            ...c.sections,
-            { id: uid(), title: title || `Sección ${order}`, order, resources: [] },
-          ],
+        const newSec: CourseSection = {
+          id: `c-${Date.now()}`,
+          title,
+          order: c.sections.length + 1,
+          units: [],
+          resources: [],
         };
+        return { ...c, sections: [...c.sections, newSec] };
       }),
     })),
 
-  addH5PResource: (courseId, sectionId, resource) =>
+  addUnit: (courseId, sectionId, title, subtitle) =>
     set((state) => ({
-      teacherCourses: state.teacherCourses.map((c) => {
-        if (c.id !== courseId) return c;
+      teacherCourses: state.teacherCourses.map((course) => {
+        if (course.id !== courseId) return course;
         return {
-          ...c,
-          sections: c.sections.map((sec) => {
-            if (sec.id !== sectionId) return sec;
+          ...course,
+          sections: course.sections.map((section) => {
+            if (section.id !== sectionId) return section;
+            const newUnit: SectionUnit = {
+              id: `unit-${Date.now()}`,
+              title,
+              subtitle: subtitle || 'Programa Transforma 2026',
+              order: (section.units?.length || 0) + 1,
+              modules: {
+                comprension: [],
+                metodo: [],
+                interactivo: [],
+              },
+            };
             return {
-              ...sec,
-              resources: [
-                ...sec.resources,
-                {
-                  ...resource,
-                  id: uid(),
-                  createdAt: new Date().toISOString(),
-                  courseId,
-                  sectionId,
-                },
-              ],
+              ...section,
+              units: [...(section.units || []), newUnit],
             };
           }),
         };
       }),
     })),
 
-  enrollStudent: (courseId, name, email, career) =>
+  removeUnit: (courseId, sectionId, unitId) =>
+    set((state) => ({
+      teacherCourses: state.teacherCourses.map((course) => {
+        if (course.id !== courseId) return course;
+        return {
+          ...course,
+          sections: course.sections.map((section) => {
+            if (section.id !== sectionId) return section;
+            return {
+              ...section,
+              units: (section.units || []).filter((u) => u.id !== unitId),
+            };
+          }),
+        };
+      }),
+    })),
+
+  addResource: (courseId, sectionId, unitId, moduleType, resourceData) =>
+    set((state) => ({
+      teacherCourses: state.teacherCourses.map((course) => {
+        if (course.id !== courseId) return course;
+        return {
+          ...course,
+          sections: course.sections.map((section) => {
+            if (section.id !== sectionId) return section;
+            return {
+              ...section,
+              units: (section.units || []).map((unit) => {
+                if (unit.id !== unitId) return unit;
+                const newRes: SectionResource = {
+                  id: `res-${Date.now()}`,
+                  name: resourceData.name,
+                  description: resourceData.description,
+                  resourceType: resourceData.resourceType,
+                  fileName: resourceData.fileName,
+                  fileSize: resourceData.fileSize,
+                  createdAt: new Date().toISOString(),
+                  courseId,
+                  sectionId,
+                  unitId,
+                  moduleType,
+                };
+                return {
+                  ...unit,
+                  modules: {
+                    ...unit.modules,
+                    [moduleType]: [...(unit.modules[moduleType] || []), newRes],
+                  },
+                };
+              }),
+            };
+          }),
+        };
+      }),
+    })),
+
+  addH5PResource: (courseId, sectionId, resource) =>
+    set((state) => {
+      const resId = `h5p-${Date.now()}`;
+      const newRes: SectionResource = {
+        id: resId,
+        name: resource.name,
+        description: resource.description,
+        fileName: resource.fileName,
+        fileSize: resource.fileSize,
+        resourceType: 'h5p',
+        createdAt: new Date().toISOString(),
+        courseId,
+        sectionId,
+      };
+
+      return {
+        teacherCourses: state.teacherCourses.map((c) => {
+          if (c.id !== courseId) return c;
+          return {
+            ...c,
+            sections: c.sections.map((sec) => {
+              if (sec.id !== sectionId) return sec;
+              // If unit exists, place into first unit interactivo module, else section resources
+              if (sec.units && sec.units.length > 0) {
+                const updatedUnits = [...sec.units];
+                updatedUnits[0].modules.interactivo.push(newRes);
+                return { ...sec, units: updatedUnits };
+              }
+              return { ...sec, resources: [...(sec.resources || []), newRes] };
+            }),
+          };
+        }),
+      };
+    }),
+
+  removeResource: (courseId, sectionId, unitId, moduleType, resourceId) =>
+    set((state) => ({
+      teacherCourses: state.teacherCourses.map((course) => {
+        if (course.id !== courseId) return course;
+        return {
+          ...course,
+          sections: course.sections.map((section) => {
+            if (section.id !== sectionId) return section;
+            return {
+              ...section,
+              units: (section.units || []).map((unit) => {
+                if (unit.id !== unitId) return unit;
+                return {
+                  ...unit,
+                  modules: {
+                    ...unit.modules,
+                    [moduleType]: (unit.modules[moduleType] || []).filter((r) => r.id !== resourceId),
+                  },
+                };
+              }),
+            };
+          }),
+        };
+      }),
+    })),
+
+  enrollStudent: (courseId, name, email, career = 'Técnico-Profesional', sectionId, password) =>
     set((state) => ({
       teacherCourses: state.teacherCourses.map((c) => {
         if (c.id !== courseId) return c;
-        return {
-          ...c,
-          enrolledStudents: [
-            ...c.enrolledStudents,
-            {
-              id: uid(),
-              name,
-              email,
-              career,
-              dateEnrolled: new Date().toISOString(),
-            },
-          ],
+        const newStudent: CourseStudent = {
+          id: `usr-${Date.now()}-${Math.random().toString(36).substring(2, 5)}`,
+          name,
+          email,
+          career,
+          dateEnrolled: new Date().toISOString(),
+          sectionId: sectionId || c.sections[0]?.id,
+          password: password || 'NOMBREalbornoz',
         };
+        return { ...c, enrolledStudents: [...(c.enrolledStudents || []), newStudent] };
+      }),
+    })),
+
+  importSectionStudents: (courseId, sectionId, students) =>
+    set((state) => ({
+      teacherCourses: state.teacherCourses.map((c) => {
+        if (c.id !== courseId) return c;
+
+        const sec = c.sections.find((s) => s.id === sectionId);
+        const existingEmails = new Set((c.enrolledStudents || []).map((s) => s.email));
+
+        const newStudents: CourseStudent[] = students
+          .filter((s) => !existingEmails.has(s.email.toLowerCase()))
+          .map((s) => ({
+            id: `usr-${Date.now()}-${Math.random().toString(36).substring(2, 5)}`,
+            name: s.name,
+            email: s.email.toLowerCase(),
+            career: s.career || 'Técnico-Profesional',
+            dateEnrolled: new Date().toISOString(),
+            sectionId,
+            sectionTitle: sec?.title,
+            username: s.username || s.email,
+            password: s.password,
+          }));
+
+        return { ...c, enrolledStudents: [...(c.enrolledStudents || []), ...newStudents] };
       }),
     })),
 
@@ -273,13 +436,23 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
         if (c.id !== courseId) return c;
         return {
           ...c,
-          enrolledStudents: c.enrolledStudents.filter((s) => s.id !== studentId),
+          enrolledStudents: (c.enrolledStudents || []).filter((s) => s.id !== studentId),
         };
       }),
     })),
 
-  getAllH5PResources: () =>
-    get().teacherCourses.flatMap((c) =>
-      c.sections.flatMap((sec) => sec.resources)
-    ),
+  getAllH5PResources: () => {
+    const all: SectionResource[] = [];
+    get().teacherCourses.forEach((course) => {
+      course.sections.forEach((sec) => {
+        (sec.resources || []).forEach((r) => all.push(r));
+        (sec.units || []).forEach((u) => {
+          Object.values(u.modules).forEach((modResList) => {
+            modResList.forEach((r) => all.push(r));
+          });
+        });
+      });
+    });
+    return all;
+  },
 }));

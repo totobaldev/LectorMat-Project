@@ -26,18 +26,73 @@ END $$;
 
 -- users
 CREATE TABLE IF NOT EXISTS users (
-  id          UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
-  rut         VARCHAR(12) NOT NULL UNIQUE,          -- e.g. "12345678-9"
-  role        user_role   NOT NULL DEFAULT 'student',
-  area        VARCHAR(100),                         -- Área técnico-profesional
-  career      VARCHAR(150),                         -- Carrera específica
-  created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  id            UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  rut           VARCHAR(12) UNIQUE,                   -- e.g. "12345678-9"
+  full_name     VARCHAR(255) NOT NULL,
+  email         VARCHAR(255) NOT NULL UNIQUE,
+  username      VARCHAR(255),
+  password_hash VARCHAR(255),                         -- Contraseña generada (ej: NOMBREalbornoz)
+  role          user_role   NOT NULL DEFAULT 'student',
+  area          VARCHAR(100),                         -- Área técnico-profesional
+  career        VARCHAR(150),                         -- Carrera específica
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-COMMENT ON TABLE  users         IS 'Usuarios del sistema (estudiantes y docentes)';
-COMMENT ON COLUMN users.rut     IS 'RUT chileno sin puntos, con guión';
-COMMENT ON COLUMN users.area    IS 'Área técnico-profesional (e.g. Construcción, Electricidad)';
-COMMENT ON COLUMN users.career  IS 'Carrera o especialidad dentro del área';
+COMMENT ON TABLE  users           IS 'Usuarios del sistema (estudiantes y docentes)';
+COMMENT ON COLUMN users.full_name IS 'Nombre completo del usuario';
+COMMENT ON COLUMN users.email     IS 'Correo electrónico institucional';
+
+-- courses
+CREATE TABLE IF NOT EXISTS courses (
+  id          VARCHAR(100) PRIMARY KEY,
+  name        VARCHAR(255) NOT NULL,
+  description TEXT,
+  created_at  TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+
+-- course_sections
+CREATE TABLE IF NOT EXISTS course_sections (
+  id            VARCHAR(100) PRIMARY KEY,
+  course_id     VARCHAR(100) NOT NULL,
+  title         VARCHAR(255) NOT NULL,
+  section_order INT          NOT NULL DEFAULT 1,
+  created_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+
+-- course_units (Unidades dentro de cada Sección)
+CREATE TABLE IF NOT EXISTS course_units (
+  id            VARCHAR(100) PRIMARY KEY,
+  section_id    VARCHAR(100) NOT NULL,
+  title         VARCHAR(255) NOT NULL,
+  subtitle      VARCHAR(255),
+  unit_order    INT          NOT NULL DEFAULT 1,
+  created_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+
+-- course_section_resources (Recursos Multiformato H5P, PDF, Word en las 3 modalidades)
+CREATE TABLE IF NOT EXISTS course_section_resources (
+  id            VARCHAR(100) PRIMARY KEY,
+  section_id    VARCHAR(100) NOT NULL,
+  unit_id       VARCHAR(100),
+  module_type   VARCHAR(50)  DEFAULT 'comprension', -- 'comprension', 'metodo', 'interactivo'
+  resource_type VARCHAR(50)  DEFAULT 'h5p',         -- 'h5p', 'pdf', 'word'
+  name          VARCHAR(255) NOT NULL,
+  description   TEXT,
+  file_name     VARCHAR(255),
+  file_path     VARCHAR(500),
+  file_size     BIGINT,
+  created_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+
+-- section_students
+CREATE TABLE IF NOT EXISTS section_students (
+  id                 VARCHAR(100) PRIMARY KEY,
+  course_id          VARCHAR(100) NOT NULL,
+  section_id         VARCHAR(100) NOT NULL,
+  user_id            VARCHAR(100) NOT NULL,
+  generated_password VARCHAR(255) NOT NULL,
+  created_at         TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 
 -- exercises
 CREATE TABLE IF NOT EXISTS exercises (
@@ -48,45 +103,29 @@ CREATE TABLE IF NOT EXISTS exercises (
   created_at   TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
 
-COMMENT ON TABLE  exercises              IS 'Banco de ejercicios por módulo y área';
-COMMENT ON COLUMN exercises.content_json IS 'Estructura: {statement, options[], answer, hints[], difficulty}';
-
 -- progress_logs
 CREATE TABLE IF NOT EXISTS progress_logs (
   id           UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id      UUID        NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  unit_id      SMALLINT    NOT NULL CHECK (unit_id BETWEEN 0 AND 4), -- 0 = pre-módulo
+  unit_id      SMALLINT    NOT NULL CHECK (unit_id BETWEEN 0 AND 4),
   module_id    module_type NOT NULL,
   score        NUMERIC(5,2) CHECK (score BETWEEN 0 AND 100),
   is_completed BOOLEAN     NOT NULL DEFAULT FALSE,
   updated_at   TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-COMMENT ON TABLE  progress_logs          IS 'Registro de progreso por usuario, unidad y módulo';
-COMMENT ON COLUMN progress_logs.unit_id  IS '0 = pre-módulo diagnóstico, 1-4 = unidades temáticas';
-COMMENT ON COLUMN progress_logs.score    IS 'Porcentaje de aciertos (0.00 - 100.00)';
-
 -- =============================================================================
 -- INDEXES
 -- =============================================================================
 
-CREATE INDEX IF NOT EXISTS idx_progress_logs_user_id
-  ON progress_logs(user_id);
-
-CREATE INDEX IF NOT EXISTS idx_progress_logs_user_unit
-  ON progress_logs(user_id, unit_id, module_id);
-
-CREATE INDEX IF NOT EXISTS idx_exercises_module_area
-  ON exercises(module_type, area_tag);
+CREATE INDEX IF NOT EXISTS idx_progress_logs_user_id ON progress_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_exercises_module_area ON exercises(module_type, area_tag);
+CREATE INDEX IF NOT EXISTS idx_course_units_section ON course_units(section_id);
+CREATE INDEX IF NOT EXISTS idx_resources_unit ON course_section_resources(unit_id);
 
 -- =============================================================================
 -- UNIQUE CONSTRAINTS
 -- =============================================================================
 
--- Un usuario no puede tener dos registros de progreso para la misma combinación
-ALTER TABLE progress_logs
-  DROP CONSTRAINT IF EXISTS uq_progress_user_unit_module;
-
-ALTER TABLE progress_logs
-  ADD CONSTRAINT uq_progress_user_unit_module
-  UNIQUE (user_id, unit_id, module_id);
+ALTER TABLE progress_logs DROP CONSTRAINT IF EXISTS uq_progress_user_unit_module;
+ALTER TABLE progress_logs ADD CONSTRAINT uq_progress_user_unit_module UNIQUE (user_id, unit_id, module_id);
