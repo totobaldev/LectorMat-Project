@@ -121,7 +121,7 @@ const Login: React.FC = () => {
 
       {/* ── Footer ────────────────────────────────────────────────── */}
       <p className="mt-8 text-xs text-slate-300">
-        LectorMat © {new Date().getFullYear()} · Plataforma de nivelación matemática
+        LectorMat © {new Date().getFullYear()}
       </p>
     </div>
   );

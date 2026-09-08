@@ -179,20 +179,7 @@ export default function CoursesPage() {
       {/* ── Page Header ────────────────────────────────────────────────────────── */}
       <section className="flex flex-col md:flex-row md:items-center justify-between bg-white rounded-[2.5rem] p-6 sm:p-8 border border-slate-100 shadow-[0_4px_25px_-4px_rgba(0,0,0,0.03)] gap-6">
         <div className="space-y-2 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider border border-blue-100">
-              Acceso Estudiante
-            </span>
-            {assignedCourses.length > 0 ? (
-              <StatusBadge tone="emerald" icon={<CheckCircle2 className="w-3 h-3" />}>
-                {assignedCourses.length} {assignedCourses.length === 1 ? 'Curso Asignado' : 'Cursos Asignados'}
-              </StatusBadge>
-            ) : (
-              <StatusBadge tone="orange" icon={<AlertCircle className="w-3 h-3" />}>
-                Sin Asignación Activa
-              </StatusBadge>
-            )}
-          </div>
+
           <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight leading-none">
             Mis Cursos y Unidades
           </h1>
@@ -201,21 +188,6 @@ export default function CoursesPage() {
           </p>
         </div>
 
-        {/* Student Session Card */}
-        <div className="flex items-center gap-4 p-4.5 rounded-2xl bg-slate-50 border border-slate-200/70 shrink-0 min-w-[280px]">
-          <div className="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
-            <GraduationCap className="w-6 h-6" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-wider">Estudiante Activo</p>
-            <p className="text-sm font-extrabold text-slate-900 truncate">
-              {studentName || 'Estudiante LectorMat'}
-            </p>
-            <p className="text-[11px] font-semibold text-slate-500 truncate">
-              {cleanEmail || 'invitado@inacapmail.cl'}
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* ── UNENROLLED EMPTY STATE ────────────────────────────────────────────── */}
@@ -237,11 +209,8 @@ export default function CoursesPage() {
               Aún no tienes cursos asignados por tu docente
             </h2>
             <p className="text-slate-600 text-sm font-medium leading-relaxed">
-              Para visualizar y acceder a tus asignaturas, tu profesor debe registrarte en la lista oficial del curso utilizando tu correo institucional:
+              Para visualizar y acceder a tus asignaturas, tu profesor debe registrarte en la lista oficial del curso.
             </p>
-            <div className="inline-block mt-2 px-4 py-2 bg-slate-100 rounded-xl font-mono text-xs font-bold text-slate-800 border border-slate-200">
-              {cleanEmail || 'tu.correo@inacapmail.cl'}
-            </div>
           </div>
 
           <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 max-w-md w-full text-left space-y-3">
@@ -265,23 +234,7 @@ export default function CoursesPage() {
             </ul>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <ActionButton
-              onClick={() => logout()}
-              variant="secondary"
-              size="md"
-            >
-              Cerrar Sesión / Cambiar Cuenta
-            </ActionButton>
-            <ActionButton
-              onClick={() => navigate('/')}
-              variant="student"
-              size="md"
-              leading={<ArrowRight className="w-4 h-4" />}
-            >
-              Ir a Inicio
-            </ActionButton>
-          </div>
+
         </motion.div>
       ) : (
 

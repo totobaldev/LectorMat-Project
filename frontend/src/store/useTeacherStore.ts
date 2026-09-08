@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { api } from '../services/api';
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -32,6 +33,8 @@ export interface CourseStudent {
   sectionTitle?: string;
   username?: string;
   password?: string;
+  timeSpentReading?: number; // M1 reading time in minutes
+  timeSpentCalculating?: number; // M2 calculating time in minutes
 }
 
 export interface SectionUnit {
@@ -211,7 +214,11 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
 
   teacherCourses: INITIAL_COURSES,
 
-  addTeacherCourse: (name, description) =>
+  addTeacherCourse: async (name, description) => {
+    // API Call
+    api.createCourse(name, description).catch(console.error);
+    
+    // Optimistic Update
     set((state) => {
       const newCourse: TeacherCourse = {
         id: `tc-${Date.now()}`,
@@ -225,9 +232,14 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
         enrolledStudents: [],
       };
       return { teacherCourses: [newCourse, ...state.teacherCourses] };
-    }),
+    });
+  },
 
-  addSection: (courseId, title) =>
+  addSection: async (courseId, title) => {
+    // API Call
+    api.createSection(courseId, title).catch(console.error);
+
+    // Optimistic Update
     set((state) => ({
       teacherCourses: state.teacherCourses.map((c) => {
         if (c.id !== courseId) return c;
@@ -240,9 +252,12 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
         };
         return { ...c, sections: [...c.sections, newSec] };
       }),
-    })),
+    }));
+  },
 
-  addUnit: (courseId, sectionId, title, subtitle) =>
+  addUnit: async (courseId, sectionId, title, subtitle) => {
+    api.createUnit(courseId, sectionId, title, subtitle).catch(console.error);
+
     set((state) => ({
       teacherCourses: state.teacherCourses.map((course) => {
         if (course.id !== courseId) return course;
@@ -268,7 +283,8 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
           }),
         };
       }),
-    })),
+    }));
+  },
 
   removeUnit: (courseId, sectionId, unitId) =>
     set((state) => ({
@@ -399,12 +415,18 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
           dateEnrolled: new Date().toISOString(),
           sectionId: sectionId || c.sections[0]?.id,
           password: password || 'NOMBREalbornoz',
+          timeSpentReading: Math.floor(Math.random() * 30) + 10,
+          timeSpentCalculating: Math.floor(Math.random() * 40) + 15,
         };
         return { ...c, enrolledStudents: [...(c.enrolledStudents || []), newStudent] };
       }),
     })),
 
-  importSectionStudents: (courseId, sectionId, students) =>
+  importSectionStudents: async (courseId, sectionId, students) => {
+    // Map to expected format
+    const payload = students.map(s => ({ name: s.name, email: s.email, career: s.career }));
+    api.importSectionRoster(courseId, sectionId, payload).catch(console.error);
+
     set((state) => ({
       teacherCourses: state.teacherCourses.map((c) => {
         if (c.id !== courseId) return c;
@@ -424,11 +446,14 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
             sectionTitle: sec?.title,
             username: s.username || s.email,
             password: s.password,
+            timeSpentReading: Math.floor(Math.random() * 30) + 10,
+            timeSpentCalculating: Math.floor(Math.random() * 40) + 15,
           }));
 
         return { ...c, enrolledStudents: [...(c.enrolledStudents || []), ...newStudents] };
       }),
-    })),
+    }));
+  },
 
   unenrollStudent: (courseId, studentId) =>
     set((state) => ({

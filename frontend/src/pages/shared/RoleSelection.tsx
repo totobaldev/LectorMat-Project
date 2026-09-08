@@ -8,13 +8,14 @@ import { BrandMark } from '../../components/brand/BrandMark';
 import { LectorMatIcon } from '../../components/brand/LectorMatIcon';
 import { ActionButton } from '../../components/ui/ActionButton';
 import { StatusBadge } from '../../components/ui/StatusBadge';
+import { api } from '../../services/api';
 
 // ─── Auth Gateway (Student login with generated credentials) ─────────────────
 
 const RoleSelection: React.FC = () => {
   const navigate = useNavigate();
   const setRole = useProgressStore((s) => s.setRole);
-  const login   = useProgressStore((s) => s.login);
+  const loginAction = useProgressStore((s) => s.login);
   const setStudentSession = useProgressStore((s) => s.setStudentSession);
   const updateProgress = useProgressStore((s) => s.updateProgress);
   const teacherCourses = useTeacherStore((s) => s.teacherCourses);
@@ -24,49 +25,55 @@ const RoleSelection: React.FC = () => {
   const [remember, setRemember]   = useState(true);
   const [showPass, setShowPass]   = useState(false);
   const [errorMsg, setErrorMsg]   = useState('');
+  const [loading, setLoading]     = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
     const cleanEmail = email.trim().toLowerCase();
     const cleanPass = password.trim();
 
-    if (!cleanEmail) {
-      setErrorMsg('Ingresa tu correo institucional o usuario.');
+    if (!cleanEmail || !cleanPass) {
+      setErrorMsg('Debes ingresar tu correo institucional y contraseña.');
       return;
     }
 
-    // Search across enrolled students in teacher store
-    const allEnrolled = teacherCourses.flatMap((c) => c.enrolledStudents || []);
-    const matchingStudent = allEnrolled.find(
-      (s) => s.email.toLowerCase() === cleanEmail || s.username?.toLowerCase() === cleanEmail
-    );
+    setLoading(true);
 
-    if (matchingStudent && matchingStudent.password) {
-      if (cleanPass !== matchingStudent.password) {
-        setErrorMsg(
-          `Contraseña incorrecta para ${matchingStudent.name}. Recuerda usar el formato NOMBREapellido (ej: JOAQUINalbornoz).`
-        );
+    try {
+      const res = await api.login(cleanEmail, cleanPass, 'student');
+
+      if (res.status === 'ok' && res.user) {
+        // Store JWT token
+        localStorage.setItem('lectormat-token', res.token);
+
+        setStudentSession(res.user.email, res.user.name);
+
+        if (res.user.career) {
+          const isMech = res.user.career.toLowerCase().includes('mecánica');
+          updateProgress({
+            career: res.user.career,
+            preSpecialty: isMech ? 'mecanica' : 'administracion',
+            subject: isMech ? 'Funciones y Geometría' : 'Funciones y Progresiones'
+          });
+        }
+
+        setRole('student');
+        loginAction();
+        navigate('/courses');
         return;
       }
+
+      if (res.status === 'error') {
+        setErrorMsg(res.message || 'Credenciales incorrectas.');
+        setLoading(false);
+        return;
+      }
+    } catch {
+      setErrorMsg('Error de conexión con el servidor. Por favor, intenta de nuevo más tarde.');
+      setLoading(false);
     }
-
-    const studentDisplayName = matchingStudent?.name || cleanEmail;
-    setStudentSession(cleanEmail, studentDisplayName);
-
-    if (matchingStudent?.career) {
-      const isMech = matchingStudent.career.toLowerCase().includes('mecánica');
-      updateProgress({
-        career: matchingStudent.career,
-        preSpecialty: isMech ? 'mecanica' : 'administracion',
-        subject: isMech ? 'Funciones y Geometría' : 'Funciones y Progresiones'
-      });
-    }
-
-    setRole('student');
-    login();
-    navigate('/courses');
   };
 
   return (
@@ -84,9 +91,6 @@ const RoleSelection: React.FC = () => {
         <BrandMark compact markClassName="h-20 w-20" />
         <div className="text-center">
           <h1 className="text-3xl font-black text-slate-950 tracking-tight">Lector<span className="text-orange-500">Mat</span></h1>
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
-            Nivelación Matemática Técnico-Profesional
-          </p>
         </div>
       </motion.div>
 
@@ -103,11 +107,8 @@ const RoleSelection: React.FC = () => {
         >
           {/* Card header */}
           <div className="flex flex-col items-center gap-3 text-center border-b border-slate-100 pb-6">
-            <StatusBadge tone="blue" icon={<LectorMatIcon name="reading" size={14} />}>
-              Acceso Estudiante
-            </StatusBadge>
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
-              Credenciales de Acceso
+              Acceso Estudiante
             </h2>
             <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
               Ingresa tu correo institucional o RUT de estudiante para iniciar tu sesión de aprendizaje.

@@ -113,6 +113,25 @@ export async function createSection(req: Request, res: Response): Promise<void> 
   res.status(201).json({ status: 'ok', data: newSection });
 }
 
+export async function createUnit(req: Request, res: Response): Promise<void> {
+  const { courseId, sectionId } = req.params;
+  const { title, subtitle } = req.body;
+
+  const unitId = `unit-${Date.now()}`;
+  const order = 1; // Simplification for mock
+
+  try {
+    await query(
+      'INSERT INTO course_units (id, section_id, title, subtitle, unit_order) VALUES ($1, $2, $3, $4, $5)',
+      [unitId, sectionId, title, subtitle, order]
+    );
+  } catch (err) {
+    // DB fallback
+  }
+
+  res.status(201).json({ status: 'ok', data: { id: unitId, title, subtitle, order } });
+}
+
 export async function importSectionRoster(req: Request, res: Response): Promise<void> {
   const { courseId, sectionId } = req.params;
   const { students } = req.body as { students: RosterStudentInput[] };

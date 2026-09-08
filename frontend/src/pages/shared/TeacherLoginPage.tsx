@@ -7,21 +7,14 @@ import { BrandMark } from '../../components/brand/BrandMark';
 import { LectorMatIcon } from '../../components/brand/LectorMatIcon';
 import { ActionButton } from '../../components/ui/ActionButton';
 import { StatusBadge } from '../../components/ui/StatusBadge';
+import { api } from '../../services/api';
 
-// ── Mock teacher credentials (frontend-only) ────────────────────────────────
-const MOCK_TEACHERS = [
-  { email: 'docente@inacap.cl',   password: '1234', name: 'Prof. Bastián' },
-  { email: 'bastian@inacap.cl',   password: '1234', name: 'Prof. Bastián' },
-  { email: 'cristobal@inacap.cl',   password: '1234', name: 'Prof. Cristóbal' },
-  { email: 'profesor@lectormat.cl', password: 'admin', name: 'Prof. Admin' },
-];
 
-// ─────────────────────────────────────────────────────────────────────────────
 
 const TeacherLoginPage: React.FC = () => {
   const navigate = useNavigate();
   const setRole           = useProgressStore((s) => s.setRole);
-  const login             = useProgressStore((s) => s.login);
+  const loginAction       = useProgressStore((s) => s.login);
   const unlockTeacherPanel = useProgressStore((s) => s.unlockTeacherPanel);
 
   const [email, setEmail]       = useState('');
@@ -30,26 +23,41 @@ const TeacherLoginPage: React.FC = () => {
   const [error, setError]       = useState('');
   const [loading, setLoading]   = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPass = password.trim();
+
+    if (!cleanEmail || !cleanPass) {
+      setError('Debes ingresar tu correo institucional y contraseña.');
+      return;
+    }
+
     setLoading(true);
 
-    // Simulate async auth (300 ms)
-    setTimeout(() => {
-      const match = MOCK_TEACHERS.find(
-        (t) => t.email.toLowerCase() === email.toLowerCase().trim() && t.password === password
-      );
-      if (match) {
+    try {
+      const res = await api.login(cleanEmail, cleanPass, 'teacher');
+
+      if (res.status === 'ok' && res.user) {
+        localStorage.setItem('lectormat-token', res.token);
         setRole('teacher');
-        login();
+        loginAction();
         unlockTeacherPanel();
         navigate('/teacher/courses');
-      } else {
-        setError('Credenciales incorrectas. Intenta con docente@inacap.cl / 1234');
-        setLoading(false);
+        return;
       }
-    }, 300);
+
+      if (res.status === 'error') {
+        setError(res.message || 'Credenciales incorrectas.');
+        setLoading(false);
+        return;
+      }
+    } catch {
+      setError('Error de conexión con el servidor. Por favor, intenta de nuevo más tarde.');
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,9 +75,6 @@ const TeacherLoginPage: React.FC = () => {
         <BrandMark compact markClassName="h-20 w-20" />
         <div className="text-center">
           <h1 className="text-3xl font-black text-slate-950 tracking-tight">Lector<span className="text-orange-500">Mat</span></h1>
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
-            Portal Docente
-          </p>
         </div>
       </motion.div>
 
@@ -86,11 +91,8 @@ const TeacherLoginPage: React.FC = () => {
         >
           {/* Card header */}
           <div className="flex flex-col items-center gap-3 text-center border-b border-slate-100 pb-6">
-            <StatusBadge tone="orange" icon={<LectorMatIcon name="teacher" size={14} />}>
-              Acceso Docente
-            </StatusBadge>
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
-              Credenciales Docente
+              Acceso Docente
             </h2>
             <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
               Ingresa con tu correo institucional y contraseña de docente para acceder al panel de gestión de cursos.
@@ -119,7 +121,7 @@ const TeacherLoginPage: React.FC = () => {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="docente@inacap.cl"
+                  placeholder="tu.correo@inacap.cl"
                   autoComplete="username"
                   className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none transition-all focus:border-orange-400 focus:ring-4 focus:ring-orange-400/10 focus:bg-white"
                 />
@@ -138,7 +140,7 @@ const TeacherLoginPage: React.FC = () => {
                   type={showPass ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="--> 1234"
+                  placeholder="••••••••"
                   autoComplete="current-password"
                   className="w-full pl-11 pr-12 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none transition-all focus:border-orange-400 focus:ring-4 focus:ring-orange-400/10 focus:bg-white"
                 />

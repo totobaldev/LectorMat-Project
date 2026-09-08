@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, Menu, ArrowRight, Plus } from 'lucide-react';
+import { LogOut, Menu, ArrowRight, Plus, Bell } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
+import { useStudentProgress } from '../../hooks/useStudentProgress';
 import { BrandMark } from '../brand/BrandMark';
 import { LectorMatIcon } from '../brand/LectorMatIcon';
 import { StatusBadge } from '../ui/StatusBadge';
@@ -12,117 +13,16 @@ const MainLayout: React.FC = () => {
   const store     = useProgressStore();
   const logout    = store.logout;
   const p         = store;
+  
+  const { activeMaterial, units, overallPct } = useStudentProgress();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => (
     typeof window === 'undefined' ? true : window.innerWidth >= 768
   ));
-
-  // ── Progress calculations ──────────────────────────────────────────────────
-  const m1Pct = p.m1Completed ? 100 : Math.round((p.m1SlotsPlaced / 3) * 55);
-  const m2Pct = p.m2Completed ? 100 : Math.min(85, p.m2NodesVisited * 30);
-  const m3Pct = Math.round((p.m3CompletedLevels / 3) * 100);
-  const overallU1 = Math.round((m1Pct + m2Pct + m3Pct) / 3);
-
-  const u2m1Pct = p.u2m1Completed ? 100 : Math.round((p.u2m1SlotsPlaced / 4) * 55);
-  const u2m2Pct = p.u2m2Completed ? 100 : Math.min(85, p.u2m2NodesVisited * 30);
-  const u2m3Pct = Math.round((p.u2m3CompletedLevels / 3) * 100);
-  const overallU2 = Math.round((u2m1Pct + u2m2Pct + u2m3Pct) / 3);
-
-  const u3m1Pct = p.u3m1Completed ? 100 : Math.round((p.u3m1SlotsPlaced / 4) * 55);
-  const u3m2Pct = p.u3m2Completed ? 100 : Math.min(85, p.u3m2NodesVisited * 30);
-  const u3m3Pct = Math.round((p.u3m3CompletedLevels / 3) * 100);
-  const overallU3 = Math.round((u3m1Pct + u3m2Pct + u3m3Pct) / 3);
-
-  const u4m1Pct = p.u4m1Completed ? 100 : Math.round((p.u4m1SlotsPlaced / 3) * 100);
-  const u4m2Pct = p.u4m2Completed ? 100 : Math.min(85, p.u4m2NodesVisited * 30);
-  const u4m3Pct = Math.round((p.u4m3CompletedLevels / 3) * 100);
-  const overallU4 = Math.round((u4m1Pct + u4m2Pct + u4m3Pct) / 3);
+  const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
+  const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
 
   const cur = location.pathname;
-
-  // ── Compute continuity target for student ─────────────────────────────────
-  const getStudentContinuity = () => {
-    if (!p.preCompleted) {
-      return {
-        title: 'Módulo Comprensión Lectora',
-        subtitle: 'Nivelación Inicial de Lectura',
-        path: '/pre',
-        pct: p.preScore ? Math.round((p.preScore / 10) * 100) : 15,
-        unitName: 'Lectura Crítica',
-        unitPct: p.preScore ? Math.round((p.preScore / 10) * 100) : 15,
-      };
-    }
-    if (!p.m1Completed) {
-      return {
-        title: 'U1 M1: Comprensión',
-        subtitle: 'Funciones Polinómicas',
-        path: '/unit/1/module/1',
-        pct: Math.round((p.m1SlotsPlaced / 3) * 100) || 20,
-        unitName: 'Unidad 1',
-        unitPct: overallU1,
-      };
-    }
-    if (!p.m2Completed) {
-      return {
-        title: 'U1 M2: Método',
-        subtitle: 'Árbol de Decisión Polinómico',
-        path: '/unit/1/module/2',
-        pct: Math.min(85, p.m2NodesVisited * 30) || 35,
-        unitName: 'Unidad 1',
-        unitPct: overallU1,
-      };
-    }
-    if (!p.m3Completed) {
-      return {
-        title: 'U1 M3: Banco de Problemas',
-        subtitle: 'Ejercicios Polinómicos',
-        path: '/unit/1/module/3',
-        pct: Math.round((p.m3CompletedLevels / 3) * 100) || 15,
-        unitName: 'Unidad 1',
-        unitPct: overallU1,
-      };
-    }
-    if (!p.u2m1Completed || !p.u2m2Completed || !p.u2m3Completed) {
-      return {
-        title: 'U2: Func. Exponenciales',
-        subtitle: !p.u2m1Completed ? 'M1: Comprensión' : !p.u2m2Completed ? 'M2: Método' : 'M3: Banco',
-        path: !p.u2m1Completed ? '/unit/2/module/1' : !p.u2m2Completed ? '/unit/2/module/2' : '/unit/2/module/3',
-        pct: overallU2 || 20,
-        unitName: 'Unidad 2',
-        unitPct: overallU2,
-      };
-    }
-    if (!p.u3m1Completed || !p.u3m2Completed || !p.u3m3Completed) {
-      return {
-        title: p.preSpecialty === 'administracion' ? 'U3: Progresiones' : 'U3: Trigonometría',
-        subtitle: !p.u3m1Completed ? 'M1: Comprensión' : !p.u3m2Completed ? 'M2: Método' : 'M3: Banco',
-        path: !p.u3m1Completed ? '/unit/3/module/1' : !p.u3m2Completed ? '/unit/3/module/2' : '/unit/3/module/3',
-        pct: overallU3 || 15,
-        unitName: 'Unidad 3',
-        unitPct: overallU3,
-      };
-    }
-    if (p.preSpecialty === 'administracion' && (!p.u4m1Completed || !p.u4m2Completed || !p.u4m3Completed)) {
-      return {
-        title: 'U4: Finanzas',
-        subtitle: !p.u4m1Completed ? 'M1: Comprensión' : !p.u4m2Completed ? 'M2: Método' : 'M3: Banco',
-        path: !p.u4m1Completed ? '/unit/4/module/1' : !p.u4m2Completed ? '/unit/4/module/2' : '/unit/4/module/3',
-        pct: overallU4 || 15,
-        unitName: 'Unidad 4',
-        unitPct: overallU4,
-      };
-    }
-    return {
-      title: '¡Nivelación Completada!',
-      subtitle: 'Has dominado todos los módulos',
-      path: '/dashboard',
-      pct: 100,
-      unitName: 'Finalizado',
-      unitPct: 100,
-    };
-  };
-
-  const activeMaterial = getStudentContinuity();
 
   const globalCls = (active: boolean) => {
     const activeColor = p.role === 'teacher'
@@ -149,21 +49,6 @@ const MainLayout: React.FC = () => {
           <div className={`flex items-center mb-6 pl-2 ${isSidebarOpen ? 'gap-3' : 'justify-center pl-0'}`}>
             <BrandMark compact={!isSidebarOpen} markClassName="h-11 w-11" />
           </div>
-
-          {/* Career badge */}
-          {(p.isAuthenticated || p.isTeacherUnlocked) && p.career && (
-            <div className={`mb-6 mx-1 px-3.5 py-2 rounded-2xl bg-blue-50 border border-blue-200/80 flex items-center ${isSidebarOpen ? 'gap-2.5' : 'justify-center'}`} title={p.career}>
-              <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-blue-200">
-                <LectorMatIcon name="career" size={17} />
-              </div>
-              {isSidebarOpen && (
-                <div className="flex-1 min-w-0">
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-blue-700 block leading-none mb-0.5">Carrera</span>
-                  <span className="text-[11px] font-extrabold text-slate-800 leading-tight block truncate">{p.career}</span>
-                </div>
-              )}
-            </div>
-          )}
 
           <nav className="space-y-1.5 flex-1 text-sm">
             {/* ── Shared: Inicio ─────────────────────── */}
@@ -200,18 +85,36 @@ const MainLayout: React.FC = () => {
                     </div>
                   ) : null}
                 </button>
-                <button onClick={() => navigate('/courses')} className={globalCls(cur === '/courses')} aria-label="Mis Cursos" title={!isSidebarOpen ? 'Mis Cursos' : undefined}>
+                <button onClick={() => navigate('/courses')} className={globalCls(cur === '/courses' || cur.startsWith('/unit/'))} aria-label="Mis Cursos" title={!isSidebarOpen ? 'Mis Cursos' : undefined}>
                   <LectorMatIcon name="courses" size={20} className="shrink-0" />
                   {isSidebarOpen && <span>Mis Cursos</span>}
                 </button>
+                
+                {isSidebarOpen && (cur === '/courses' || cur.startsWith('/unit/')) && units.length > 0 && (
+                  <div className="ml-8 pl-3 border-l-2 border-slate-100 flex flex-col gap-1 py-1">
+                    {units.map(u => {
+                      const isActive = cur.includes(`/unit/${u.unitNum}`);
+                      return (
+                        <button
+                          key={u.id}
+                          onClick={() => navigate(`/unit/${u.unitNum}/module/1`)}
+                          className={`w-full text-left text-[11px] font-bold py-1.5 px-2 rounded-lg transition-colors border-none bg-transparent cursor-pointer flex justify-between items-center ${
+                            isActive ? 'bg-blue-50 text-blue-700' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
+                          }`}
+                        >
+                          Unidad {u.unitNum}
+                          {u.isCompleted && <span className="text-emerald-500">✓</span>}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
+
                 <button onClick={() => navigate('/dashboard')} className={globalCls(cur === '/dashboard')} aria-label="Mi Avance" title={!isSidebarOpen ? 'Mi Avance' : undefined}>
                   <LectorMatIcon name="progress" size={20} className="shrink-0" />
                   {isSidebarOpen && <span>Mi Avance</span>}
                 </button>
-                <button onClick={() => navigate('/feedback')} className={globalCls(cur === '/feedback')} aria-label="Tu opinión" title={!isSidebarOpen ? 'Tu opinión' : undefined}>
-                  <LectorMatIcon name="feedback" size={20} className="shrink-0" />
-                  {isSidebarOpen && <span>Tu opinión</span>}
-                </button>
+
               </>
             )}
 
@@ -305,16 +208,138 @@ const MainLayout: React.FC = () => {
 
       {/* ── Main Panel Container ────────────────────────────────────────── */}
       <div className="flex-1 flex flex-col h-full overflow-hidden relative">
-        {/* Top Header Bar */}
-        <header className="h-16 border-b border-slate-200 bg-white flex items-center px-6 gap-4 z-10 shrink-0 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-          <button 
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2.5 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors cursor-pointer border border-slate-200/60 shadow-sm bg-transparent"
-            title={isSidebarOpen ? "Ocultar menú" : "Mostrar menú"}
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-          <span className="text-sm font-extrabold text-slate-800 tracking-wide">Lector<span className="text-orange-500">Mat</span></span>
+        {/* Top Gradient Bar */}
+        <div className="hidden md:flex w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 py-1.5 px-6 items-center justify-center shrink-0 z-20">
+          <span className="text-[10px] font-black text-white uppercase tracking-[0.25em]">Plataforma Transforma 2026</span>
+        </div>
+
+        <header className="h-16 border-b border-slate-200 bg-white flex items-center justify-between px-6 z-10 shrink-0 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2.5 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors cursor-pointer border border-slate-200/60 shadow-sm bg-transparent"
+              title={isSidebarOpen ? "Ocultar menú" : "Mostrar menú"}
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="text-sm font-extrabold text-slate-800 tracking-wide">Lector<span className="text-orange-500">Mat</span></span>
+              {cur.includes('/teacher') && (
+                <>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-sm font-semibold text-slate-600">Panel Docente</span>
+                </>
+              )}
+              {cur.includes('/courses') && !cur.includes('/teacher') && (
+                <>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-sm font-semibold text-slate-600">Mis Cursos</span>
+                </>
+              )}
+              {cur.includes('/dashboard') && (
+                <>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-sm font-semibold text-slate-600">Mi Avance</span>
+                </>
+              )}
+            </div>
+          </div>
+          
+          {(p.isAuthenticated || p.isTeacherUnlocked) && (
+            <div className="flex items-center gap-3 relative">
+              {/* Notif & XP for Students */}
+              {p.role === 'student' && (
+                <div className="flex items-center gap-3 mr-2">
+                  <div className="hidden sm:flex items-center gap-1.5 bg-yellow-50 px-3 py-1.5 rounded-full border border-yellow-200 shadow-sm cursor-help" title={`Nivel ${p.level || 1}`}>
+                    <svg className="w-3.5 h-3.5 text-yellow-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <span className="text-xs font-black text-yellow-700">{p.xp || 0} XP</span>
+                  </div>
+                  
+                  <div className="relative">
+                    <button 
+                      onClick={() => {
+                        setIsNotifDropdownOpen(!isNotifDropdownOpen);
+                        if (isNotifDropdownOpen) p.markNotificationsRead();
+                      }}
+                      className="p-2 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer border-none bg-transparent relative"
+                    >
+                      <Bell className="w-5 h-5" />
+                      {p.unreadNotifications > 0 && (
+                        <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white shadow-sm"></span>
+                      )}
+                    </button>
+                    
+                    {/* Notif Dropdown */}
+                    {isNotifDropdownOpen && (
+                      <>
+                        <div className="fixed inset-0 z-40" onClick={() => { setIsNotifDropdownOpen(false); p.markNotificationsRead(); }}></div>
+                        <div className="absolute top-12 right-0 mt-2 w-80 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-slate-100 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                          <div className="px-4 py-3 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                            <p className="text-xs font-black text-slate-800 uppercase tracking-widest">Notificaciones</p>
+                            <button onClick={() => p.markNotificationsRead()} className="text-[10px] font-bold text-blue-600 hover:text-blue-800 bg-transparent border-none cursor-pointer">Marcar leídas</button>
+                          </div>
+                          <div className="max-h-64 overflow-y-auto">
+                            {!p.notifications || p.notifications.length === 0 ? (
+                              <div className="p-6 text-center text-xs font-medium text-slate-400">No tienes notificaciones.</div>
+                            ) : (
+                              p.notifications.map(n => (
+                                <div key={n.id} className={`p-4 border-b border-slate-50 flex gap-3 ${!n.read ? 'bg-blue-50/30' : ''}`}>
+                                  <div className={`w-2 h-2 rounded-full shrink-0 mt-1.5 ${!n.read ? 'bg-blue-500' : 'bg-transparent'}`}></div>
+                                  <p className="text-xs font-medium text-slate-600 leading-relaxed text-left">{n.message}</p>
+                                </div>
+                              ))
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="text-right hidden md:block">
+                <p className="text-xs font-extrabold text-slate-900">{p.role === 'teacher' ? 'Docente' : (p.studentName || 'Estudiante')}</p>
+                <p className="text-[10px] text-slate-500 font-medium">{p.role === 'teacher' ? 'Admin' : (p.studentEmail || 'inacapmail.cl')}</p>
+              </div>
+              <button 
+                onClick={() => setIsAvatarDropdownOpen(!isAvatarDropdownOpen)}
+                className="w-10 h-10 rounded-full bg-slate-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-100 transition-all focus:outline-none"
+              >
+                {p.avatar ? (
+                  <img src={p.avatar} alt="Avatar" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-sm font-bold text-slate-600">
+                    {p.role === 'teacher' ? 'DO' : (p.studentName ? p.studentName.substring(0, 2).toUpperCase() : 'ES')}
+                  </span>
+                )}
+              </button>
+
+              {/* Avatar Dropdown */}
+              {isAvatarDropdownOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setIsAvatarDropdownOpen(false)}></div>
+                  <div className="absolute top-12 right-0 mt-2 w-64 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-slate-100 z-50 p-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Elige tu Avatar</p>
+                    <div className="grid grid-cols-3 gap-2">
+                      {[
+                        { id: 'boy', src: '/avatars/boy.jpg', alt: 'Chico' },
+                        { id: 'girl', src: '/avatars/girl.jpg', alt: 'Chica' },
+                        { id: 'animal', src: '/avatars/animal.jpg', alt: 'Mascota' }
+                      ].map((av) => (
+                        <button
+                          key={av.id}
+                          onClick={() => { p.setAvatar(av.src); setIsAvatarDropdownOpen(false); }}
+                          className={`w-full aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${p.avatar === av.src ? 'border-blue-500 shadow-md scale-105' : 'border-transparent hover:scale-105 hover:shadow-sm'}`}
+                        >
+                          <img src={av.src} alt={av.alt} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </header>
 
         <main className="flex-1 overflow-y-auto overflow-x-hidden relative bg-slate-50">

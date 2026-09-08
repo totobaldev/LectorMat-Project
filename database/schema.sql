@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS courses (
 -- course_sections
 CREATE TABLE IF NOT EXISTS course_sections (
   id            VARCHAR(100) PRIMARY KEY,
-  course_id     VARCHAR(100) NOT NULL,
+  course_id     VARCHAR(100) NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
   title         VARCHAR(255) NOT NULL,
   section_order INT          NOT NULL DEFAULT 1,
   created_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW()
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS course_sections (
 -- course_units (Unidades dentro de cada Sección)
 CREATE TABLE IF NOT EXISTS course_units (
   id            VARCHAR(100) PRIMARY KEY,
-  section_id    VARCHAR(100) NOT NULL,
+  section_id    VARCHAR(100) NOT NULL REFERENCES course_sections(id) ON DELETE CASCADE,
   title         VARCHAR(255) NOT NULL,
   subtitle      VARCHAR(255),
   unit_order    INT          NOT NULL DEFAULT 1,
@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS course_units (
 -- course_section_resources (Recursos Multiformato H5P, PDF, Word en las 3 modalidades)
 CREATE TABLE IF NOT EXISTS course_section_resources (
   id            VARCHAR(100) PRIMARY KEY,
-  section_id    VARCHAR(100) NOT NULL,
-  unit_id       VARCHAR(100),
+  section_id    VARCHAR(100) NOT NULL REFERENCES course_sections(id) ON DELETE CASCADE,
+  unit_id       VARCHAR(100) REFERENCES course_units(id) ON DELETE SET NULL,
   module_type   VARCHAR(50)  DEFAULT 'comprension', -- 'comprension', 'metodo', 'interactivo'
   resource_type VARCHAR(50)  DEFAULT 'h5p',         -- 'h5p', 'pdf', 'word'
   name          VARCHAR(255) NOT NULL,
@@ -86,12 +86,13 @@ CREATE TABLE IF NOT EXISTS course_section_resources (
 
 -- section_students
 CREATE TABLE IF NOT EXISTS section_students (
-  id                 VARCHAR(100) PRIMARY KEY,
-  course_id          VARCHAR(100) NOT NULL,
-  section_id         VARCHAR(100) NOT NULL,
+  id                 VARCHAR(100) PRIMARY KEY DEFAULT gen_random_uuid()::text,
+  course_id          VARCHAR(100) NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+  section_id         VARCHAR(100) NOT NULL REFERENCES course_sections(id) ON DELETE CASCADE,
   user_id            VARCHAR(100) NOT NULL,
   generated_password VARCHAR(255) NOT NULL,
-  created_at         TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  created_at         TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  CONSTRAINT uq_section_student UNIQUE (section_id, user_id)
 );
 
 -- exercises
@@ -122,6 +123,9 @@ CREATE INDEX IF NOT EXISTS idx_progress_logs_user_id ON progress_logs(user_id);
 CREATE INDEX IF NOT EXISTS idx_exercises_module_area ON exercises(module_type, area_tag);
 CREATE INDEX IF NOT EXISTS idx_course_units_section ON course_units(section_id);
 CREATE INDEX IF NOT EXISTS idx_resources_unit ON course_section_resources(unit_id);
+CREATE INDEX IF NOT EXISTS idx_section_students_course ON section_students(course_id);
+CREATE INDEX IF NOT EXISTS idx_section_students_user ON section_students(user_id);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 
 -- =============================================================================
 -- UNIQUE CONSTRAINTS

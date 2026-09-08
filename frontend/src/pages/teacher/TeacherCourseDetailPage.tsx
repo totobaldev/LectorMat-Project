@@ -696,42 +696,64 @@ export default function TeacherCourseDetailPage() {
             </div>
           ) : (
             <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_4px_20px_-6px_rgba(0,0,0,0.03)] overflow-hidden animate-in fade-in duration-200">
-              <div className="grid grid-cols-[2fr_1.5fr_1.5fr_1fr_60px] gap-4 px-7 py-4 border-b border-slate-100 bg-slate-50/70 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+              <div className="grid grid-cols-[1.5fr_1fr_2fr_60px] gap-4 px-7 py-4 border-b border-slate-100 bg-slate-50/70 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                 <span>Estudiante</span>
-                <span>Email</span>
-                <span>Carrera</span>
-                <span>Matriculado el</span>
+                <span>Contacto</span>
+                <span>Análisis de Tiempos (M1 vs M2)</span>
                 <span className="text-center">Acciones</span>
               </div>
               <div className="divide-y divide-slate-100">
-                {course.enrolledStudents.map((std) => (
-                  <div key={std.id} className="grid grid-cols-[2fr_1.5fr_1.5fr_1fr_60px] gap-4 px-7 py-4 items-center hover:bg-slate-50/60 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center font-black text-sm">
-                        {std.name.charAt(0)}
+                {course.enrolledStudents.map((std) => {
+                  const m1Time = std.timeSpentReading || 0;
+                  const m2Time = std.timeSpentCalculating || 0;
+                  const total = m1Time + m2Time || 1; // prevent div 0
+                  const m1Pct = Math.round((m1Time / total) * 100);
+                  const m2Pct = Math.round((m2Time / total) * 100);
+                  const isReadingIssue = m1Pct > 60; // Desproporcionalmente alto
+                  
+                  return (
+                    <div key={std.id} className="grid grid-cols-[1.5fr_1fr_2fr_60px] gap-4 px-7 py-4 items-center hover:bg-slate-50/60 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center font-black text-sm shrink-0">
+                          {std.name.charAt(0)}
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span className="text-sm font-extrabold text-slate-800 truncate">{std.name}</span>
+                          <span className="text-[10px] font-bold text-slate-400 truncate">{std.career}</span>
+                        </div>
                       </div>
-                      <span className="text-sm font-extrabold text-slate-800">{std.name}</span>
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500 truncate">
+                        <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        <span className="truncate">{std.email}</span>
+                      </div>
+                      
+                      {/* Time Metrics Bar */}
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex justify-between text-[10px] font-bold">
+                          <span className={isReadingIssue ? 'text-red-500' : 'text-slate-500'}>
+                            M1 (Lectura): {m1Time} min
+                            {isReadingIssue && ' ⚠️ Alto'}
+                          </span>
+                          <span className="text-blue-500">M2 (Cálculo): {m2Time} min</span>
+                        </div>
+                        <div className="h-2 w-full rounded-full overflow-hidden flex bg-slate-100">
+                          <div style={{ width: `${m1Pct}%` }} className={`h-full transition-all ${isReadingIssue ? 'bg-red-400' : 'bg-slate-300'}`}></div>
+                          <div style={{ width: `${m2Pct}%` }} className="h-full bg-blue-400 transition-all"></div>
+                        </div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <button
+                          onClick={() => unenrollStudent(course.id, std.id)}
+                          className="w-8 h-8 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer border-none bg-transparent flex items-center justify-center mx-auto"
+                          title="Desmatricular"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500 truncate">
-                      <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                      {std.email}
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500 truncate">
-                      <GraduationCap className="w-4 h-4 text-slate-400 shrink-0" />
-                      {std.career}
-                    </div>
-                    <span className="text-xs text-slate-400 font-bold">{formatDate(std.dateEnrolled)}</span>
-                    <div className="text-center">
-                      <button
-                        onClick={() => unenrollStudent(course.id, std.id)}
-                        className="w-8 h-8 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer border-none bg-transparent flex items-center justify-center mx-auto"
-                        title="Desmatricular"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}

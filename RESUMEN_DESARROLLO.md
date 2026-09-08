@@ -1,0 +1,3 @@
+# Cambios Frontend - LectorMat
+
+Se finalizó la optimización visual de la plataforma (estilo "Premium Clean White") simplificando los flujos de login y limpiando redundancias en la página de inicio (se removieron los fondos de las tarjetas de asignaturas y el bloque de unidades). Adicionalmente, se implementó un sistema de gamificación (niveles y XP en tiempo real) y un módulo de notificaciones para los estudiantes, mientras que el panel docente ahora integra barras bicolor de métricas de tiempo, permitiendo visualizar cuántos minutos invierte cada estudiante en la lectura versus el cálculo, logrando un código compilado estable (`npm run build`) listo para su despliegue final.

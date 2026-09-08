@@ -25,6 +25,12 @@ export interface M2PathEntry {
 
 export type AppRole = 'student' | 'teacher' | null;
 
+export interface NotificationItem {
+  id: string;
+  message: string;
+  read: boolean;
+}
+
 export interface ProgressState {
   // ── Auth / Session ────────────────────────────────────────────────────────
   isAuthenticated: boolean;
@@ -34,7 +40,9 @@ export interface ProgressState {
   role: AppRole;
   studentEmail: string | null;
   studentName: string | null;
+  avatar: string | null;
   setStudentSession: (email: string, name: string) => void;
+  setAvatar: (avatarPath: string) => void;
 
   // ── Identity ──────────────────────────────────────────────────────────────
   selectedCareer: string | null;
@@ -43,6 +51,12 @@ export interface ProgressState {
 
   // ── General progress ──────────────────────────────────────────────────────
   progress: StudentProgress;
+  xp: number;
+  level: number;
+  
+  // ── Notifications ─────────────────────────────────────────────────────────
+  notifications: NotificationItem[];
+  unreadNotifications: number;
 
   // ── M2: Árbol de Decisión ─────────────────────────────────────────────────
   /** ID del nodo actual en el árbol */
@@ -61,6 +75,11 @@ export interface ProgressState {
   updateUnit: (unitId: 1 | 2 | 3 | 4, score: number, completed?: boolean) => void;
   resetProgress: () => void;
   clearSession: () => void;
+  
+  // ── Gamification & Notifications Actions ──────────────────────────────────
+  addXp: (amount: number) => void;
+  addNotification: (message: string) => void;
+  markNotificationsRead: () => void;
 
   // ── FRONT compatibility ───────────────────────────────────────────────────
   /** Carrera seleccionada (alias del prototipo FRONT) */
@@ -141,10 +160,18 @@ export const useProgressStore = create<ProgressState>()(
       role: null,
       studentEmail: null,
       studentName: null,
+      avatar: null,
       selectedCareer: null,
       selectedArea: null,
       activeModule: 'M1',
       progress: defaultProgress(),
+      xp: 0,
+      level: 1,
+      notifications: [
+        { id: '1', message: '¡Bienvenido a LectorMat! Tu nivelación inicia ahora.', read: false },
+        { id: '2', message: 'Tu profesor te ha asignado el Módulo 1.', read: false }
+      ],
+      unreadNotifications: 2,
 
       // M2 initial state
       currentM2NodeId: U3_ROOT_NODE_ID,
@@ -184,11 +211,13 @@ export const useProgressStore = create<ProgressState>()(
        // Auth actions
       login: () => set({ isAuthenticated: true }),
       setStudentSession: (email, name) => set({ studentEmail: email, studentName: name }),
+      setAvatar: (avatar) => set({ avatar }),
       logout: () => set({ 
         isAuthenticated: false, 
         role: null, 
         studentEmail: null,
         studentName: null,
+        avatar: null,
         isTeacherUnlocked: false,
         career: null,
         subject: null,
@@ -225,6 +254,10 @@ export const useProgressStore = create<ProgressState>()(
         activeModule: 'M1',
         currentM2NodeId: U3_ROOT_NODE_ID,
         m2PathHistory: [],
+        xp: 0,
+        level: 1,
+        notifications: [],
+        unreadNotifications: 0,
       }),
       unlockTeacherPanel: () => set({ isTeacherUnlocked: true }),
 
@@ -233,6 +266,24 @@ export const useProgressStore = create<ProgressState>()(
 
       // FRONT updateProgress action
       updateProgress: (updates) => set((state) => ({ ...state, ...updates })),
+
+      // Gamification & Notifications
+      addXp: (amount) => set((state) => {
+        const newXp = state.xp + amount;
+        const newLevel = Math.floor(newXp / 100) + 1; // 1 level every 100 XP
+        return { xp: newXp, level: newLevel };
+      }),
+      addNotification: (message) => set((state) => {
+        const newNotif = { id: Date.now().toString(), message, read: false };
+        return { 
+          notifications: [newNotif, ...state.notifications],
+          unreadNotifications: state.unreadNotifications + 1
+        };
+      }),
+      markNotificationsRead: () => set((state) => ({
+        notifications: state.notifications.map(n => ({ ...n, read: true })),
+        unreadNotifications: 0
+      })),
 
       // General actions
       setCareer: (career, area) => set({ selectedCareer: career, selectedArea: area }),
@@ -271,12 +322,17 @@ export const useProgressStore = create<ProgressState>()(
         set({
           studentEmail: null,
           studentName: null,
+          avatar: null,
           selectedCareer: null,
           selectedArea: null,
           activeModule: 'M1',
           progress: defaultProgress(),
           currentM2NodeId: U3_ROOT_NODE_ID,
           m2PathHistory: [],
+          xp: 0,
+          level: 1,
+          notifications: [],
+          unreadNotifications: 0,
         }),
 
       // M2 actions
@@ -301,10 +357,15 @@ export const useProgressStore = create<ProgressState>()(
         role: state.role,
         studentEmail: state.studentEmail,
         studentName: state.studentName,
+        avatar: state.avatar,
         selectedCareer: state.selectedCareer,
         selectedArea: state.selectedArea,
         activeModule: state.activeModule,
         progress: state.progress,
+        xp: state.xp,
+        level: state.level,
+        notifications: state.notifications,
+        unreadNotifications: state.unreadNotifications,
         currentM2NodeId: state.currentM2NodeId,
         m2PathHistory: state.m2PathHistory,
         // FRONT fields

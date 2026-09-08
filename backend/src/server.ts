@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 import coursesRouter from './routes/coursesRoutes';
 import authRouter from './routes/authRoutes';
+import progressRouter from './routes/progressRoutes';
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
@@ -40,6 +41,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
 // Feature routers
 app.use('/api/courses', coursesRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/progress', progressRouter);
 
 // ─── 404 Handler ─────────────────────────────────────────────────────────────
 

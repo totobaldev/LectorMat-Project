@@ -34,9 +34,7 @@ export default function Home() {
         <section className="flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20 gap-8 relative">
           <div className="absolute -top-20 left-[12%] h-44 w-44 rounded-[3rem] rotate-12 bg-blue-100/50" aria-hidden="true" />
           <div className="absolute top-16 right-[10%] h-20 w-20 rounded-[1.75rem] -rotate-12 bg-orange-100/70" aria-hidden="true" />
-          <StatusBadge tone="blue" icon={<LectorMatIcon name="math" size={13} />} className="relative z-10">
-            Plataforma de Nivelación Matemática
-          </StatusBadge>
+
           <div className="space-y-4 max-w-2xl relative z-10">
             <h1 className="text-4xl sm:text-6xl font-black text-slate-950 tracking-tight leading-none">
               Bienvenido a{' '}
@@ -120,48 +118,34 @@ export default function Home() {
 
         {/* ── Platform News / Versions ──────────────────────────────── */}
         <section className="px-6 pb-16 max-w-5xl mx-auto w-full flex flex-col gap-4">
-          <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Novedades y Versiones</h2>
-          {[
-            {
-              version: 'v1.3.0',
-              date: 'Agosto 2026',
-              badge: 'Nuevo',
-              tone: 'blue' as const,
-              title: 'Módulo H5P para Docentes',
-              desc: 'Los docentes ahora pueden subir actividades interactivas H5P directamente desde el Panel Docente, organizarlas en secciones y gestionar un banco de contenido centralizado.',
-            },
-            {
-              version: 'v1.2.0',
-              date: 'Julio 2026',
-              badge: 'Mejora',
-              tone: 'emerald' as const,
-              title: 'Continuidad de Aprendizaje',
-              desc: 'El sidebar del estudiante ahora muestra una ProgressCard inteligente que detecta automáticamente en qué módulo se quedó el estudiante y permite reanudar con un clic.',
-            },
-            {
-              version: 'v1.1.0',
-              date: 'Junio 2026',
-              badge: 'Funcionalidad',
-              tone: 'orange' as const,
-              title: 'Panel Docente con Búsqueda de Cursos',
-              desc: 'Panel dedicado para docentes con búsqueda instantánea por código de asignatura (MAT101, MEC205…), agrupación por área y acceso protegido por credenciales.',
-            },
-          ].map((item) => (
-            <div
-              key={item.version}
-              className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] flex items-start gap-5"
-            >
-              <div className="shrink-0 text-center">
-                <StatusBadge tone={item.tone} className="mb-1">{item.badge}</StatusBadge>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{item.version}</p>
-                <p className="text-[10px] text-slate-400 font-medium">{item.date}</p>
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">{item.title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+          <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Comunidad Inacap</h2>
+          
+          <div className="bg-white rounded-[2rem] p-6 sm:p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col md:flex-row gap-8 items-center md:items-start relative overflow-hidden group">
+            <div className="w-full md:w-2/5 aspect-[4/3] rounded-2xl overflow-hidden shrink-0 border border-slate-200/60 shadow-sm relative">
+              <img src="/inacap_news.jpg" alt="Inacap Lenguaje y Matemática" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute top-3 left-3">
+                 <StatusBadge tone="blue" icon={<LectorMatIcon name="reading" size={12} />}>Noticia Oficial</StatusBadge>
               </div>
             </div>
-          ))}
+            
+            <div className="flex-1 space-y-4 w-full">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-extrabold text-[10px] shadow-sm">IN</div>
+                <div>
+                  <p className="text-xs font-extrabold text-slate-900">Sede Los Ángeles</p>
+                  <p className="text-[10px] text-slate-500 font-medium">Hace 2 horas</p>
+                </div>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug">
+                ¡Nueva Plataforma de Nivelación: Lenguaje + Matemática!
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                INACAP Sede Los Ángeles lanza oficialmente la primera iniciativa integrada que une la comprensión lectora con la resolución matemática. Se ha comprobado que el mayor obstáculo no está en los números, sino en la lectura del enunciado. ¡Prepárate para transformar tu rendimiento académico este 2026!
+              </p>
+              
+
+            </div>
+          </div>
         </section>
       </div>
     );
@@ -524,9 +508,6 @@ export default function Home() {
       {/* HEADER DE BIENVENIDA Y CARRERA */}
       <section className="flex flex-col md:flex-row md:items-center md:justify-between bg-white rounded-[2rem] p-6 sm:p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] gap-6 relative overflow-hidden">
         <div className="space-y-1.5 relative z-10 flex-1">
-          <StatusBadge tone="blue" icon={<LectorMatIcon name="reading" size={13} />}>
-            Plataforma Transforma 2026
-          </StatusBadge>
           <h1 className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight leading-none mt-2">¡Bienvenido a LectorMat!</h1>
           <p className="text-slate-600 text-sm sm:text-base font-medium mt-3 leading-relaxed">
             LectorMat es una plataforma interactiva diseñada para ayudarte a comprender mejor los enunciados de los problemas matemáticos. Muchas veces el error no está en el cálculo, sino en no entender bien qué te está pidiendo el problema. Por eso, LectorMat te guía paso a paso en la lectura comprensiva de cada enunciado, antes de que llegues a la parte del cálculo.
@@ -535,13 +516,13 @@ export default function Home() {
 
         {/* Bloque Elegir Carrera (Only visible if already configured and logged in) */}
         {(isAuthenticated || isTeacherUnlocked) && progress.career && (
-          <div className="relative z-10 flex items-center gap-4 p-4 sm:p-5 rounded-2xl border min-w-[280px] md:min-w-[340px] shrink-0 bg-blue-600 border-blue-700 text-white shadow-[0_14px_30px_-18px_rgba(37,99,235,0.9)]">
-            <div className="w-12 h-12 rounded-xl bg-white/20 text-white flex items-center justify-center shrink-0">
+          <div className="relative z-10 flex items-center gap-4 p-4 sm:p-5 min-w-[280px] md:min-w-[340px] shrink-0">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-blue-600 bg-transparent">
               <LectorMatIcon name="career" size={25} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] font-black text-white/80 uppercase tracking-wider">Tu Carrera Seleccionada</p>
-              <p className="text-sm font-extrabold text-white truncate leading-snug">{progress.career}</p>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Tu Carrera Seleccionada</p>
+              <p className="text-sm font-extrabold text-slate-800 truncate leading-snug">{progress.career}</p>
               <button
                 onClick={() => {
                   if (!isAuthenticated && !isTeacherUnlocked) {
@@ -550,7 +531,7 @@ export default function Home() {
                     setIsChoosingCareer(true);
                   }
                 }}
-                className="text-xs font-bold text-white hover:text-white/80 underline mt-1 block cursor-pointer bg-transparent border-none p-0"
+                className="text-xs font-bold text-blue-600 hover:text-blue-700 underline mt-1 block cursor-pointer bg-transparent border-none p-0"
               >
                 Cambiar carrera
               </button>
@@ -572,7 +553,7 @@ export default function Home() {
                       Recomendado para comenzar
                     </StatusBadge>
                     <span className="text-[10px] font-black text-blue-50 bg-blue-950/40 px-3 py-1 rounded-full uppercase tracking-wider ring-1 ring-inset ring-white/15">
-                      Lectura Crítica
+                      Lectura Avanzada
                     </span>
                   </div>
                   <h1 className="text-3xl font-extrabold tracking-tight">Nivelación de Comprensión LectorMat</h1>
@@ -605,7 +586,7 @@ export default function Home() {
             <div className="p-6 sm:p-8 rounded-3xl text-white relative overflow-hidden flex flex-col lg:flex-row lg:items-center gap-6 bg-slate-950 border border-slate-800">
               <div className="flex-1 relative z-10 flex flex-col sm:flex-row gap-4">
                 {/* Caja de Carrera */}
-                <div className="flex-1 space-y-1 bg-white/10 p-5 rounded-2xl border border-white/20 backdrop-blur-sm">
+                <div className="flex-1 space-y-1 p-5 rounded-2xl bg-transparent">
                   <span className="text-[10px] font-black text-white/70 uppercase tracking-wider">
                     Carrera Seleccionada
                   </span>
@@ -613,7 +594,7 @@ export default function Home() {
                 </div>
                 
                 {/* Caja de Asignatura */}
-                <div className="flex-1 space-y-1 bg-white/10 p-5 rounded-2xl border border-white/20 backdrop-blur-sm">
+                <div className="flex-1 space-y-1 p-5 rounded-2xl bg-transparent">
                   <span className="text-[10px] font-black text-white/70 uppercase tracking-wider">
                     Asignatura Inscrita
                   </span>
@@ -635,244 +616,6 @@ export default function Home() {
               <div className="absolute bottom-5 right-48 w-12 h-12 bg-orange-500/40 rounded-2xl -rotate-12" aria-hidden="true"></div>
             </div>
 
-            <div className="space-y-10">
-              <div className="border-b border-slate-100 pb-4">
-                <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Unidades de Aprendizaje</h3>
-              </div>
-
-              {/* UNIT 1 */}
-              <section className="flex flex-col gap-6">
-                <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gradient-to-r from-indigo-50 to-white p-6 sm:p-8 rounded-[2rem] border border-indigo-100 shadow-sm relative overflow-hidden">
-                  <div className="relative z-10 space-y-1">
-                    <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Unidad 1: Funciones Polinómicas</h1>
-                    <p className="text-indigo-600 font-medium">Programa Transforma 2026</p>
-                  </div>
-                  <div className="flex items-center gap-4 relative z-10 mt-4 sm:mt-0">
-                    <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center font-black text-white shadow-sm border border-indigo-200 text-xl">U1</div>
-                  </div>
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-100 rounded-full blur-3xl opacity-50 transform translate-x-1/3 -translate-y-1/3"></div>
-                </header>
-
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 w-full">
-                  {/* M1 */}
-                  <button onClick={() => setScreen('m1')} className="col-span-1 md:col-span-4 bg-indigo-50/50 rounded-[2rem] p-7 border border-indigo-100 hover:border-indigo-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center"><BookOpen className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-indigo-600 px-4 py-1.5 rounded-full shadow-sm">Básico</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Comprensión</h3>
-                      <p className="text-sm text-slate-500 mt-2">Arrastra los datos a la función.</p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{m1Pct}%</span></div><div className="w-full bg-indigo-100 h-2 rounded-full"><div className="bg-indigo-600 h-full rounded-full" style={{width: `${m1Pct}%`}}></div></div></div>
-                  </button>
-
-                  {/* M2 */}
-                  <button onClick={() => setScreen('m2')} className="col-span-1 md:col-span-4 bg-emerald-50/50 rounded-[2rem] p-7 border border-emerald-100 hover:border-emerald-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center"><Compass className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-emerald-600 px-4 py-1.5 rounded-full shadow-sm">Intermedio</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Método</h3>
-                      <p className="text-sm text-slate-500 mt-2">Árbol de decisión.</p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{m2Pct}%</span></div><div className="w-full bg-emerald-100 h-2 rounded-full"><div className="bg-emerald-600 h-full rounded-full" style={{width: `${m2Pct}%`}}></div></div></div>
-                  </button>
-
-                  {/* M3 */}
-                  <button onClick={() => setScreen('m3')} className="col-span-1 md:col-span-4 bg-orange-50/50 rounded-[2rem] p-7 border border-orange-100 hover:border-orange-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center"><Zap className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-orange-600 px-4 py-1.5 rounded-full shadow-sm">Avanzado</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Interactivo</h3>
-                      <p className="text-sm text-slate-500 mt-2">Problemas escalonados.</p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{m3Pct}%</span></div><div className="w-full bg-orange-100 h-2 rounded-full"><div className="bg-orange-600 h-full rounded-full" style={{width: `${m3Pct}%`}}></div></div></div>
-                  </button>
-                </div>
-              </section>
-
-              {/* UNIT 2 */}
-              <section className="flex flex-col gap-6">
-                <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gradient-to-r from-violet-50 to-white p-6 sm:p-8 rounded-[2rem] border border-violet-100 shadow-sm relative overflow-hidden">
-                  <div className="relative z-10 space-y-1">
-                    <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Unidad 2: Funciones Exponenciales</h1>
-                    <p className="text-violet-600 font-medium">Programa Transforma 2026</p>
-                  </div>
-                  <div className="flex items-center gap-4 relative z-10 mt-4 sm:mt-0">
-                    <div className="w-14 h-14 bg-gradient-to-br from-violet-500 to-violet-600 rounded-2xl flex items-center justify-center font-black text-white shadow-sm border border-violet-200 text-xl">U2</div>
-                  </div>
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-violet-100 rounded-full blur-3xl opacity-50 transform translate-x-1/3 -translate-y-1/3"></div>
-                </header>
-
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 w-full">
-                  {/* U2M1 */}
-                  <button onClick={() => setScreen('u2m1')} className="col-span-1 md:col-span-4 bg-violet-50/50 rounded-[2rem] p-7 border border-violet-100 hover:border-violet-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-violet-100 text-violet-600 rounded-2xl flex items-center justify-center"><BookOpen className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-violet-600 px-4 py-1.5 rounded-full shadow-sm">Básico</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Comprensión</h3>
-                      <p className="text-sm text-slate-500 mt-2">Construye el modelo exponencial.</p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u2m1Pct}%</span></div><div className="w-full bg-violet-100 h-2 rounded-full"><div className="bg-violet-600 h-full rounded-full" style={{width: `${u2m1Pct}%`}}></div></div></div>
-                  </button>
-
-                  {/* U2M2 */}
-                  <button onClick={() => setScreen('u2m2')} className="col-span-1 md:col-span-4 bg-cyan-50/50 rounded-[2rem] p-7 border border-cyan-100 hover:border-cyan-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-cyan-100 text-cyan-600 rounded-2xl flex items-center justify-center"><Compass className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-cyan-600 px-4 py-1.5 rounded-full shadow-sm">Intermedio</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Método</h3>
-                      <p className="text-sm text-slate-500 mt-2">Clasificador Logarítmico/Exponencial.</p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u2m2Pct}%</span></div><div className="w-full bg-cyan-100 h-2 rounded-full"><div className="bg-cyan-600 h-full rounded-full" style={{width: `${u2m2Pct}%`}}></div></div></div>
-                  </button>
-
-                  {/* U2M3 */}
-                  <button onClick={() => setScreen('u2m3')} className="col-span-1 md:col-span-4 bg-fuchsia-50/50 rounded-[2rem] p-7 border border-fuchsia-100 hover:border-fuchsia-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-fuchsia-100 text-fuchsia-600 rounded-2xl flex items-center justify-center"><Zap className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-fuchsia-600 px-4 py-1.5 rounded-full shadow-sm">Avanzado</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Interactivo</h3>
-                      <p className="text-sm text-slate-500 mt-2">Resolución de problemas aplicados.</p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u2m3Pct}%</span></div><div className="w-full bg-fuchsia-100 h-2 rounded-full"><div className="bg-fuchsia-600 h-full rounded-full" style={{width: `${u2m3Pct}%`}}></div></div></div>
-                  </button>
-                </div>
-              </section>
-
-              {/* UNIT 3 */}
-              <section className="flex flex-col gap-6">
-                <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gradient-to-r from-sky-50 to-white p-6 sm:p-8 rounded-[2rem] border border-sky-100 shadow-sm relative overflow-hidden">
-                  <div className="relative z-10 space-y-1">
-                    <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-                      {progress.preSpecialty === 'mecanica' ? 'Unidad 3: Trigonometría y Geometría' : 'Unidad 3: Progresiones y Sucesiones'}
-                    </h1>
-                    <p className="text-sky-600 font-medium">Programa Transforma 2026</p>
-                  </div>
-                  <div className="flex items-center gap-4 relative z-10 mt-4 sm:mt-0">
-                    <div className="w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl flex items-center justify-center font-black text-white shadow-sm border border-sky-200 text-xl">U3</div>
-                  </div>
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-sky-100 rounded-full blur-3xl opacity-50 transform translate-x-1/3 -translate-y-1/3"></div>
-                </header>
-
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 w-full">
-                  {/* U3M1 */}
-                  <button onClick={() => setScreen('u3m1')} className="col-span-1 md:col-span-4 bg-sky-50/50 rounded-[2rem] p-7 border border-sky-100 hover:border-sky-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center"><BookOpen className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-sky-600 px-4 py-1.5 rounded-full shadow-sm">Básico</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Comprensión</h3>
-                      <p className="text-sm text-slate-500 mt-2">
-                        {progress.preSpecialty === 'mecanica' ? 'Deduce las medidas y distancias.' : 'Deduce patrones numéricos y razones.'}
-                      </p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u3m1Pct}%</span></div><div className="w-full bg-sky-100 h-2 rounded-full"><div className="bg-sky-600 h-full rounded-full" style={{width: `${u3m1Pct}%`}}></div></div></div>
-                  </button>
-
-                  {/* U3M2 */}
-                  <button onClick={() => setScreen('u3m2')} className="col-span-1 md:col-span-4 bg-blue-50/50 rounded-[2rem] p-7 border border-blue-100 hover:border-blue-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center"><Compass className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-blue-600 px-4 py-1.5 rounded-full shadow-sm">Intermedio</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Método</h3>
-                      <p className="text-sm text-slate-500 mt-2">
-                        {progress.preSpecialty === 'mecanica' ? 'Clasificador de Teoremas y Funciones.' : 'Clasificador de Progresiones Aritméticas/Geométricas.'}
-                      </p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u3m2Pct}%</span></div><div className="w-full bg-blue-100 h-2 rounded-full"><div className="bg-blue-600 h-full rounded-full" style={{width: `${u3m2Pct}%`}}></div></div></div>
-                  </button>
-
-                  {/* U3M3 */}
-                  <button onClick={() => setScreen('u3m3')} className="col-span-1 md:col-span-4 bg-teal-50/50 rounded-[2rem] p-7 border border-teal-100 hover:border-teal-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="w-14 h-14 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center"><Zap className="w-7 h-7" /></div>
-                      <span className="text-xs font-bold text-white bg-teal-600 px-4 py-1.5 rounded-full shadow-sm">Avanzado</span>
-                    </div>
-                    <div className="relative z-10 mt-2">
-                      <h3 className="text-xl font-extrabold text-slate-900">Interactivo</h3>
-                      <p className="text-sm text-slate-500 mt-2">
-                        {progress.preSpecialty === 'mecanica' 
-                          ? 'Resolución de problemas de Trigonometría aplicados.' 
-                          : 'Resolución de problemas de Progresiones aplicados.'
-                        }
-                      </p>
-                    </div>
-                    <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u3m3Pct}%</span></div><div className="w-full bg-teal-100 h-2 rounded-full"><div className="bg-teal-600 h-full rounded-full" style={{width: `${u3m3Pct}%`}}></div></div></div>
-                  </button>
-                </div>
-              </section>
-
-              {/* UNIT 4 (Only for Administration) */}
-              {progress.preSpecialty === 'administracion' && (
-                <section className="flex flex-col gap-6">
-                  <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gradient-to-r from-emerald-50 to-white p-6 sm:p-8 rounded-[2rem] border border-emerald-100 shadow-sm relative overflow-hidden">
-                    <div className="relative z-10 space-y-1">
-                      <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Unidad 4: Aplicaciones para las Finanzas</h1>
-                      <p className="text-emerald-600 font-medium">Programa Transforma 2026</p>
-                    </div>
-                    <div className="flex items-center gap-4 relative z-10 mt-4 sm:mt-0">
-                      <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center font-black text-white shadow-sm border border-emerald-200 text-xl">U4</div>
-                    </div>
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-50 transform translate-x-1/3 -translate-y-1/3"></div>
-                  </header>
-
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-5 w-full">
-                    {/* U4M1 */}
-                    <button onClick={() => setScreen('u4m1')} className="col-span-1 md:col-span-4 bg-emerald-50/50 rounded-[2rem] p-7 border border-emerald-100 hover:border-emerald-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                      <div className="flex items-center justify-between relative z-10">
-                        <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center"><BookOpen className="w-7 h-7" /></div>
-                        <span className="text-xs font-bold text-white bg-emerald-600 px-4 py-1.5 rounded-full shadow-sm">Básico</span>
-                      </div>
-                      <div className="relative z-10 mt-2">
-                        <h3 className="text-xl font-extrabold text-slate-900">Comprensión</h3>
-                        <p className="text-sm text-slate-500 mt-2">Identifica variables de valor futuro.</p>
-                      </div>
-                      <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u4m1Pct}%</span></div><div className="w-full bg-emerald-100 h-2 rounded-full"><div className="bg-emerald-600 h-full rounded-full" style={{width: `${u4m1Pct}%`}}></div></div></div>
-                    </button>
-
-                    {/* U4M2 */}
-                    <button onClick={() => setScreen('u4m2')} className="col-span-1 md:col-span-4 bg-teal-50/50 rounded-[2rem] p-7 border border-teal-100 hover:border-teal-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                      <div className="flex items-center justify-between relative z-10">
-                        <div className="w-14 h-14 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center"><Compass className="w-7 h-7" /></div>
-                        <span className="text-xs font-bold text-white bg-teal-600 px-4 py-1.5 rounded-full shadow-sm">Intermedio</span>
-                      </div>
-                      <div className="relative z-10 mt-2">
-                        <h3 className="text-xl font-extrabold text-slate-900">Método</h3>
-                        <p className="text-sm text-slate-500 mt-2">Clasificador de Modelos Financieros.</p>
-                      </div>
-                      <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u4m2Pct}%</span></div><div className="w-full bg-teal-100 h-2 rounded-full"><div className="bg-teal-600 h-full rounded-full" style={{width: `${u4m2Pct}%`}}></div></div></div>
-                    </button>
-
-                    {/* U4M3 */}
-                    <button onClick={() => setScreen('u4m3')} className="col-span-1 md:col-span-4 bg-amber-50/50 rounded-[2rem] p-7 border border-amber-100 hover:border-amber-500 shadow-sm flex flex-col gap-4 text-left hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden text-slate-800">
-                      <div className="flex items-center justify-between relative z-10">
-                        <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center"><Zap className="w-7 h-7" /></div>
-                        <span className="text-xs font-bold text-white bg-amber-600 px-4 py-1.5 rounded-full shadow-sm">Avanzado</span>
-                      </div>
-                      <div className="relative z-10 mt-2">
-                        <h3 className="text-xl font-extrabold text-slate-900">Interactivo</h3>
-                        <p className="text-sm text-slate-500 mt-2">Problemas de interés y anualidad.</p>
-                      </div>
-                      <div className="mt-auto pt-6"><div className="flex justify-between text-xs font-extrabold mb-2 uppercase text-slate-500"><span>Progreso</span><span>{u4m3Pct}%</span></div><div className="w-full bg-amber-100 h-2 rounded-full"><div className="bg-amber-600 h-full rounded-full" style={{width: `${u4m3Pct}%`}}></div></div></div>
-                    </button>
-                  </div>
-                </section>
-              )}
-            </div>
           </div>
         </>
       ) : (
