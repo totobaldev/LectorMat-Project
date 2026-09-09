@@ -42,7 +42,7 @@ const TeacherLoginPage: React.FC = () => {
 
       if (res.status === 'ok' && res.user) {
         localStorage.setItem('lectormat-token', res.token);
-        setRole('teacher');
+        setRole(res.user.role as any);
         loginAction();
         unlockTeacherPanel();
         navigate('/teacher/courses');

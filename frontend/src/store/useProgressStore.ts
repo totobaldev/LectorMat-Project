@@ -23,7 +23,7 @@ export interface M2PathEntry {
   answer: 'Sí' | 'No';
 }
 
-export type AppRole = 'student' | 'teacher' | null;
+export type AppRole = 'student' | 'teacher' | 'admin' | null;
 
 export interface NotificationItem {
   id: string;
@@ -67,7 +67,7 @@ export interface ProgressState {
   // ── Actions ───────────────────────────────────────────────────────────────
   login: () => void;
   logout: () => void;
-  setRole: (role: 'student' | 'teacher') => void;
+  setRole: (role: 'student' | 'teacher' | 'admin') => void;
   unlockTeacherPanel: () => void;
   setCareer: (career: string, area: string) => void;
   setActiveModule: (module: ModuleType) => void;

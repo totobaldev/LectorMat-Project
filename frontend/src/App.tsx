@@ -57,7 +57,7 @@ const RequireAuth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const RequireTeacher: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const role = useProgressStore((s) => s.role);
   const isTeacherUnlocked = useProgressStore((s) => s.isTeacherUnlocked);
-  if (role !== 'teacher' && !isTeacherUnlocked) return <Navigate to="/" replace />;
+  if (role !== 'teacher' && role !== 'admin' && !isTeacherUnlocked) return <Navigate to="/" replace />;
   return <>{children}</>;
 };
 

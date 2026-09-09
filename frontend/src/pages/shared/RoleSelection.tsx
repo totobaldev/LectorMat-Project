@@ -59,7 +59,7 @@ const RoleSelection: React.FC = () => {
           });
         }
 
-        setRole('student');
+        setRole(res.user.role as any);
         loginAction();
         navigate('/courses');
         return;

@@ -11,7 +11,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 -- =============================================================================
 
 DO $$ BEGIN
-  CREATE TYPE user_role AS ENUM ('student', 'teacher');
+  CREATE TYPE user_role AS ENUM ('student', 'teacher', 'admin');
 EXCEPTION WHEN duplicate_object THEN NULL;
 END $$;
 
