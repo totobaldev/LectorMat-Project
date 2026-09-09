@@ -1,0 +1,3 @@
+# Actualización de Avances - LectorMat
+
+Hola Bastián. Hemos finalizado la configuración integral de las cuentas de estudiantes y accesos administrativos para las secciones **C1** (25 alumnos) y **C4** (18 alumnos), dejándolos pre-registrados en la base de datos con contraseñas autogeneradas (primera parte del correo) listos para interactuar con la plataforma gamificada. Además, se configuró una cuenta **Administrador (`admin@inacap.cl`)** que posee privilegios unificados (estudiante y docente) para navegar sin restricciones, y se pulieron detalles de interfaz (estilo "Premium Clean White") y flujos de login, quedando todo el código integrado, empaquetado en producción y subido de forma exitosa al repositorio oficial en GitHub.
