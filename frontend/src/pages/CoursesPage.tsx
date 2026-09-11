@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -11,6 +11,7 @@ import { StatusBadge } from '../components/ui/StatusBadge';
 import { ActionButton } from '../components/ui/ActionButton';
 import { parseResourceToQuestions, type ParsedQuestion } from '../utils/fileQuestionParser';
 import { InteractiveQuestionRunner } from '../components/ui/InteractiveQuestionRunner';
+import { api } from '../services/api';
 
 export default function CoursesPage() {
   const navigate = useNavigate();
@@ -31,18 +32,51 @@ export default function CoursesPage() {
   const [h5pAnswerSelected, setH5pAnswerSelected] = useState<number | null>(null);
   const [h5pSubmitted, setH5pSubmitted] = useState(false);
 
+  // ── API-sourced courses (from DB via JWT) ──────────────────────────────────
+  const [apiCourses, setApiCourses] = useState<any[] | null>(null); // null = loading
+  const [apiLoaded, setApiLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchEnrolled() {
+      const token = localStorage.getItem('lectormat-token');
+      if (!token) {
+        setApiCourses([]);
+        setApiLoaded(true);
+        return;
+      }
+      try {
+        const res = await api.listEnrolledCourses();
+        if (cancelled) return;
+        if (res.ok && Array.isArray((res as any).data?.data ?? (res as any).data)) {
+          const data = (res as any).data?.data ?? (res as any).data;
+          setApiCourses(data);
+        } else {
+          setApiCourses([]);
+        }
+      } catch {
+        setApiCourses([]);
+      }
+      setApiLoaded(true);
+    }
+    fetchEnrolled();
+    return () => { cancelled = true; };
+  }, []);
+
   const handleOpenResource = (res: SectionResource) => {
     const modType = res.moduleType || 'comprension';
-    const parsedQuestions = parseResourceToQuestions(
-      res.description || res.fileName || res.name,
-      res.name,
-      modType
-    );
+    const questions = (res.parsedQuestions && res.parsedQuestions.length > 0)
+      ? res.parsedQuestions
+      : parseResourceToQuestions(
+          res.extractedText || res.description || res.fileName || res.name,
+          res.name,
+          modType
+        );
 
     setActiveRunnerResource({
       name: res.name,
       moduleType: modType,
-      questions: parsedQuestions,
+      questions,
     });
   };
 
@@ -54,13 +88,41 @@ export default function CoursesPage() {
     setActiveRunnerResource(null);
   };
 
-  // Filter assigned courses for student
+  // ── Resolve assigned courses: API first, then Zustand fallback ────────────
   const cleanEmail = studentEmail?.trim().toLowerCase() || '';
-  const assignedCourses = teacherCourses.filter((course) =>
+  
+  // Courses from Zustand store (teacher-created locally)
+  const zustandAssigned = teacherCourses.filter((course) =>
     course.enrolledStudents?.some(
       (s) => s.email.toLowerCase() === cleanEmail || (s.username && s.username.toLowerCase() === cleanEmail)
     )
   );
+
+  // Final list: prefer API courses if loaded, merge with Zustand courses
+  let assignedCourses: any[] = apiLoaded
+    ? [
+        ...(apiCourses ?? []),
+        // Add Zustand courses that aren't already in the API list
+        ...zustandAssigned.filter(
+          (zc) => !(apiCourses ?? []).some((ac: any) => ac.id === zc.id)
+        ),
+      ]
+    : zustandAssigned;
+
+  // Unrestricted access for admin account: see all courses or default curriculum preview
+  if (store.role === 'admin' && assignedCourses.length === 0) {
+    assignedCourses = teacherCourses.length > 0 ? teacherCourses : [
+      {
+        id: 'tc-admin-preview',
+        name: 'Trigonometría y Geometría (Vista Administrador)',
+        description: 'Acceso irrestricto de previsualización para el perfil Administrador.',
+        sections: [],
+        enrolledStudents: [],
+      },
+    ];
+  }
+
+
 
   // Default system units calculation (for standard curriculum)
   const m1Pct = store.m1Completed ? 100 : Math.round((store.m1SlotsPlaced / 3) * 55);
@@ -190,13 +252,23 @@ export default function CoursesPage() {
 
       </section>
 
-      {/* ── UNENROLLED EMPTY STATE ────────────────────────────────────────────── */}
-      {assignedCourses.length === 0 ? (
+      {/* ── LOADING STATE ─────────────────────────────────────────────────────── */}
+      {!apiLoaded ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex flex-col items-center justify-center gap-4 py-24 text-slate-400"
+        >
+          <div className="w-10 h-10 rounded-full border-4 border-slate-200 border-t-blue-500 animate-spin" />
+          <p className="text-sm font-semibold">Cargando tus cursos...</p>
+        </motion.div>
+      ) : assignedCourses.length === 0 ? (
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-[2.5rem] border border-amber-200/80 p-8 sm:p-12 shadow-[0_10px_35px_-12px_rgba(0,0,0,0.05)] text-center flex flex-col items-center gap-6"
         >
+
           <div className="w-20 h-20 rounded-3xl bg-amber-50 border-2 border-amber-200 text-amber-600 flex items-center justify-center shadow-inner">
             <ShieldAlert className="w-10 h-10" />
           </div>
@@ -240,17 +312,17 @@ export default function CoursesPage() {
 
         /* ── ASSIGNED COURSES LIST ────────────────────────────────────────────── */
         <div className="flex flex-col gap-12">
-          {assignedCourses.map((course) => {
+          {assignedCourses.map((course: any) => {
             // Find student's assigned section in this course if specified
-            const studentInfo = course.enrolledStudents.find(
-              (s) => s.email.toLowerCase() === cleanEmail || (s.username && s.username.toLowerCase() === cleanEmail)
+            const studentInfo = course.enrolledStudents?.find(
+              (s: any) => s.email.toLowerCase() === cleanEmail || (s.username && s.username.toLowerCase() === cleanEmail)
             );
             const assignedSectionId = studentInfo?.sectionId;
 
             // Sections to render: filtered to assigned section if present, else all sections in course
-            const sectionsToRender = assignedSectionId
-              ? course.sections.filter((sec) => sec.id === assignedSectionId)
-              : course.sections;
+            const sectionsToRender = (course.sections ?? []).filter((sec: any) =>
+              assignedSectionId ? sec.id === assignedSectionId : true
+            );
 
             return (
               <div key={course.id} className="flex flex-col gap-6">
@@ -296,7 +368,7 @@ export default function CoursesPage() {
                     ))}
                   </div>
                 ) : (
-                  sectionsToRender.map((section) => (
+                  sectionsToRender.map((section: any) => (
                     <div key={section.id} className="flex flex-col gap-6">
                       
                       {/* Section Banner */}
@@ -306,12 +378,12 @@ export default function CoursesPage() {
                           Sección: {section.title}
                         </h3>
                         <span className="text-xs font-bold text-slate-400">
-                          ({section.units.length > 0 ? `${section.units.length} unidades creadas` : 'Programa estándar LectorMat'})
+                          ({(section.units ?? []).length > 0 ? `${section.units.length} unidades creadas` : 'Programa estándar LectorMat'})
                         </span>
                       </div>
 
                       {/* Units rendering */}
-                      {section.units.length === 0 ? (
+                      {(section.units ?? []).length === 0 ? (
                         /* Default curriculum units if section has no custom units */
                         <div className="grid grid-cols-1 gap-8">
                           {defaultCurriculumUnits.map((unit) => (
@@ -319,9 +391,10 @@ export default function CoursesPage() {
                           ))}
                         </div>
                       ) : (
-                        section.units.map((unit, uIdx) => {
+                        section.units.map((unit: any, uIdx: number) => {
                           const themeColors = ['#00B4C8', '#E87A1E', '#1B2A5A', '#8DC63F'];
                           const color = themeColors[uIdx % themeColors.length];
+
                           
                           return (
                             <div

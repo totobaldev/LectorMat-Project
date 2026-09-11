@@ -18,7 +18,10 @@ export interface SectionResource {
   sectionId: string;
   unitId?: string;
   moduleType?: ModuleCategory; // 'comprension' | 'metodo' | 'interactivo'
+  extractedText?: string;
+  parsedQuestions?: any[];
 }
+
 
 // Legacy alias for backward compatibility
 export type H5PResource = SectionResource;
@@ -83,6 +86,7 @@ export interface TeacherState {
   teacherCourses: TeacherCourse[];
   addTeacherCourse: (name: string, description: string) => void;
   addSection: (courseId: string, title: string) => void;
+  removeSection: (courseId: string, sectionId: string) => void;
   addUnit: (courseId: string, sectionId: string, title: string, subtitle?: string) => void;
   removeUnit: (courseId: string, sectionId: string, unitId: string) => void;
   addResource: (
@@ -90,8 +94,17 @@ export interface TeacherState {
     sectionId: string,
     unitId: string,
     moduleType: ModuleCategory,
-    resource: { name: string; description: string; resourceType: ResourceType; fileName: string; fileSize?: number }
+    resource: {
+      name: string;
+      description: string;
+      resourceType: ResourceType;
+      fileName: string;
+      fileSize?: number;
+      extractedText?: string;
+      parsedQuestions?: any[];
+    }
   ) => void;
+
   addH5PResource: (
     courseId: string,
     sectionId: string,
@@ -225,10 +238,7 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
         name,
         description,
         createdAt: new Date().toISOString(),
-        sections: [
-          { id: `c-${Date.now()}-1`, title: 'C1', order: 1, units: [], resources: [] },
-          { id: `c-${Date.now()}-2`, title: 'C4', order: 2, units: [], resources: [] },
-        ],
+        sections: [], // Sin secciones automáticas, creadas manualmente por el profesor
         enrolledStudents: [],
       };
       return { teacherCourses: [newCourse, ...state.teacherCourses] };
@@ -254,6 +264,24 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
       }),
     }));
   },
+
+  removeSection: async (courseId, sectionId) => {
+    // API Call
+    api.deleteSection(courseId, sectionId).catch(console.error);
+
+    // Optimistic Update
+    set((state) => ({
+      teacherCourses: state.teacherCourses.map((c) => {
+        if (c.id !== courseId) return c;
+        return {
+          ...c,
+          sections: c.sections.filter((s) => s.id !== sectionId),
+          enrolledStudents: (c.enrolledStudents || []).filter((std) => std.sectionId !== sectionId),
+        };
+      }),
+    }));
+  },
+
 
   addUnit: async (courseId, sectionId, title, subtitle) => {
     api.createUnit(courseId, sectionId, title, subtitle).catch(console.error);
@@ -322,12 +350,15 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
                   resourceType: resourceData.resourceType,
                   fileName: resourceData.fileName,
                   fileSize: resourceData.fileSize,
+                  extractedText: resourceData.extractedText,
+                  parsedQuestions: resourceData.parsedQuestions,
                   createdAt: new Date().toISOString(),
                   courseId,
                   sectionId,
                   unitId,
                   moduleType,
                 };
+
                 return {
                   ...unit,
                   modules: {

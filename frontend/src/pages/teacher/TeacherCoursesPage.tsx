@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Plus, BookOpen, ChevronRight, Layers, X, FileText, Calendar } from 'lucide-react';
 import { useTeacherStore } from '../../store/useTeacherStore';
+import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -15,6 +16,17 @@ export default function TeacherCoursesPage() {
   const [courseDesc, setCourseDesc] = useState('');
   const [error, setError] = useState('');
 
+  // Success Confirmation Modal
+  const [successModalData, setSuccessModalData] = useState<{
+    isOpen: boolean;
+    title: string;
+    description: string;
+  }>({
+    isOpen: false,
+    title: '',
+    description: '',
+  });
+
   // Auto-open modal when navigated from sidebar "Nuevo Curso" button
   useEffect(() => {
     const state = location.state as { openModal?: boolean } | null;
@@ -26,19 +38,28 @@ export default function TeacherCoursesPage() {
   }, [location.state]);
 
   const handleCreate = () => {
-    if (!courseName.trim()) {
+    const trimmedName = courseName.trim();
+    if (!trimmedName) {
       setError('El nombre del curso es obligatorio.');
       return;
     }
-    addTeacherCourse(courseName.trim(), courseDesc.trim());
+    addTeacherCourse(trimmedName, courseDesc.trim());
     setCourseName('');
     setCourseDesc('');
     setError('');
     setShowModal(false);
+
+    // Show success confirmation popup
+    setSuccessModalData({
+      isOpen: true,
+      title: '¡Curso creado con éxito!',
+      description: `El curso "${trimmedName}" fue registrado sin secciones por defecto. Puedes ingresar a él para añadir tus secciones y materiales.`,
+    });
   };
 
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString('es-CL', { day: '2-digit', month: 'short', year: 'numeric' });
+
 
   return (
     <div className="p-6 sm:p-10 max-w-6xl mx-auto flex flex-col gap-8 pb-16 w-full">
@@ -212,6 +233,17 @@ export default function TeacherCoursesPage() {
           </div>
         </div>
       )}
+
+      {/* ── Success Confirmation Popup ────────────────────────────────────── */}
+      <ConfirmModal
+        isOpen={successModalData.isOpen}
+        onClose={() => setSuccessModalData((prev) => ({ ...prev, isOpen: false }))}
+        title={successModalData.title}
+        description={successModalData.description}
+        variant="success"
+        confirmText="Entendido"
+      />
     </div>
   );
 }
+

@@ -39,6 +39,91 @@ const memoryCourses: Array<{
   },
 ];
 
+export async function listEnrolledCourses(req: Request, res: Response): Promise<void> {
+  // req.user is injected by requireAuth middleware
+  const userId = (req as any).user?.userId;
+
+  if (!userId) {
+    res.status(401).json({ status: 'error', message: 'No autenticado' });
+    return;
+  }
+
+  try {
+    // Find courses/sections where this user is enrolled
+    const rows = await query(
+      `SELECT
+         c.id        AS course_id,
+         c.name      AS course_name,
+         c.description,
+         cs.id       AS section_id,
+         cs.title    AS section_title,
+         cu.id       AS unit_id,
+         cu.title    AS unit_title,
+         cu.subtitle AS unit_subtitle,
+         cu.unit_order
+       FROM section_students ss
+       JOIN courses c         ON c.id  = ss.course_id
+       JOIN course_sections cs ON cs.id = ss.section_id
+       LEFT JOIN course_units cu ON cu.section_id = cs.id
+       WHERE ss.user_id = $1
+       ORDER BY c.id, cs.section_order, cu.unit_order`,
+      [userId]
+    );
+
+    if (rows.length === 0) {
+      // Student authenticated but no enrollments found — return empty list
+      res.status(200).json({ status: 'ok', data: [] });
+      return;
+    }
+
+    // Group rows into course → section → units
+    const courseMap: Record<string, any> = {};
+    for (const row of rows) {
+      if (!courseMap[row.course_id]) {
+        courseMap[row.course_id] = {
+          id: row.course_id,
+          name: row.course_name,
+          description: row.description,
+          sections: {},
+        };
+      }
+      const course = courseMap[row.course_id];
+      if (!course.sections[row.section_id]) {
+        course.sections[row.section_id] = {
+          id: row.section_id,
+          title: row.section_title,
+          units: [],
+        };
+      }
+      if (row.unit_id) {
+        const section = course.sections[row.section_id];
+        const alreadyAdded = section.units.some((u: any) => u.id === row.unit_id);
+        if (!alreadyAdded) {
+          section.units.push({
+            id: row.unit_id,
+            title: row.unit_title,
+            subtitle: row.unit_subtitle,
+            order: row.unit_order,
+            modules: { comprension: [], metodo: [], interactivo: [] },
+          });
+        }
+      }
+    }
+
+    // Flatten to array
+    const result = Object.values(courseMap).map((c: any) => ({
+      ...c,
+      sections: Object.values(c.sections),
+    }));
+
+    res.status(200).json({ status: 'ok', data: result });
+  } catch (err) {
+    // DB unavailable — return empty so frontend falls back to default curriculum
+    console.warn('[listEnrolledCourses] DB error, falling back:', err);
+    res.status(200).json({ status: 'ok', data: [] });
+  }
+}
+
 export async function listCourses(_req: Request, res: Response): Promise<void> {
   try {
     const dbCourses = await query('SELECT * FROM courses ORDER BY created_at DESC');
@@ -65,10 +150,7 @@ export async function createCourse(req: Request, res: Response): Promise<void> {
     id,
     name,
     description: description || '',
-    sections: [
-      { id: `sec-${Date.now()}-1`, title: 'C1', order: 1, students: [] },
-      { id: `sec-${Date.now()}-2`, title: 'C4', order: 2, students: [] },
-    ],
+    sections: [], // Secciones se crean manualmente por el docente
   };
 
   memoryCourses.push(newCourse);
@@ -112,6 +194,27 @@ export async function createSection(req: Request, res: Response): Promise<void> 
 
   res.status(201).json({ status: 'ok', data: newSection });
 }
+
+export async function deleteSection(req: Request, res: Response): Promise<void> {
+  const { courseId, sectionId } = req.params;
+
+  const course = memoryCourses.find((c) => c.id === courseId);
+  if (course) {
+    course.sections = course.sections.filter((s) => s.id !== sectionId);
+  }
+
+  try {
+    await query(
+      'DELETE FROM course_sections WHERE id = $1 AND course_id = $2',
+      [sectionId, courseId]
+    );
+  } catch (err) {
+    // DB fallback
+  }
+
+  res.status(200).json({ status: 'ok', message: 'Sección eliminada exitosamente' });
+}
+
 
 export async function createUnit(req: Request, res: Response): Promise<void> {
   const { courseId, sectionId } = req.params;

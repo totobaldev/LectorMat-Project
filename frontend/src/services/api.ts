@@ -108,6 +108,13 @@ export const api = {
     });
   },
 
+  async deleteSection(courseId: string, sectionId: string) {
+    return apiRequest(`${API_BASE_URL}/courses/${courseId}/sections/${sectionId}`, {
+      method: 'DELETE',
+    });
+  },
+
+
   async createUnit(courseId: string, sectionId: string, title: string, subtitle?: string) {
     return apiRequest(`${API_BASE_URL}/courses/${courseId}/sections/${sectionId}/units`, {
       method: 'POST',

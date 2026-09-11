@@ -21,10 +21,18 @@ export async function initDatabase(): Promise<void> {
       await pool.query(sql);
       console.log('🟢 Base de datos PostgreSQL inicializada con esquema DDL.');
     }
+
+    const seedPath = path.join(__dirname, '../../../database/seed.sql');
+    if (fs.existsSync(seedPath)) {
+      const seedSql = fs.readFileSync(seedPath, 'utf8');
+      await pool.query(seedSql);
+      console.log('🟢 Base de datos PostgreSQL sincronizada con seed.');
+    }
   } catch (err: any) {
     console.warn(`[DB NOTICE] PostgreSQL no disponible localmente en :5432. Modo desarrollo activo.`);
   }
 }
+
 
 export async function query<T = any>(text: string, params?: any[]): Promise<T[]> {
   try {

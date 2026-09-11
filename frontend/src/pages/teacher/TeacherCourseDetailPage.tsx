@@ -15,6 +15,7 @@ import {
 } from '../../store/useTeacherStore';
 import { readRosterFile, parseStudentRosterText, type ParsedStudent } from '../../utils/pdfParser';
 import { api } from '../../services/api';
+import { ConfirmModal, type ModalVariant } from '../../components/ui/ConfirmModal';
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -24,6 +25,7 @@ export default function TeacherCourseDetailPage() {
   const {
     teacherCourses,
     addSection,
+    removeSection,
     addUnit,
     removeUnit,
     removeResource,
@@ -36,6 +38,64 @@ export default function TeacherCourseDetailPage() {
 
   // Tab State: 'content' | 'participants'
   const [activeTab, setActiveTab] = useState<'content' | 'participants'>('content');
+
+  // Confirmation & Feedback Modal State
+  const [feedbackModal, setFeedbackModal] = useState<{
+    isOpen: boolean;
+    title: string;
+    description: string;
+    variant: ModalVariant;
+    confirmText?: string;
+    cancelText?: string;
+    onConfirm?: () => void;
+  }>({
+    isOpen: false,
+    title: '',
+    description: '',
+    variant: 'info',
+  });
+
+  const closeFeedbackModal = () => {
+    setFeedbackModal((prev) => ({ ...prev, isOpen: false }));
+  };
+
+  const showSuccessNotice = (title: string, description: string) => {
+    setFeedbackModal({
+      isOpen: true,
+      title,
+      description,
+      variant: 'success',
+      confirmText: 'Entendido',
+      onConfirm: closeFeedbackModal,
+    });
+  };
+
+  const showDeleteConfirm = (
+    title: string,
+    description: string,
+    confirmAction: () => void,
+    itemLabel: string = 'Elemento'
+  ) => {
+    setFeedbackModal({
+      isOpen: true,
+      title,
+      description,
+      variant: 'danger',
+      confirmText: 'Sí, eliminar',
+      cancelText: 'Cancelar',
+      onConfirm: () => {
+        confirmAction();
+        setFeedbackModal({
+          isOpen: true,
+          title: `¡${itemLabel} eliminado!`,
+          description: `Se ha completado la eliminación exitosamente.`,
+          variant: 'success',
+          confirmText: 'Aceptar',
+          onConfirm: closeFeedbackModal,
+        });
+      },
+    });
+  };
 
   // Modal: Add Section
   const [showSectionModal, setShowSectionModal] = useState(false);
@@ -70,27 +130,76 @@ export default function TeacherCourseDetailPage() {
   const handleAddSection = () => {
     if (!courseId) return;
     const order = (course?.sections.length ?? 0) + 1;
-    addSection(courseId, sectionTitle.trim() || `Sección C${order}`);
+    const title = sectionTitle.trim() || `Sección C${order}`;
+    addSection(courseId, title);
     setSectionTitle('');
     setShowSectionModal(false);
+
+    showSuccessNotice(
+      '¡Sección creada con éxito!',
+      `La "${title}" ha sido agregada al curso. Ahora puedes añadir unidades temáticas y cargar estudiantes.`
+    );
+  };
+
+  const handleDeleteSection = (secId: string, secTitle: string) => {
+    if (!courseId) return;
+    showDeleteConfirm(
+      `¿Eliminar la sección "${secTitle}"?`,
+      `Esta acción eliminará de forma permanente todas las unidades, recursos y nómina de estudiantes asignada a esta sección.`,
+      () => removeSection(courseId, secId),
+      'Sección'
+    );
   };
 
   const handleAddUnitConfirm = () => {
     if (!courseId || !showUnitModalForSectionId) return;
     const sec = course?.sections.find(s => s.id === showUnitModalForSectionId);
     const order = (sec?.units.length ?? 0) + 1;
+    const title = unitTitle.trim() || `Unidad ${order}: Tema de Estudio`;
+    const subtitle = unitSubtitle.trim() || 'Programa Transforma 2026';
 
-    addUnit(
-      courseId,
-      showUnitModalForSectionId,
-      unitTitle.trim() || `Unidad ${order}: Tema de Estudio`,
-      unitSubtitle.trim() || 'Programa Transforma 2026'
-    );
+    addUnit(courseId, showUnitModalForSectionId, title, subtitle);
 
     setUnitTitle('');
     setUnitSubtitle('');
     setShowUnitModalForSectionId(null);
+
+    showSuccessNotice(
+      '¡Unidad creada con éxito!',
+      `La "${title}" ha sido creada dentro de la sección. Ya puedes publicar recursos en los módulos de Comprensión, Método e Interactivo.`
+    );
   };
+
+  const handleDeleteUnit = (secId: string, uId: string, uTitle: string) => {
+    if (!courseId) return;
+    showDeleteConfirm(
+      `¿Eliminar la unidad "${uTitle}"?`,
+      `Se eliminarán todos los recursos y actividades creados dentro de esta unidad.`,
+      () => removeUnit(courseId, secId, uId),
+      'Unidad'
+    );
+  };
+
+  const handleDeleteResource = (secId: string, uId: string, modType: ModuleCategory, resId: string, resName: string) => {
+    if (!courseId) return;
+    showDeleteConfirm(
+      `¿Eliminar el recurso "${resName}"?`,
+      `El material será retirado del módulo ${modType}.`,
+      () => removeResource(courseId, secId, uId, modType, resId),
+      'Recurso'
+    );
+  };
+
+  const handleUnenrollStudent = (stdId: string, stdName: string) => {
+    if (!courseId) return;
+    showDeleteConfirm(
+      `¿Desmatricular a ${stdName}?`,
+      `El estudiante perderá el acceso a las actividades y unidades asignadas a este curso.`,
+      () => unenrollStudent(courseId, stdId),
+      'Estudiante'
+    );
+  };
+
 
   const handleSectionFileUpload = async (sectionId: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -103,11 +212,25 @@ export default function TeacherCourseDetailPage() {
       const extracted = parseStudentRosterText(text);
       setParsedStudents(extracted);
       if (extracted.length === 0) {
-        alert('No se detectaron correos ni nombres de estudiantes en el archivo. Puedes pegar el texto directamente si lo prefieres.');
+        setFeedbackModal({
+          isOpen: true,
+          title: 'Sin estudiantes detectados',
+          description: 'No se detectaron correos ni nombres válidos en el archivo. Puedes pegar el texto manualmente si lo prefieres.',
+          variant: 'info',
+          confirmText: 'Entendido',
+          onConfirm: closeFeedbackModal,
+        });
       }
     } catch (err) {
       console.error(err);
-      alert('Error al leer el archivo. Intenta copiando y pegando el contenido.');
+      setFeedbackModal({
+        isOpen: true,
+        title: 'Error de lectura',
+        description: 'No se pudo leer el archivo cargado. Intenta copiando y pegando el texto directamente.',
+        variant: 'danger',
+        confirmText: 'Aceptar',
+        onConfirm: closeFeedbackModal,
+      });
     } finally {
       setFileLoading(false);
     }
@@ -118,7 +241,14 @@ export default function TeacherCourseDetailPage() {
     const extracted = parseStudentRosterText(pastedText);
     setParsedStudents(extracted);
     if (extracted.length === 0) {
-      alert('No se pudieron extraer estudiantes del texto pegado. Verifica que contenga direcciones de correo.');
+      setFeedbackModal({
+        isOpen: true,
+        title: 'Formato no reconocido',
+        description: 'No se pudieron extraer estudiantes del texto pegado. Asegúrate de que contenga direcciones de correo institucional.',
+        variant: 'info',
+        confirmText: 'Entendido',
+        onConfirm: closeFeedbackModal,
+      });
     }
   };
 
@@ -152,7 +282,10 @@ export default function TeacherCourseDetailPage() {
     );
 
     const section = course?.sections.find(s => s.id === importingSectionId);
-    alert(`¡Éxito! Se importaron ${parsedStudents.length} estudiantes a la sección "${section?.title || 'Sección'}". Cuentas de usuario y contraseñas creadas y guardadas en el backend.`);
+    showSuccessNotice(
+      '¡Estudiantes importados con éxito!',
+      `Se importaron ${parsedStudents.length} estudiantes a la sección "${section?.title || 'Sección'}". Se han generado y guardado sus cuentas institucionales y contraseñas.`
+    );
 
     const targetSecId = importingSectionId;
     setImportingSectionId(null);
@@ -160,6 +293,7 @@ export default function TeacherCourseDetailPage() {
     setPastedText('');
     setViewCredentialsSectionId(targetSecId);
   };
+
 
   const handleCopyCredentials = (sectionStudents: CourseStudent[]) => {
     if (!sectionStudents.length) return;
@@ -200,14 +334,27 @@ export default function TeacherCourseDetailPage() {
 
     const isEnrolled = course.enrolledStudents.some(s => s.email === student.email);
     if (isEnrolled) {
-      alert('El estudiante ya está matriculado.');
+      setFeedbackModal({
+        isOpen: true,
+        title: 'Estudiante ya matriculado',
+        description: 'El alumno seleccionado ya forma parte de la lista de este curso.',
+        variant: 'info',
+        confirmText: 'Entendido',
+        onConfirm: closeFeedbackModal,
+      });
       return;
     }
 
     enrollStudent(courseId, student.name, student.email, student.career);
     setSelectedStudentId('');
     setShowEnrollModal(false);
+
+    showSuccessNotice(
+      '¡Estudiante matriculado!',
+      `Se ha matriculado a "${student.name}" exitosamente en el curso.`
+    );
   };
+
 
   const handleNavigateToForm = (sectionId: string, unitId: string, moduleType: ModuleCategory, resourceType: ResourceType) => {
     setActiveResourcePicker(null);
@@ -434,6 +581,16 @@ export default function TeacherCourseDetailPage() {
                             Credenciales ({sectionStudents.length})
                           </button>
                         )}
+
+                        <button
+                          onClick={() => handleDeleteSection(section.id, section.title)}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-extrabold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors cursor-pointer"
+                          title={`Eliminar sección ${section.title}`}
+                          aria-label={`Eliminar sección ${section.title}`}
+                        >
+                          <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                          <span>Eliminar Sección</span>
+                        </button>
                       </div>
                     </div>
 
@@ -475,7 +632,7 @@ export default function TeacherCourseDetailPage() {
                                   U{uIdx + 1}
                                 </span>
                                 <button
-                                  onClick={() => removeUnit(course.id, section.id, unit.id)}
+                                  onClick={() => handleDeleteUnit(section.id, unit.id, unit.title)}
                                   className="w-8 h-8 rounded-lg hover:bg-rose-50 text-slate-400 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer border-none bg-transparent"
                                   title="Eliminar Unidad"
                                 >
@@ -483,6 +640,7 @@ export default function TeacherCourseDetailPage() {
                                 </button>
                               </div>
                             </div>
+
 
                             {/* 3 Exercise Modality Cards Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -526,8 +684,9 @@ export default function TeacherCourseDetailPage() {
                                           </div>
                                         </div>
                                         <button
-                                          onClick={() => removeResource(course.id, section.id, unit.id, 'comprension', res.id)}
+                                          onClick={() => handleDeleteResource(section.id, unit.id, 'comprension', res.id, res.name)}
                                           className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1"
+                                          title="Eliminar recurso"
                                         >
                                           <X className="w-3.5 h-3.5" />
                                         </button>
@@ -584,8 +743,9 @@ export default function TeacherCourseDetailPage() {
                                           </div>
                                         </div>
                                         <button
-                                          onClick={() => removeResource(course.id, section.id, unit.id, 'metodo', res.id)}
+                                          onClick={() => handleDeleteResource(section.id, unit.id, 'metodo', res.id, res.name)}
                                           className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1"
+                                          title="Eliminar recurso"
                                         >
                                           <X className="w-3.5 h-3.5" />
                                         </button>
@@ -642,11 +802,13 @@ export default function TeacherCourseDetailPage() {
                                           </div>
                                         </div>
                                         <button
-                                          onClick={() => removeResource(course.id, section.id, unit.id, 'interactivo', res.id)}
+                                          onClick={() => handleDeleteResource(section.id, unit.id, 'interactivo', res.id, res.name)}
                                           className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1"
+                                          title="Eliminar recurso"
                                         >
                                           <X className="w-3.5 h-3.5" />
                                         </button>
+
                                       </div>
                                     ))
                                   )}
@@ -744,13 +906,14 @@ export default function TeacherCourseDetailPage() {
                       
                       <div className="text-center">
                         <button
-                          onClick={() => unenrollStudent(course.id, std.id)}
+                          onClick={() => handleUnenrollStudent(std.id, std.name)}
                           className="w-8 h-8 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer border-none bg-transparent flex items-center justify-center mx-auto"
                           title="Desmatricular"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
+
                     </div>
                   );
                 })}
@@ -1121,6 +1284,19 @@ export default function TeacherCourseDetailPage() {
           </div>
         );
       })()}
+
+      {/* ── Global Confirmation & Feedback Modal ────────────────────────────── */}
+      <ConfirmModal
+        isOpen={feedbackModal.isOpen}
+        onClose={closeFeedbackModal}
+        onConfirm={feedbackModal.onConfirm}
+        title={feedbackModal.title}
+        description={feedbackModal.description}
+        variant={feedbackModal.variant}
+        confirmText={feedbackModal.confirmText}
+        cancelText={feedbackModal.cancelText}
+      />
     </div>
   );
 }
+

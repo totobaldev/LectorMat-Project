@@ -1,7 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, FileText, FileCode2, Package, Upload } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, FileText, FileCode2, Package, Upload, Loader2, ListChecks, HelpCircle } from 'lucide-react';
 import { useTeacherStore, type ModuleCategory, type ResourceType } from '../../store/useTeacherStore';
+import { readDocumentText, parseResourceToQuestions, type ParsedQuestion } from '../../utils/fileQuestionParser';
 
 export default function TeacherH5PResourceForm() {
   const { courseId } = useParams<{ courseId: string }>();
@@ -26,6 +27,10 @@ export default function TeacherH5PResourceForm() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  const [extractedText, setExtractedText] = useState('');
+  const [parsedQuestions, setParsedQuestions] = useState<ParsedQuestion[]>([]);
+  const [isProcessingFile, setIsProcessingFile] = useState(false);
+  const [fileParseStatus, setFileParseStatus] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; file?: string; unit?: string }>({});
   const [saved, setSaved] = useState(false);
@@ -40,7 +45,7 @@ export default function TeacherH5PResourceForm() {
     }
   };
 
-  const handleFile = (f: File) => {
+  const handleFile = async (f: File) => {
     const ext = f.name.split('.').pop()?.toLowerCase() || '';
 
     if (resourceType === 'pdf' && ext !== 'pdf') {
@@ -59,6 +64,33 @@ export default function TeacherH5PResourceForm() {
     setFile(f);
     setErrors((e) => ({ ...e, file: undefined }));
     if (!name.trim()) setName(f.name.replace(/\.[^/.]+$/, ''));
+
+    // Process file text and parse questions
+    setIsProcessingFile(true);
+    setFileParseStatus('Analizando documento y extrayendo todas las preguntas...');
+    try {
+      const text = await readDocumentText(f);
+      setExtractedText(text);
+      const questions = parseResourceToQuestions(text, f.name, moduleType);
+      setParsedQuestions(questions);
+      setFileParseStatus(`✓ Se detectaron ${questions.length} preguntas en el material (todas interactivas)`);
+    } catch (err) {
+      console.warn('Error extrayendo texto del documento:', err);
+      const fallbackQuestions = parseResourceToQuestions(f.name, f.name, moduleType);
+      setParsedQuestions(fallbackQuestions);
+      setFileParseStatus(`✓ Se generaron ${fallbackQuestions.length} preguntas interactivas.`);
+    } finally {
+      setIsProcessingFile(false);
+    }
+  };
+
+  const handleModuleTypeChange = (newType: ModuleCategory) => {
+    setModuleType(newType);
+    if (file && (extractedText || file.name)) {
+      const updated = parseResourceToQuestions(extractedText || file.name, file.name, newType);
+      setParsedQuestions(updated);
+      setFileParseStatus(`✓ Se detectaron ${updated.length} preguntas en el material (todas interactivas)`);
+    }
   };
 
   const onDrop = useCallback((ev: React.DragEvent) => {
@@ -66,7 +98,7 @@ export default function TeacherH5PResourceForm() {
     setDragOver(false);
     const f = ev.dataTransfer.files[0];
     if (f) handleFile(f);
-  }, [resourceType]);
+  }, [resourceType, moduleType]);
 
   const onDragOver = (ev: React.DragEvent) => { ev.preventDefault(); setDragOver(true); };
   const onDragLeave = () => setDragOver(false);
@@ -93,6 +125,8 @@ export default function TeacherH5PResourceForm() {
       resourceType,
       fileName: file.name,
       fileSize: file.size,
+      extractedText,
+      parsedQuestions,
     });
 
     setSaved(true);
@@ -155,7 +189,7 @@ export default function TeacherH5PResourceForm() {
             <div className="grid grid-cols-3 gap-3">
               <button
                 type="button"
-                onClick={() => { setResourceType('pdf'); setFile(null); }}
+                onClick={() => { setResourceType('pdf'); setFile(null); setExtractedText(''); setParsedQuestions([]); setFileParseStatus(null); }}
                 className={`flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border-2 font-extrabold text-xs transition-all cursor-pointer ${
                   resourceType === 'pdf'
                     ? 'border-rose-500 bg-rose-50 text-rose-700 shadow-sm'
@@ -168,7 +202,7 @@ export default function TeacherH5PResourceForm() {
 
               <button
                 type="button"
-                onClick={() => { setResourceType('word'); setFile(null); }}
+                onClick={() => { setResourceType('word'); setFile(null); setExtractedText(''); setParsedQuestions([]); setFileParseStatus(null); }}
                 className={`flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border-2 font-extrabold text-xs transition-all cursor-pointer ${
                   resourceType === 'word'
                     ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm'
@@ -181,7 +215,7 @@ export default function TeacherH5PResourceForm() {
 
               <button
                 type="button"
-                onClick={() => { setResourceType('h5p'); setFile(null); }}
+                onClick={() => { setResourceType('h5p'); setFile(null); setExtractedText(''); setParsedQuestions([]); setFileParseStatus(null); }}
                 className={`flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border-2 font-extrabold text-xs transition-all cursor-pointer ${
                   resourceType === 'h5p'
                     ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm'
@@ -220,7 +254,7 @@ export default function TeacherH5PResourceForm() {
               </label>
               <select
                 value={moduleType}
-                onChange={(e) => setModuleType(e.target.value as ModuleCategory)}
+                onChange={(e) => handleModuleTypeChange(e.target.value as ModuleCategory)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1B2A5A]/30"
               >
                 <option value="comprension">📖 Comprensión (Básico)</option>
@@ -281,9 +315,14 @@ export default function TeacherH5PResourceForm() {
               />
 
               {file ? (
-                <div className="flex items-center justify-center gap-3">
-                  <span className="font-extrabold text-xs text-slate-800">{file.name}</span>
-                  <span className="text-[11px] font-bold text-slate-400">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="font-extrabold text-xs text-slate-800">{file.name}</span>
+                    <span className="text-[11px] font-bold text-slate-400">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                  </div>
+                  <span className="text-[11px] text-blue-600 font-bold hover:underline">
+                    Haz clic para cambiar de archivo
+                  </span>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-2">
@@ -295,6 +334,43 @@ export default function TeacherH5PResourceForm() {
               )}
             </div>
             {errors.file && <p className="text-xs text-rose-500 font-bold">{errors.file}</p>}
+
+            {/* Document Extraction & Interactive Questions Badge */}
+            {isProcessingFile && (
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-center gap-2.5 text-xs text-blue-800 font-bold animate-pulse">
+                <Loader2 className="w-4 h-4 animate-spin text-blue-600 shrink-0" />
+                <span>Analizando documento y extrayendo todas las preguntas...</span>
+              </div>
+            )}
+
+            {!isProcessingFile && parsedQuestions.length > 0 && (
+              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex flex-col gap-3">
+                <div className="flex items-center gap-2.5 text-xs text-emerald-800 font-black">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>{fileParseStatus || `Se detectaron ${parsedQuestions.length} preguntas interactivas en el material`}</span>
+                </div>
+
+                <div className="text-[11px] text-slate-600 font-medium space-y-1.5 max-h-40 overflow-y-auto pr-1 border-t border-emerald-200/60 pt-2">
+                  <p className="font-black text-slate-800 text-[11px] flex items-center gap-1.5">
+                    <ListChecks className="w-3.5 h-3.5 text-emerald-600" />
+                    Preguntas interactivas listas para el alumno ({parsedQuestions.length}):
+                  </p>
+                  {parsedQuestions.map((q, idx) => (
+                    <div key={idx} className="flex items-start gap-2 bg-white/80 p-2 rounded-lg border border-emerald-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                      <span className="font-black text-emerald-800 shrink-0">#{idx + 1}</span>
+                      <div className="flex-1 min-w-0">
+                        <span className="font-bold text-slate-800 truncate block">{q.questionText}</span>
+                        {q.options && q.options.length > 0 && (
+                          <span className="text-[10px] text-slate-500 block truncate mt-0.5">
+                            Alternativas: {q.options.map((o) => `${o.label}) ${o.text}`).join(' | ')}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Form Action Buttons */}
