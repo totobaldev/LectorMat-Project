@@ -127,7 +127,7 @@ const RoleSelection: React.FC = () => {
             {/* Email */}
             <div className="flex flex-col gap-2">
               <label htmlFor="student-identity" className="text-xs font-bold text-slate-600 uppercase tracking-wider">
-                Correo o RUT
+                RUT o correo institucional
               </label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -136,7 +136,7 @@ const RoleSelection: React.FC = () => {
                   type="text"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="correo@inacap.cl"
+                  placeholder="12.345.678-9 o correo@inacapmail.cl"
                   className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 placeholder:text-slate-400 outline-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white"
                 />
               </div>
