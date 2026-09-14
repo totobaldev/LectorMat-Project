@@ -95,7 +95,7 @@ const TeacherLoginPage: React.FC = () => {
               Acceso Docente
             </h2>
             <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
-              Ingresa con tu correo institucional y contraseña de docente para acceder al panel de gestión de cursos.
+              <span className="text-orange-500 text-l">Ingresa con tu correo institucional y contraseña de docente para acceder al panel de gestión de cursos.</span>
             </p>
           </div>
 

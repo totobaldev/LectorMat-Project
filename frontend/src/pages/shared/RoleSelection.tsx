@@ -111,7 +111,7 @@ const RoleSelection: React.FC = () => {
               Acceso Estudiante
             </h2>
             <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
-              Ingresa tu correo institucional o RUT de estudiante para iniciar tu sesión de aprendizaje.
+              <span className="text-orange-500 text-l">Ingresa con tu  RUT o correo institucional de estudiante para iniciar tu sesión de aprendizaje.</span>
             </p>
           </div>
 
