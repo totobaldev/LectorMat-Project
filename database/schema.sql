@@ -35,6 +35,9 @@ CREATE TABLE IF NOT EXISTS users (
   role          user_role   NOT NULL DEFAULT 'student',
   area          VARCHAR(100),                         -- Área técnico-profesional
   career        VARCHAR(150),                         -- Carrera específica
+  avatar_url    VARCHAR(500),                         -- URL del avatar
+  xp            INT         NOT NULL DEFAULT 0,       -- Experiencia acumulada
+  level         INT         NOT NULL DEFAULT 1,       -- Nivel actual
   created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 

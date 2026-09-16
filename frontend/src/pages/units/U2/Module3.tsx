@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U2_PROBLEMS } from '../../../data/u2Questions';
 
 import { HelpCircle, ChevronRight, Lock, Unlock, Zap } from 'lucide-react';
 
@@ -49,6 +52,7 @@ export default function U2Module3() {
   const [inputVal, setInputVal] = useState('');
   const [showHint, setShowHint] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const completed = progress.u2m3CompletedLevels || 0;
   const currentLevelKey = levels[currentLevelIdx];
@@ -83,6 +87,8 @@ export default function U2Module3() {
         <h1 className="text-2xl font-bold">Módulo 3: Banco de Resolución</h1>
         <p className="text-slate-500">Problemas modelados con funciones exponenciales y logarítmicas.</p>
       </header>
+
+      <TeacherResources unitId="u2" moduleType="interactivo" />
 
       <div className="flex gap-4">
         {levels.map((lvl, i) => {
@@ -130,7 +136,28 @@ export default function U2Module3() {
           <button type="button" onClick={() => setShowHint(h => !h)} className="px-6 py-4 rounded-2xl font-bold bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 transition-colors flex items-center gap-2"><HelpCircle className="w-5 h-5"/> {showHint ? 'Ocultar pista' : 'Ver Pista'}</button>
           <button type="submit" className="bg-violet-600 hover:bg-violet-700 text-white font-bold px-8 py-4 rounded-2xl shadow-sm border border-violet-700 transition-colors flex items-center gap-2 cursor-pointer">Enviar <ChevronRight className="w-5 h-5"/></button>
         </form>
+        
+        {completed === 3 && currentLevelKey === 'avanzado' && (
+          <div className="mt-8 pt-8 border-t border-slate-100 flex justify-end">
+            <button 
+              onClick={() => setShowQuiz(true)}
+              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white font-extrabold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-violet-500/30 hover:-translate-y-1 cursor-pointer"
+            >
+              Realizar Cuestionario M3 Completo
+            </button>
+          </div>
+        )}
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U2_PROBLEMS.find(p => p.id === 'u2-s2-instagram')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

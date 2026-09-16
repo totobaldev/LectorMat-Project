@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { useProgressStore } from '../store/useProgressStore';
 import { useTeacherStore, type SectionResource, type TeacherCourse, type ModuleCategory } from '../store/useTeacherStore';
+import { ResourcePreviewModal } from '../components/ui/ResourcePreviewModal';
 import { StatusBadge } from '../components/ui/StatusBadge';
 import { ActionButton } from '../components/ui/ActionButton';
 import { parseResourceToQuestions, type ParsedQuestion } from '../utils/fileQuestionParser';
@@ -659,6 +660,12 @@ export default function CoursesPage() {
               </div>
             </motion.div>
           </motion.div>
+        )}
+        {activeModalResource && (
+          <ResourcePreviewModal
+            resource={activeModalResource}
+            onClose={() => setActiveModalResource(null)}
+          />
         )}
       </AnimatePresence>
     </div>

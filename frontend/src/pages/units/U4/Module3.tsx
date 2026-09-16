@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U4_PROBLEMS } from '../../../data/u4Questions';
 
 import { HelpCircle, ChevronRight, Lock, Unlock, Zap } from 'lucide-react';
 
@@ -49,6 +52,7 @@ export default function U4Module3() {
   const [inputVal, setInputVal] = useState('');
   const [showHint, setShowHint] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const completed = progress.u3m3CompletedLevels || 0; // we can track locally or share, let's use locally completed if needed or use a new progress state
   const [localCompleted, setLocalCompleted] = useState(0);
@@ -89,6 +93,8 @@ export default function U4Module3() {
         <h1 className="text-2xl font-bold">Módulo 3: Banco de Resolución de Problemas</h1>
         <p className="text-slate-500">Resolución de problemas de finanzas y cálculo de flujos aplicados.</p>
       </header>
+
+      <TeacherResources unitId="u4" moduleType="interactivo" />
 
       <div className="flex gap-4">
         {levels.map((lvl, i) => {
@@ -166,9 +172,30 @@ export default function U4Module3() {
                 </div>
               ))}
             </div>
+            
+            {currentLevelKey === 'avanzado' && (
+              <div className="pt-6 mt-6 border-t border-slate-200 flex justify-end">
+                <button 
+                  onClick={() => setShowQuiz(true)}
+                  className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-emerald-500/30 hover:-translate-y-1 cursor-pointer"
+                >
+                  Realizar Cuestionario M3 Completo
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U4_PROBLEMS.find(p => p.id === 'u4-s2-caja-compuesto')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

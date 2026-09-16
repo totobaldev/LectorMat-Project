@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 2434  -->
+  <question type="cloze">
+    <name>
+      <text>F1-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 4,8 t + 18</p>
+<p><br></p><p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><br>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=18} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 5 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=29.5:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 20 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=0.44:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=9.16:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=4.8:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=4.8:0.2},{1:NM:=12.5:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=12.5:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=29.5:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%100%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/gajghcwj/width/815/height/723/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="815px" height="723px" scrolling="no"> </iframe></p>
+<p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2554  -->
+  <question type="cloze">
+    <name>
+      <text>F10-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 5,4 t + 17</p>
+<p><strong><span><br></span></strong></p><p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong><br></p><p><br>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=17} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 6,5 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=30.98:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 27 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=2.37:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=8.43:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=5.4:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=5.4:0.2},{1:NM:=13.35:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=13.35:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=31.58:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%100%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p><iframe scrolling="no" title="Actividad sin título" src="https://www.geogebra.org/material/iframe/id/mwamr2su/width/915/height/823/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="915px" height="823px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2446  -->
+  <question type="cloze">
+    <name>
+      <text>F2-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 5,2 t + 21</p>
+<p><strong><span><br></span></strong></p><p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><b><br></b>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=21} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 4 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=33.8:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 31 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=2.55:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=7.85:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=5.2:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=5.2:0.2},{1:NM:=13.51:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=13.51:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=34.52:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%100%Gráfica 3~%0%Gráfica 4}</p>
+<p><iframe scrolling="no" title="Actividad sin título" src="https://www.geogebra.org/material/iframe/id/sgeyum94/width/815/height/723/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="815px" height="723px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2458  -->
+  <question type="cloze">
+    <name>
+      <text>F3-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 4,6 t + 19</p>
+<p><br></p><p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong><br></p><p><br>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=19} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 3 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=28.3:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 26 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=1.92:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=7.28:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=4.6:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=4.6:0.2},{1:NM:=12.29:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=12.29:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=29.58:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%100%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p><iframe scrolling="no" title=" " src="https://www.geogebra.org/material/iframe/id/kvzsbfuz/width/815/height/723/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="815px" height="723px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2470  -->
+  <question type="cloze">
+    <name>
+      <text>F4-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong style="color: rgb(0, 0, 255); font-size: 0.9375rem;"><span class="" style="color: rgb(51, 51, 51);"></span></strong></h4><h4><span><strong><span>Problema : Altura de un Proyectil</span></strong><span>&nbsp;</span><strong>(25 puntos)</strong></span></h4><strong style="color: rgb(0, 0, 255); font-size: 0.9375rem;"><span class="" style="color: rgb(51, 51, 51);"></span></strong>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 5,1 t + 23</p>
+<p><strong><span><br></span></strong></p><p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><b><br></b>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=23} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 6 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=35.6:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 32 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=2.27:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=7.93:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=5.1:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=5.1:0.2},{1:NM:=13.59:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=13.59:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=36:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%100%Gráfica 4}</p>
+<p><iframe scrolling="no" title=" " src="https://www.geogebra.org/material/iframe/id/ewrsxcfn/width/915/height/823/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="915px" height="823px" style="border:0px;"> </iframe>
+</p><p><br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2482  -->
+  <question type="cloze">
+    <name>
+      <text>F5-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p></p><h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 5,7 t + 20</p><p><br></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><b><br></b>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=20} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 4,5 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=35.53:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 33 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=3.15:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=8.25:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=5.7:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=5.7:0.2},{1:NM:=14.21:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=14.21:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=36.25:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%100%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p><iframe scrolling="no" title="Actividad sin título" src="https://www.geogebra.org/material/iframe/id/ucrahcce/width/915/height/823/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="915px" height="823px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2494  -->
+  <question type="cloze">
+    <name>
+      <text>F6-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 4,9 t + 15</p><p><br></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><b><br></b>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=15} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 2,5 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=24.13:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 24 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=2.45:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=7.35:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=4.9:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=4.9:0.2},{1:NM:=12.25:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=12.25:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=27:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%100%Gráfica 4}</p>
+<p><iframe scrolling="no" title="Actividad sin título" src="https://www.geogebra.org/material/iframe/id/ve4z42np/width/915/height/823/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="915px" height="823px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2518  -->
+  <question type="cloze">
+    <name>
+      <text>F7-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 4,5 t + 22</p><p><br></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><b><br></b>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=22} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 3,5 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=31.63:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 28 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=1.63:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=7.37:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=4.5:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=4.5:0.2},{1:NM:=12.52:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=12.52:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=32.1:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%100%Gráfica 3~%0%Gráfica 4}</p>
+<p><iframe scrolling="no" title=" " src="https://www.geogebra.org/material/iframe/id/xey6wkce/width/915/height/823/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="915px" height="823px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2530  -->
+  <question type="cloze">
+    <name>
+      <text>F8-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 5,3 t + 16</p><p><br></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><b><br></b>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=16} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 7 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=28.6:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 25 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=2.12:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=8.48:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=5.3:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=5.3:0.2},{1:NM:=13.05:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=13.05:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=30.05:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%100%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p><iframe scrolling="no" title="Actividad sin título" src="https://www.geogebra.org/material/iframe/id/r4w6ucqd/width/915/height/823/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="915px" height="823px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2542  -->
+  <question type="cloze">
+    <name>
+      <text>F9-Problema : Altura de un Proyectil (25 puntos)</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><span style="color: #0000ff;"><strong><span class="" style="color: rgb(51, 51, 51);">Problema : Altura de un Proyectil</span></strong><span class="" style="color: rgb(51, 51, 51);"> </span><strong><span class="" style="color: rgb(51, 51, 51);">(25 puntos)</span></strong></span></h4>
+<p><br>Un objeto es lanzado hacia arriba desde una cierta altura, llega a un punto donde alcanza una máxima altura y cae al suelo.</p>
+<p><br>La función ℎ(𝑡) que modela la altura del objeto (en metros) en un tiempo t (en segundos) está dada por:</p>
+<p>h(t) = −0,5 t<sup>2</sup>&nbsp;+ 4,7 t + 14</p><p><br></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIONES: Ingrese los valores utilizando punto decimal con una cifra decimal redondeada.</span></strong></p><p><b><br></b>a) ¿Desde qué altura fue lanzado el objeto? <strong>(2 puntos)</strong></p>
+<p>&nbsp;Desde {2:NM:=14} metros</p>
+<p><br>b) ¿Cuál es la altura que alcanza el objeto a los 5,5 segundos del movimiento? <strong>(2 puntos)</strong></p>
+<p>&nbsp;La altura es {2:NM:=24.73:0.2} metros</p>
+<p><br>c) ¿En qué instante de tiempo el objeto se encuentra a una altura de 22 m? <strong>(4 puntos)</strong></p>
+<p>&nbsp;El menor valor de tiempo es : {2:NM:=2.23:0.2} segundos&nbsp;</p>
+<p>&nbsp;El mayor valor de tiempo es : {2:NM:=7.17:0.2} segundos</p>
+<p>&nbsp;</p>
+<p>d) ¿Cuál es el intervalo de tiempo en el que el objeto va subiendo? <strong>(2 puntos)</strong></p>
+<p>&nbsp;sube en el intervalo&nbsp; ]{1:NM:=0},{1:NM:=4.7:0.2}[&nbsp;</p>
+<p><br>e) ¿Cuál es el intervalo de tiempo en el que el objeto va bajando? <strong>(2 puntos)</strong></p>
+<p>&nbsp;baja en el intervalo&nbsp; ]{1:NM:=4.7:0.2},{1:NM:=11.78:0.2}[&nbsp;</p>
+<p>&nbsp;</p>
+<p>f) ¿Cuánto tiempo demora la piedra en caer al suelo desde que inicia el movimiento? <strong>(5 puntos)</strong></p>
+<p>Se demora&nbsp;{5:NM:=11.78:0.2}&nbsp; segundos en caer al suelo.</p>
+<p>&nbsp;</p>
+<p>g) ¿Cuál es la máxima altura que alcanza el objeto?&nbsp;<strong>(4 puntos)</strong></p>
+<p>La altura máxima es&nbsp;&nbsp;{4:NM:=25.05:0.2}&nbsp; metros</p>
+<p>&nbsp;</p>
+<p>h) ¿Cuál de las siguientes gráficas representa mejor a la función h(t)?&nbsp;&nbsp;<strong>(4 puntos)</strong></p>
+<p>&nbsp;&nbsp;La gráfica es : {4:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%100%Gráfica 4}</p>
+<p><iframe scrolling="no" title="Actividad sin título" src="https://www.geogebra.org/material/iframe/id/kyrsk6hz/width/915/height/823/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="915px" height="823px" style="border:0px;"> </iframe>
+</p><p>&nbsp;&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+</quiz>

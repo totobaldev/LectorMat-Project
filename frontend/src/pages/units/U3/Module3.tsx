@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U3_PROBLEMS } from '../../../data/u3Questions';
 
 import { HelpCircle, ChevronRight, Lock, Unlock, Zap } from 'lucide-react';
 
@@ -82,6 +85,7 @@ export default function U3Module3() {
   const [inputVal, setInputVal] = useState('');
   const [showHint, setShowHint] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const completed = progress.u3m3CompletedLevels || 0;
   const currentLevelKey = levels[currentLevelIdx];
@@ -119,6 +123,8 @@ export default function U3Module3() {
           {isAdm ? 'Resolución de problemas de Progresiones Aplicados.' : 'Resolución de problemas de Trigonometría.'}
         </p>
       </header>
+
+      <TeacherResources unitId="u3" moduleType="interactivo" />
 
       <div className="flex gap-4">
         {levels.map((lvl, i) => {
@@ -196,9 +202,29 @@ export default function U3Module3() {
                 </div>
               ))}
             </div>
+            {currentLevelKey === 'avanzado' && (
+              <div className="pt-6 mt-6 border-t border-slate-200 flex justify-end">
+                <button 
+                  onClick={() => setShowQuiz(true)}
+                  className={`bg-gradient-to-r ${isAdm ? 'from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600' : 'from-sky-500 to-blue-500 hover:from-sky-600 hover:to-blue-600'} text-white font-extrabold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-sky-500/30 hover:-translate-y-1 cursor-pointer`}
+                >
+                  Realizar Cuestionario M3 Completo
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U3_PROBLEMS.find(p => p.id === 'u3-s3-chichen')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

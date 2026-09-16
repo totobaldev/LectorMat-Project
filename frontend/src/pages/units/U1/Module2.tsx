@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U1_PROBLEMS } from '../../../data/u1Questions';
 
 import { Check } from 'lucide-react';
 
@@ -34,6 +37,7 @@ export default function Module2() {
 
   const [currentNode, setCurrentNode] = useState<number | string>(1);
   const [path, setPath] = useState<{ q: string; ans: string }[]>([]);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const isTerminal = typeof currentNode === 'string' && currentNode.startsWith('T:');
 
@@ -64,6 +68,25 @@ export default function Module2() {
         </div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-200 rounded-full blur-3xl opacity-40 transform translate-x-1/3 -translate-y-1/3"></div>
       </header>
+
+      <TeacherResources unitId="u1" moduleType="metodo" />
+
+      {/* ── Situación a Analizar ──────────────────────────────────────────────── */}
+      <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start relative overflow-hidden w-full">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-slate-50 to-transparent rounded-bl-full pointer-events-none opacity-50"></div>
+        <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <div className="space-y-2 relative z-10 flex-1">
+          <span className="text-[10px] font-black uppercase text-indigo-500 tracking-wider">Situación a analizar</span>
+          <h3 className="text-xl font-extrabold text-slate-900 leading-tight">El Precio del Combustible</h3>
+          <p className="text-sm text-slate-600 leading-relaxed font-medium">
+            Si en determinada semana del año (semana 0) el precio de la bencina es $1230 y sabiendo que el fondo de estabilización FEPCO inyecta dinero, de forma que el precio de la bencina no suba más de 10 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible. Responde las siguientes preguntas para identificar con qué modelo matemático debes resolver este problema.
+          </p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start w-full">
         {/* Node Card */}
@@ -112,12 +135,20 @@ export default function Module2() {
                 {TERMINALS[currentNode as string].detail}
               </p>
               
-              <button 
-                onClick={reset}
-                className="mt-10 bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold py-4 px-10 rounded-2xl transition-colors cursor-pointer"
-              >
-                Volver al inicio del árbol
-              </button>
+              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  onClick={reset}
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold py-4 px-10 rounded-2xl transition-colors cursor-pointer"
+                >
+                  Volver al inicio
+                </button>
+                <button 
+                  onClick={() => setShowQuiz(true)}
+                  className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold py-4 px-10 rounded-2xl transition-all shadow-lg shadow-emerald-500/30 hover:-translate-y-1 cursor-pointer"
+                >
+                  Realizar Cuestionario M2
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -154,6 +185,16 @@ export default function Module2() {
         </div>
 
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U1_PROBLEMS.find(p => p.id === 'u1-s2-proyectil')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

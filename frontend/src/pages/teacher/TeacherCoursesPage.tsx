@@ -9,7 +9,7 @@ import { ConfirmModal } from '../../components/ui/ConfirmModal';
 export default function TeacherCoursesPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { teacherCourses, addTeacherCourse } = useTeacherStore();
+  const { teacherCourses, addTeacherCourse, fetchTeacherCourses } = useTeacherStore();
 
   const [showModal, setShowModal] = useState(false);
   const [courseName, setCourseName] = useState('');
@@ -36,6 +36,11 @@ export default function TeacherCoursesPage() {
       window.history.replaceState({}, '');
     }
   }, [location.state]);
+
+  // Load courses on mount
+  useEffect(() => {
+    fetchTeacherCourses();
+  }, [fetchTeacherCourses]);
 
   const handleCreate = () => {
     const trimmedName = courseName.trim();
@@ -109,7 +114,7 @@ export default function TeacherCoursesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {teacherCourses.map((course) => {
-            const totalResources = course.sections.reduce((acc, s) => acc + s.resources.length, 0);
+            const totalResources = course.sections.reduce((acc, s) => acc + (s.resources?.length || 0), 0);
             return (
               <button
                 key={course.id}

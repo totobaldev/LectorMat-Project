@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U3_PROBLEMS } from '../../../data/u3Questions';
 
 import { GripHorizontal, Check, RefreshCw, Layers } from 'lucide-react';
 
@@ -54,6 +57,7 @@ export default function U3Module1() {
 
   const [dragged, setDragged] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const placedCount = Object.values(placements).filter(Boolean).length;
 
@@ -100,6 +104,8 @@ export default function U3Module1() {
           <h1 className="text-2xl font-bold">Módulo 1: Comprensión</h1>
           <p className="text-slate-500">Progresiones Aritméticas - Planificación de Entregas.</p>
         </header>
+
+      <TeacherResources unitId="u3" moduleType="comprension" />
 
         <div className="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200">
           <p className="text-lg font-medium bg-slate-50 p-6 rounded-3xl mb-8 leading-relaxed">
@@ -188,12 +194,30 @@ export default function U3Module1() {
           <div className="flex justify-between items-center bg-slate-50 p-4 rounded-2xl">
             <button onClick={reset} className="flex gap-2 items-center text-slate-500 font-bold hover:text-slate-800 cursor-pointer bg-transparent border-none"><RefreshCw className="w-5 h-5"/> Reiniciar</button>
             {checked && isOk ? (
-              <div className="flex bg-emerald-100 text-emerald-700 font-bold px-4 py-2 rounded-xl items-center gap-2"><Check className="w-5 h-5"/> ¡Correcto!</div>
+              <div className="flex items-center gap-4">
+                <div className="flex bg-emerald-100 text-emerald-700 font-bold px-4 py-2 rounded-xl items-center gap-2"><Check className="w-5 h-5"/> ¡Correcto!</div>
+                <button 
+                  onClick={() => setShowQuiz(true)}
+                  className="bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-600 hover:to-blue-600 text-white font-extrabold py-2 px-6 rounded-xl transition-all shadow-md shadow-sky-500/30 hover:-translate-y-0.5 cursor-pointer"
+                >
+                  Realizar Cuestionario M1
+                </button>
+              </div>
             ) : (
               <button onClick={check} disabled={!allPlaced} className={`px-6 py-2 rounded-xl font-bold text-white transition-opacity cursor-pointer ${allPlaced ? 'bg-sky-600 hover:bg-sky-700' : 'bg-slate-300'}`}>Verificar</button>
             )}
           </div>
         </div>
+
+        {showQuiz && (
+          <QuizRunner
+            problem={U3_PROBLEMS.find(p => p.id === 'u3-s1-razones')!}
+            onClose={() => setShowQuiz(false)}
+            onComplete={(scorePct, totalPts, earnedPts) => {
+              setShowQuiz(false);
+            }}
+          />
+        )}
       </div>
     );
   }
@@ -335,12 +359,30 @@ export default function U3Module1() {
         <div className="flex justify-between items-center bg-slate-50 p-4 rounded-2xl">
           <button onClick={reset} className="flex gap-2 items-center text-slate-500 font-bold hover:text-slate-800 cursor-pointer bg-transparent border-none"><RefreshCw className="w-5 h-5"/> Reiniciar</button>
           {checked && isOk ? (
-            <div className="flex bg-emerald-100 text-emerald-700 font-bold px-4 py-2 rounded-xl items-center gap-2"><Check className="w-5 h-5"/> ¡Correcto!</div>
+            <div className="flex items-center gap-4">
+              <div className="flex bg-emerald-100 text-emerald-700 font-bold px-4 py-2 rounded-xl items-center gap-2"><Check className="w-5 h-5"/> ¡Correcto!</div>
+              <button 
+                onClick={() => setShowQuiz(true)}
+                className="bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-600 hover:to-blue-600 text-white font-extrabold py-2 px-6 rounded-xl transition-all shadow-md shadow-sky-500/30 hover:-translate-y-0.5 cursor-pointer"
+              >
+                Realizar Cuestionario M1
+              </button>
+            </div>
           ) : (
             <button onClick={check} disabled={!allPlaced} className={`px-6 py-2 rounded-xl font-bold text-white transition-opacity cursor-pointer ${allPlaced ? 'bg-sky-600 hover:bg-sky-700' : 'bg-slate-300'}`}>Verificar</button>
           )}
         </div>
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U3_PROBLEMS.find(p => p.id === 'u3-s1-razones')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

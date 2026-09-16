@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U1_PROBLEMS } from '../../../data/u1Questions';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 
 
 interface Chip {
@@ -33,6 +36,7 @@ export default function Module1() {
   const [placements, setPlacements] = useState<Record<string, string | null>>({ m: null, n: null, y: null });
   const [dragged, setDragged] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const placedIds = Object.values(placements).filter(Boolean) as string[];
   const correctCount = SLOTS.filter(sl => placements[sl.key] === sl.correct).length;
@@ -83,6 +87,8 @@ export default function Module1() {
         </div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-200 rounded-full blur-3xl opacity-40 transform translate-x-1/3 -translate-y-1/3"></div>
       </header>
+
+      <TeacherResources unitId="u1" moduleType="comprension" />
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start w-full">
         {/* LEFT: exercise */}
@@ -192,9 +198,18 @@ export default function Module1() {
             {checked && (
               <span className={`text-base font-extrabold ml-2 ${correctCount === 3 ? 'text-emerald-600 bg-emerald-50 px-4 py-2 rounded-xl border border-emerald-200' : 'text-red-500 bg-red-50 px-4 py-2 rounded-xl border border-red-200'}`}>
                 {correctCount === 3 
-                  ? '¡Excelente! Datos bien ubicados. Insignia lograda.' 
+                  ? '¡Excelente! Datos bien ubicados.' 
                   : `${correctCount} de 3 correctos. ¡Inténtalo de nuevo!`}
               </span>
+            )}
+            
+            {checked && correctCount === 3 && (
+              <button 
+                onClick={() => setShowQuiz(true)}
+                className="ml-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-emerald-500/30 hover:-translate-y-1 cursor-pointer"
+              >
+                Realizar Cuestionario M1
+              </button>
             )}
           </div>
         </div>
@@ -235,6 +250,16 @@ export default function Module1() {
           </div>
         </div>
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U1_PROBLEMS.find(p => p.id === 'u1-s1-combustible')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

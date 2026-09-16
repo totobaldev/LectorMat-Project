@@ -33,8 +33,15 @@ export default function TeacherCourseDetailPage() {
     removeResource,
     enrollStudent,
     importSectionStudents,
-    unenrollStudent
+    unenrollStudent,
+    fetchSectionStudents,
+    fetchTeacherCourses
   } = useTeacherStore();
+
+  // Load courses on mount if not loaded
+  React.useEffect(() => {
+    fetchTeacherCourses();
+  }, [fetchTeacherCourses]);
 
   const course = teacherCourses.find((c) => c.id === courseId);
 
@@ -117,7 +124,7 @@ export default function TeacherCourseDetailPage() {
 
   // Modal: Enroll Student
   const [showEnrollModal, setShowEnrollModal] = useState(false);
-  const [selectedStudentId, setSelectedStudentId] = useState('');
+  const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
 
   // Modal: Section Student Roster Import (PDF / CSV / Text)
   const [importingSectionId, setImportingSectionId] = useState<string | null>(null);
@@ -156,6 +163,15 @@ export default function TeacherCourseDetailPage() {
       questions,
     });
   };
+
+  // Fetch students from the backend for all sections
+  React.useEffect(() => {
+    if (courseId && course?.sections) {
+      course.sections.forEach(sec => {
+        fetchSectionStudents(courseId, sec.id);
+      });
+    }
+  }, [courseId, course?.sections?.length]); // only fetch when sections count changes or course loads
 
   const handleAddSection = () => {
     if (!courseId) return;
@@ -358,31 +374,43 @@ export default function TeacherCourseDetailPage() {
   };
 
   const handleEnroll = () => {
-    if (!courseId || !selectedStudentId || !course) return;
-    const student = globalStudents.find(s => s.id === selectedStudentId);
-    if (!student) return;
+    if (!courseId || selectedStudentIds.length === 0 || !course) return;
 
-    const isEnrolled = course.enrolledStudents.some(s => s.email === student.email);
-    if (isEnrolled) {
+    let enrolledCount = 0;
+    let alreadyEnrolledCount = 0;
+
+    selectedStudentIds.forEach(id => {
+      const student = globalStudents.find(s => s.id === id);
+      if (!student) return;
+
+      const isEnrolled = course.enrolledStudents.some(s => s.email === student.email);
+      if (isEnrolled) {
+        alreadyEnrolledCount++;
+      } else {
+        enrollStudent(courseId, student.name, student.email, student.career);
+        enrolledCount++;
+      }
+    });
+
+    setSelectedStudentIds([]);
+    setShowEnrollModal(false);
+
+    if (enrolledCount > 0) {
+      showSuccessNotice(
+        '¡Estudiantes matriculados!',
+        `Se han matriculado ${enrolledCount} estudiante(s) exitosamente en el curso.` + 
+        (alreadyEnrolledCount > 0 ? ` (${alreadyEnrolledCount} ya estaban matriculados).` : '')
+      );
+    } else if (alreadyEnrolledCount > 0) {
       setFeedbackModal({
         isOpen: true,
-        title: 'Estudiante ya matriculado',
-        description: 'El alumno seleccionado ya forma parte de la lista de este curso.',
+        title: 'Estudiantes ya matriculados',
+        description: 'Todos los alumnos seleccionados ya formaban parte de la lista de este curso.',
         variant: 'info',
         confirmText: 'Entendido',
         onConfirm: closeFeedbackModal,
       });
-      return;
     }
-
-    enrollStudent(courseId, student.name, student.email, student.career);
-    setSelectedStudentId('');
-    setShowEnrollModal(false);
-
-    showSuccessNotice(
-      '¡Estudiante matriculado!',
-      `Se ha matriculado a "${student.name}" exitosamente en el curso.`
-    );
   };
 
 
@@ -625,13 +653,6 @@ export default function TeacherCourseDetailPage() {
                       </div>
 
                       <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
-                        <button
-                          onClick={() => setShowUnitModalForSectionId(section.id)}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold text-white bg-[#1B2A5A] hover:bg-[#263d7a] transition-colors cursor-pointer border-none shadow-sm"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>+ Añadir Unidad</span>
-                        </button>
 
                         <button
                           onClick={() => setImportingSectionId(section.id)}
@@ -666,22 +687,7 @@ export default function TeacherCourseDetailPage() {
                     </div>
 
                     {/* Section Units Container */}
-                    {!section.units || section.units.length === 0 ? (
-                      <div className="px-6 py-12 text-center bg-slate-50/60 rounded-2xl border border-dashed border-slate-200 flex flex-col items-center gap-3">
-                        <BookOpen className="w-8 h-8 text-slate-300" />
-                        <p className="text-sm font-extrabold text-slate-600">Esta sección no tiene Unidades asignadas todavía.</p>
-                        <p className="text-xs text-slate-400 max-w-xs">
-                          Crea una Unidad (ej: Unidad 3: Trigonometría) para comenzar a publicar ejercicios de Comprensión, Método e Interactivo.
-                        </p>
-                        <button
-                          onClick={() => setShowUnitModalForSectionId(section.id)}
-                          className="mt-1 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold text-[#1B2A5A] bg-slate-200/80 hover:bg-slate-200 border-none cursor-pointer"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          Crear Unidad 1
-                        </button>
-                      </div>
-                    ) : (
+                    {section.units && section.units.length > 0 && (
                       <div className="flex flex-col gap-8">
                         {section.units.map((unit, uIdx) => (
                           <div key={unit.id} className="flex flex-col gap-5 border border-slate-100 rounded-[1.8rem] p-6 bg-slate-50/40">
@@ -702,13 +708,6 @@ export default function TeacherCourseDetailPage() {
                                 <span className="w-10 h-10 rounded-2xl bg-sky-500 text-white font-black text-xs flex items-center justify-center shadow-md shadow-sky-500/20">
                                   U{uIdx + 1}
                                 </span>
-                                <button
-                                  onClick={() => handleDeleteUnit(section.id, unit.id, unit.title)}
-                                  className="w-8 h-8 rounded-lg hover:bg-rose-50 text-slate-400 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer border-none bg-transparent"
-                                  title="Eliminar Unidad"
-                                >
-                                  <Trash2 className="w-4 h-4" />
-                                </button>
                               </div>
                             </div>
 
@@ -1384,6 +1383,69 @@ export default function TeacherCourseDetailPage() {
           </div>
         );
       })()}
+
+      {/* ── Enroll Student Modal ────────────────────────────────────────────── */}
+      {showEnrollModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(15,26,58,0.35)', backdropFilter: 'blur(8px)' }}>
+          <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-md p-8 flex flex-col gap-6">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div>
+                <h2 className="text-xl font-black text-slate-900">Matricular Estudiante</h2>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">
+                  Selecciona un estudiante de la base de datos global.
+                </p>
+              </div>
+              <button
+                onClick={() => { setShowEnrollModal(false); setSelectedStudentIds([]); }}
+                className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center cursor-pointer border-none transition-colors"
+              >
+                <X className="w-4 h-4 text-slate-600" />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-black text-slate-700 uppercase tracking-wider">
+                Estudiante(s) (Usa Ctrl/Cmd para selección múltiple)
+              </label>
+              <select
+                multiple
+                value={selectedStudentIds}
+                onChange={(e) => {
+                  const options = Array.from(e.target.selectedOptions, option => option.value);
+                  setSelectedStudentIds(options);
+                }}
+                className="w-full px-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/30 h-40"
+              >
+                {globalStudents.map((std) => (
+                  <option key={std.id} value={std.id}>
+                    {std.name} ({std.email})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+              <button
+                onClick={() => { setShowEnrollModal(false); setSelectedStudentIds([]); }}
+                className="px-5 py-2.5 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer border-none bg-transparent"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleEnroll}
+                disabled={selectedStudentIds.length === 0}
+                className={`px-6 py-2.5 rounded-xl text-white font-extrabold text-sm transition-colors cursor-pointer border-none shadow-md ${
+                  selectedStudentIds.length === 0
+                    ? 'bg-slate-300 cursor-not-allowed shadow-none'
+                    : 'bg-orange-500 hover:bg-orange-600 shadow-orange-500/20'
+                }`}
+              >
+                Matricular {selectedStudentIds.length > 0 ? `(${selectedStudentIds.length})` : ''}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Global Confirmation & Feedback Modal ────────────────────────────── */}
       <ConfirmModal

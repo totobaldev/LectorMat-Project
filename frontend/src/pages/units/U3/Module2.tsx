@@ -1,4 +1,5 @@
 import React from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, GitMerge } from 'lucide-react';
 import DecisionTree from '../../../features/decision-tree/components/DecisionTree';
@@ -74,6 +75,37 @@ const U3Module2: React.FC = () => {
             </span>
           </div>
         </header>
+
+      <TeacherResources unitId="u3" moduleType="metodo" />
+
+        {/* ── Situación a Analizar ──────────────────────────────────────────────── */}
+        <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start relative overflow-hidden w-full">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-slate-50 to-transparent rounded-bl-full pointer-events-none opacity-50"></div>
+          <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div className="space-y-2 relative z-10 flex-1">
+            <span className="text-[10px] font-black uppercase text-blue-500 tracking-wider">Situación a analizar</span>
+            
+            {useProgressStore().preSpecialty === 'mecanica' ? (
+              <>
+                <h3 className="text-xl font-extrabold text-slate-900 leading-tight">Mantenimiento de Brazo Hidráulico</h3>
+                <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                  Se requiere calcular la extensión necesaria de un brazo hidráulico (hipotenusa) para levantar una carga pesada. Conoces la altura vertical que debe alcanzar y la distancia horizontal desde la base, formando un triángulo rectángulo. Utiliza el árbol de decisión para descubrir qué teorema trigonométrico usarías.
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-xl font-extrabold text-slate-900 leading-tight">Proyección de Producción Anual</h3>
+                <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                  Una fábrica ensambla 500 unidades en el primer mes y decide aumentar la producción agregando 50 unidades fijas adicionales cada mes consecutivo. Se busca determinar cuántas unidades producirá exactamente en el mes 12. Utiliza el árbol de decisión para identificar qué progresión corresponde a este problema.
+                </p>
+              </>
+            )}
+          </div>
+        </div>
 
         {/* ── Decision Tree ──────────────────────────────────────── */}
         <DecisionTree nodes={u3Nodes} />

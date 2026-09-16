@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U4_PROBLEMS } from '../../../data/u4Questions';
 
 import { BrainCircuit, ArrowLeft, Terminal } from 'lucide-react';
 
@@ -40,6 +43,7 @@ export default function U4Module2() {
 
   const [history, setHistory] = useState<number[]>([]);
   const [current, setCurrent] = useState<number | string>(1);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const isTerminal = typeof current === 'string';
 
@@ -69,6 +73,25 @@ export default function U4Module2() {
         <p className="text-slate-500">Clasificador de Modelos de Finanzas Aplicadas (Interés y Anualidades).</p>
       </header>
 
+      <TeacherResources unitId="u4" moduleType="metodo" />
+
+      {/* ── Situación a Analizar ──────────────────────────────────────────────── */}
+      <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start relative overflow-hidden w-full">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-slate-50 to-transparent rounded-bl-full pointer-events-none opacity-50"></div>
+        <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div className="space-y-2 relative z-10 flex-1">
+          <span className="text-[10px] font-black uppercase text-emerald-500 tracking-wider">Situación a analizar</span>
+          <h3 className="text-xl font-extrabold text-slate-900 leading-tight">Crédito Automotriz vs Cuenta de Ahorro</h3>
+          <p className="text-sm text-slate-600 leading-relaxed font-medium">
+            Una persona evalúa pedir un préstamo con cuotas mensuales para comprar un vehículo, o bien, ahorrar ese mismo monto mensual en una cuenta para comprarlo al contado en el futuro. Se requiere saber qué modelo financiero usar para calcular el costo total. Responde el siguiente árbol de decisiones para elegir el método matemático adecuado.
+          </p>
+        </div>
+      </div>
+
       <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-slate-200">
         <div className="p-8 sm:p-12 relative flex items-center justify-center min-h-[400px]">
           {!isTerminal ? (
@@ -84,7 +107,14 @@ export default function U4Module2() {
               <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6"><Terminal className="w-10 h-10"/></div>
               <h3 className="text-3xl font-black text-slate-900 mb-2">{TERMINALS[current as string].method}</h3>
               <p className="text-emerald-600 font-bold mb-6 text-xl">{TERMINALS[current as string].sub}</p>
-              <p className="text-slate-600 bg-slate-50 p-6 rounded-2xl text-left leading-relaxed">{TERMINALS[current as string].detail}</p>
+              <p className="text-slate-600 bg-slate-50 p-6 rounded-2xl text-left leading-relaxed mb-8">{TERMINALS[current as string].detail}</p>
+              
+              <button 
+                onClick={() => setShowQuiz(true)}
+                className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold py-4 px-10 rounded-2xl transition-all shadow-lg shadow-emerald-500/30 hover:-translate-y-1 cursor-pointer"
+              >
+                Realizar Cuestionario M2
+              </button>
             </div>
           )}
         </div>
@@ -99,6 +129,16 @@ export default function U4Module2() {
           </div>
         </div>
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U4_PROBLEMS.find(p => p.id === 'u4-s2-interes-simple')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

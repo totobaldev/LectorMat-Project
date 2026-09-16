@@ -25,7 +25,7 @@ const MainLayout: React.FC = () => {
   const cur = location.pathname;
 
   const globalCls = (active: boolean) => {
-    const activeColor = p.role === 'teacher'
+    const activeColor = p.role === 'teacher' || p.role === 'admin'
       ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
       : 'bg-blue-600 text-white shadow-md shadow-blue-600/20';
     
@@ -58,7 +58,7 @@ const MainLayout: React.FC = () => {
             </button>
 
             {/* ── TEACHER: Panel docente right below Inicio ─────────────── */}
-            {p.role === 'teacher' && (
+            {(p.role === 'teacher' || p.role === 'admin') && (
               <button
                 onClick={() => navigate('/teacher/courses')}
                 className={globalCls(cur.startsWith('/teacher/courses'))}
@@ -70,8 +70,8 @@ const MainLayout: React.FC = () => {
               </button>
             )}
 
-            {/* ── STUDENT nav (role === 'student') ─────────────────────────── */}
-            {p.role === 'student' && p.isAuthenticated && (
+            {/* ── STUDENT nav (role === 'student' or 'admin') ─────────────────────────── */}
+            {(p.role === 'student' || p.role === 'admin') && p.isAuthenticated && (
               <>
                 <button onClick={() => navigate('/pre')} className={globalCls(cur === '/pre')} aria-label="Comprensión Lectora" title={!isSidebarOpen ? 'Comprensión Lectora' : undefined}>
                   <LectorMatIcon name="reading" size={20} className="shrink-0" />
@@ -99,7 +99,7 @@ const MainLayout: React.FC = () => {
             )}
 
             {/* ── TEACHER extended nav ─────────────────────────────────────── */}
-            {p.role === 'teacher' && (
+            {(p.role === 'teacher' || p.role === 'admin') && (
               <>
                 <div className="border-t border-slate-100/80 my-3" />
                 {isSidebarOpen ? (
@@ -278,8 +278,8 @@ const MainLayout: React.FC = () => {
               )}
 
               <div className="text-right hidden md:block">
-                <p className="text-xs font-extrabold text-slate-900">{p.role === 'teacher' ? 'Docente' : (p.studentName || 'Estudiante')}</p>
-                <p className="text-[10px] text-slate-500 font-medium">{p.role === 'teacher' ? 'Admin' : (p.studentEmail || 'inacapmail.cl')}</p>
+                <p className="text-xs font-extrabold text-slate-900">{p.role === 'teacher' || p.role === 'admin' ? 'Docente' : (p.studentName || 'Estudiante')}</p>
+                <p className="text-[10px] text-slate-500 font-medium">{p.role === 'teacher' || p.role === 'admin' ? 'Admin' : (p.studentEmail || 'inacapmail.cl')}</p>
               </div>
               <button 
                 onClick={() => setIsAvatarDropdownOpen(!isAvatarDropdownOpen)}
@@ -289,7 +289,7 @@ const MainLayout: React.FC = () => {
                   <img src={p.avatar} alt="Avatar" className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-sm font-bold text-slate-600">
-                    {p.role === 'teacher' ? 'DO' : (p.studentName ? p.studentName.substring(0, 2).toUpperCase() : 'ES')}
+                    {p.role === 'teacher' || p.role === 'admin' ? 'DO' : (p.studentName ? p.studentName.substring(0, 2).toUpperCase() : 'ES')}
                   </span>
                 )}
               </button>

@@ -52,22 +52,35 @@ ON CONFLICT (id) DO NOTHING;
 -- ── Units ────────────────────────────────────────────────────────────────────
 
 INSERT INTO course_units (id, section_id, title, subtitle, unit_order)
-VALUES (
-  'u3',
-  'c1',
-  'Unidad 3: Trigonometría y Geometría',
-  'Programa Transforma 2026',
-  1
-)
+VALUES 
+  ('u1', 'c1', 'Unidad 1: Funciones Polinómicas', 'Modelando con funciones afines y cuadráticas', 1),
+  ('u2', 'c1', 'Unidad 2: Función Exponencial y Logarítmica', 'Crecimiento y decrecimiento', 2),
+  ('u3', 'c1', 'Unidad 3: Trigonometría', 'Resolución de triángulos y problemas', 3),
+  ('u4', 'c1', 'Unidad 4: Geometría Plana y Espacial', 'Áreas y volúmenes aplicados', 4)
 ON CONFLICT (id) DO NOTHING;
 
 -- ── Resources ────────────────────────────────────────────────────────────────
 
 INSERT INTO course_section_resources (id, section_id, unit_id, module_type, resource_type, name, description, file_name, file_size)
 VALUES
-  ('res_1', 'c1', 'u3', 'comprension', 'pdf', 'Deducción de Medidas y Distancias', 'Guía práctica en formato PDF.', 'Guia_Trigonometria_U3.pdf', 1548576),
-  ('res_2', 'c1', 'u3', 'metodo', 'word', 'Clasificador de Teoremas y Funciones', 'Documento Word con tablas y teoría.', 'Clasificador_Teoremas.docx', 854000),
-  ('res_3', 'c1', 'u3', 'interactivo', 'h5p', 'Resolución de problemas de Trigonometría aplicados', 'Actividad interactiva paquete H5P.', 'Trigonometria_Interactivas.h5p', 4200000)
+  -- U1
+  ('res_u1_m1', 'c1', 'u1', 'comprension', 'pdf', 'Semana 1: El Precio del Combustible', 'Función afín y lineal.', 'Combustible_S1.pdf', 1200000),
+  ('res_u1_m2', 'c1', 'u1', 'metodo', 'pdf', 'Semana 2: Altura de un Proyectil', 'Función cuadrática.', 'Proyectil_S2.pdf', 1400000),
+  ('res_u1_m3', 'c1', 'u1', 'interactivo', 'h5p', 'Semana 3: Ajustes GeoGebra', 'Problemas interactivos de funciones polinómicas.', 'GeoGebra_Ajustes.h5p', 3500000),
+  
+  -- U2
+  ('res_u2_m1', 'c1', 'u2', 'comprension', 'pdf', 'Semana 1: Crecimiento de Bacterias y Fármacos', 'Funciones exponenciales.', 'Exponencial_S1.pdf', 1100000),
+  ('res_u2_m3', 'c1', 'u2', 'interactivo', 'h5p', 'Semana 2: Seguidores en Instagram', 'Crecimiento logarítmico.', 'Instagram_S2.h5p', 2500000),
+  
+  -- U3
+  ('res_u3_m1', 'c1', 'u3', 'comprension', 'pdf', 'Semana 1: Razones Trigonométricas', 'Ángulos y distancias.', 'Razones_Trig.pdf', 1548576),
+  ('res_u3_m2', 'c1', 'u3', 'metodo', 'pdf', 'Semana 2: El Viaje', 'Ley de senos y cosenos.', 'El_Viaje.pdf', 1350000),
+  ('res_u3_m3', 'c1', 'u3', 'interactivo', 'h5p', 'Semana 3: Chichén Itzá', 'Problemas aplicados en monumentos.', 'Chichen_Itza.h5p', 4200000),
+
+  -- U4
+  ('res_u4_m1', 'c1', 'u4', 'comprension', 'pdf', 'Semana 1: Geometría Plana', 'Áreas y perímetros.', 'Geometria_Plana.pdf', 1800000),
+  ('res_u4_m2', 'c1', 'u4', 'metodo', 'pdf', 'Semana 2: Geometría Espacial', 'Superficies y volúmenes.', 'Geometria_Espacial.pdf', 1900000),
+  ('res_u4_m3', 'c1', 'u4', 'interactivo', 'h5p', 'Semana 3: Problemas Aplicados', 'aRPas de especialidades.', 'aRPas_U4.h5p', 3100000)
 ON CONFLICT (id) DO NOTHING;
 
 

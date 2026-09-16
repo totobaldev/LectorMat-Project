@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { U3_ROOT_NODE_ID } from '../features/decision-tree/data/u3Nodes';
+import { api } from '../services/api';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -211,7 +212,12 @@ export const useProgressStore = create<ProgressState>()(
        // Auth actions
       login: () => set({ isAuthenticated: true }),
       setStudentSession: (email, name) => set({ studentEmail: email, studentName: name }),
-      setAvatar: (avatar) => set({ avatar }),
+      setAvatar: (avatar) => set((state) => {
+        if (state.isAuthenticated && state.role !== 'admin') {
+          api.updateProfile({ avatar }).catch(console.error);
+        }
+        return { avatar };
+      }),
       logout: () => set({ 
         isAuthenticated: false, 
         role: null, 
@@ -271,6 +277,11 @@ export const useProgressStore = create<ProgressState>()(
       addXp: (amount) => set((state) => {
         const newXp = state.xp + amount;
         const newLevel = Math.floor(newXp / 100) + 1; // 1 level every 100 XP
+        
+        if (state.isAuthenticated && state.role !== 'admin') {
+          api.updateProfile({ xp: newXp, level: newLevel }).catch(console.error);
+        }
+
         return { xp: newXp, level: newLevel };
       }),
       addNotification: (message) => set((state) => {

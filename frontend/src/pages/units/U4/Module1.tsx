@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U4_PROBLEMS } from '../../../data/u4Questions';
 
 import { GripHorizontal, Check, RefreshCw, Layers } from 'lucide-react';
 
@@ -26,6 +29,7 @@ export default function U4Module1() {
   const [placements, setPlacements] = useState<Record<string, string | null>>({ VP: null, i: null, n: null });
   const [dragged, setDragged] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const placedCount = Object.values(placements).filter(Boolean).length;
 
@@ -66,6 +70,8 @@ export default function U4Module1() {
         <h1 className="text-2xl font-bold">Módulo 1: Comprensión de Enunciado</h1>
         <p className="text-slate-500">Finanzas aplicadas - Valor Futuro con Interés Compuesto.</p>
       </header>
+
+      <TeacherResources unitId="u4" moduleType="comprension" />
 
       <div className="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200">
         <p className="text-lg font-medium bg-slate-50 p-6 rounded-3xl mb-8 leading-relaxed">
@@ -156,12 +162,30 @@ export default function U4Module1() {
         <div className="flex justify-between items-center bg-slate-50 p-4 rounded-2xl">
           <button onClick={reset} className="flex gap-2 items-center text-slate-500 font-bold hover:text-slate-800 cursor-pointer bg-transparent border-none"><RefreshCw className="w-5 h-5"/> Reiniciar</button>
           {checked && isOk ? (
-            <div className="flex bg-emerald-100 text-emerald-700 font-bold px-4 py-2 rounded-xl items-center gap-2"><Check className="w-5 h-5"/> ¡Correcto!</div>
+            <div className="flex items-center gap-4">
+              <div className="flex bg-emerald-100 text-emerald-700 font-bold px-4 py-2 rounded-xl items-center gap-2"><Check className="w-5 h-5"/> ¡Correcto!</div>
+              <button 
+                onClick={() => setShowQuiz(true)}
+                className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold py-2 px-6 rounded-xl transition-all shadow-md shadow-emerald-500/30 hover:-translate-y-0.5 cursor-pointer"
+              >
+                Realizar Cuestionario M1
+              </button>
+            </div>
           ) : (
             <button onClick={check} disabled={!allPlaced} className={`px-6 py-2 rounded-xl font-bold text-white transition-opacity cursor-pointer ${allPlaced ? 'bg-emerald-600 hover:bg-emerald-700 shadow-sm' : 'bg-slate-300'}`}>Verificar</button>
           )}
         </div>
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U4_PROBLEMS.find(p => p.id === 'u4-s1-plana')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }

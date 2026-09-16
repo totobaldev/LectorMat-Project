@@ -55,6 +55,9 @@ export interface LoginResponse {
     email: string;
     role: string;
     career: string;
+    avatar?: string | null;
+    xp?: number;
+    level?: number;
   };
   token: string;
   message?: string;
@@ -83,6 +86,13 @@ export const api = {
       body: JSON.stringify({ email, password, role }),
     });
     return res.json();
+  },
+
+  async updateProfile(updates: { avatar?: string | null; xp?: number; level?: number }) {
+    return apiRequest(`${API_BASE_URL}/auth/profile`, {
+      method: 'PUT',
+      body: JSON.stringify(updates),
+    });
   },
 
   // ── Courses ─────────────────────────────────────────────────────────────────

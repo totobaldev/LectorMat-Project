@@ -84,7 +84,8 @@ export interface TeacherState {
   setSearchQuery: (query: string) => void;
 
   teacherCourses: TeacherCourse[];
-  addTeacherCourse: (name: string, description: string) => void;
+  fetchTeacherCourses: () => Promise<void>;
+  addTeacherCourse: (name: string, description: string) => Promise<void>;
   addSection: (courseId: string, title: string) => void;
   removeSection: (courseId: string, sectionId: string) => void;
   addUnit: (courseId: string, sectionId: string, title: string, subtitle?: string) => void;
@@ -119,6 +120,7 @@ export interface TeacherState {
     students: Array<{ name: string; email: string; career?: string; username?: string; password?: string }>
   ) => void;
   unenrollStudent: (courseId: string, studentId: string) => void;
+  fetchSectionStudents: (courseId: string, sectionId: string) => Promise<void>;
 
   getAllH5PResources: () => SectionResource[];
 }
@@ -144,19 +146,34 @@ const INITIAL_COURSES: TeacherCourse[] = [
   {
     id: 'tc1',
     name: 'Trigonometría y Geometría',
-    description: 'Curso de trigonometría básica y sus aplicaciones geométricas.',
+    description: 'Matemática aplicada a carreras técnicas. (Programa Transforma 2026)',
     createdAt: new Date().toISOString(),
     sections: [
       {
         id: 'c1',
-        title: 'C1',
+        title: 'Sección Principal',
         order: 1,
+        resources: [],
         units: [
           {
-            id: 'u3',
-            title: 'Unidad 3: Trigonometría y Geometría',
+            id: 'u1',
+            title: 'Unidad 1: Funciones Polinómicas',
             subtitle: 'Programa Transforma 2026',
             order: 1,
+            modules: { comprension: [], metodo: [], interactivo: [] }
+          },
+          {
+            id: 'u2',
+            title: 'Unidad 2: Funciones Exponenciales',
+            subtitle: 'Programa Transforma 2026',
+            order: 2,
+            modules: { comprension: [], metodo: [], interactivo: [] }
+          },
+          {
+            id: 'u3',
+            title: 'Unidad 3: Trigonometría / Sucesiones',
+            subtitle: 'Programa Transforma 2026',
+            order: 3,
             modules: {
               comprension: [
                 {
@@ -164,7 +181,7 @@ const INITIAL_COURSES: TeacherCourse[] = [
                   name: 'Deducción de Medidas y Distancias',
                   description: 'Guía práctica en formato PDF.',
                   resourceType: 'pdf',
-                  fileName: 'Guia_Trigonometria_U3.pdf',
+                  fileName: 'Guia_U3.pdf',
                   fileSize: 1548576,
                   createdAt: new Date().toISOString(),
                   courseId: 'tc1',
@@ -194,7 +211,7 @@ const INITIAL_COURSES: TeacherCourse[] = [
                   name: 'Resolución de problemas de Trigonometría aplicados',
                   description: 'Actividad interactiva paquete H5P.',
                   resourceType: 'h5p',
-                  fileName: 'Trigonometria_Interactivas.h5p',
+                  fileName: 'Problemas_Interactivas.h5p',
                   fileSize: 4200000,
                   createdAt: new Date().toISOString(),
                   courseId: 'tc1',
@@ -204,16 +221,15 @@ const INITIAL_COURSES: TeacherCourse[] = [
                 }
               ]
             }
+          },
+          {
+            id: 'u4',
+            title: 'Unidad 4: Aplicaciones para las Finanzas',
+            subtitle: 'Programa Transforma 2026',
+            order: 4,
+            modules: { comprension: [], metodo: [], interactivo: [] }
           }
-        ],
-        resources: []
-      },
-      {
-        id: 'c4',
-        title: 'C4',
-        order: 2,
-        units: [],
-        resources: []
+        ]
       }
     ],
     enrolledStudents: []
@@ -227,22 +243,37 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
 
   teacherCourses: INITIAL_COURSES,
 
+  fetchTeacherCourses: async () => {
+    try {
+      const res = await api.listCourses();
+      if (res.ok && res.data?.data) {
+        set({ teacherCourses: res.data.data });
+      }
+    } catch (err) {
+      console.error('[fetchTeacherCourses] error:', err);
+    }
+  },
+
   addTeacherCourse: async (name, description) => {
-    // API Call
-    api.createCourse(name, description).catch(console.error);
-    
-    // Optimistic Update
-    set((state) => {
-      const newCourse: TeacherCourse = {
-        id: `tc-${Date.now()}`,
-        name,
-        description,
-        createdAt: new Date().toISOString(),
-        sections: [], // Sin secciones automáticas, creadas manualmente por el profesor
-        enrolledStudents: [],
-      };
-      return { teacherCourses: [newCourse, ...state.teacherCourses] };
-    });
+    try {
+      const res = await api.createCourse(name, description);
+      if (res.ok && res.data?.data) {
+        const realCourse = res.data.data;
+        set((state) => {
+          const newCourse: TeacherCourse = {
+            id: realCourse.id,
+            name: realCourse.name,
+            description: realCourse.description,
+            createdAt: new Date().toISOString(),
+            sections: [], // Sin secciones automáticas, creadas manualmente por el profesor
+            enrolledStudents: [],
+          };
+          return { teacherCourses: [newCourse, ...state.teacherCourses] };
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
   },
 
   addSection: async (courseId, title) => {
@@ -257,7 +288,36 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
           id: `c-${Date.now()}`,
           title,
           order: c.sections.length + 1,
-          units: [],
+          units: [
+            {
+              id: `u1-${Date.now()}`,
+              title: 'Unidad 1: Funciones Polinómicas',
+              subtitle: 'Programa Transforma 2026',
+              order: 1,
+              modules: { comprension: [], metodo: [], interactivo: [] }
+            },
+            {
+              id: `u2-${Date.now()}`,
+              title: 'Unidad 2: Funciones Exponenciales',
+              subtitle: 'Programa Transforma 2026',
+              order: 2,
+              modules: { comprension: [], metodo: [], interactivo: [] }
+            },
+            {
+              id: `u3-${Date.now()}`,
+              title: 'Unidad 3: Trigonometría / Sucesiones',
+              subtitle: 'Programa Transforma 2026',
+              order: 3,
+              modules: { comprension: [], metodo: [], interactivo: [] }
+            },
+            {
+              id: `u4-${Date.now()}`,
+              title: 'Unidad 4: Aplicaciones para las Finanzas',
+              subtitle: 'Programa Transforma 2026',
+              order: 4,
+              modules: { comprension: [], metodo: [], interactivo: [] }
+            }
+          ],
           resources: [],
         };
         return { ...c, sections: [...c.sections, newSec] };
@@ -434,7 +494,11 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
       }),
     })),
 
-  enrollStudent: (courseId, name, email, career = 'Técnico-Profesional', sectionId, password) =>
+  enrollStudent: (courseId, name, email, career = 'Técnico-Profesional', sectionId, password) => {
+    // Single enrollment via bulk roster endpoint
+    const resolvedSectionId = sectionId || 'c1';
+    api.importSectionRoster(courseId, resolvedSectionId, [{ name, email, career }]).catch(console.error);
+
     set((state) => ({
       teacherCourses: state.teacherCourses.map((c) => {
         if (c.id !== courseId) return c;
@@ -451,7 +515,8 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
         };
         return { ...c, enrolledStudents: [...(c.enrolledStudents || []), newStudent] };
       }),
-    })),
+    }));
+  },
 
   importSectionStudents: async (courseId, sectionId, students) => {
     // Map to expected format
@@ -496,6 +561,38 @@ export const useTeacherStore = create<TeacherState>((set, get) => ({
         };
       }),
     })),
+
+  fetchSectionStudents: async (courseId, sectionId) => {
+    try {
+      const res = await api.getSectionStudents(courseId, sectionId);
+      if (res.ok && res.data?.data) {
+        const studentsFromDB = res.data.data.map((s: any) => ({
+          id: s.id,
+          name: s.name,
+          email: s.email,
+          career: s.career || 'Técnico-Profesional',
+          dateEnrolled: s.dateEnrolled,
+          sectionId: sectionId,
+          username: s.username,
+        }));
+
+        set((state) => ({
+          teacherCourses: state.teacherCourses.map((c) => {
+            if (c.id !== courseId) return c;
+            
+            // Reemplazamos todos los estudiantes de esta sección con la base de datos para no duplicar
+            const otherStudents = (c.enrolledStudents || []).filter(s => s.sectionId !== sectionId);
+            return {
+              ...c,
+              enrolledStudents: [...otherStudents, ...studentsFromDB]
+            };
+          })
+        }));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
 
   getAllH5PResources: () => {
     const all: SectionResource[] = [];

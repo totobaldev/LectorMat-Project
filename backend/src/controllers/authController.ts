@@ -18,7 +18,7 @@ export async function login(req: Request, res: Response): Promise<void> {
 
   try {
     const users = await query(
-      'SELECT id, full_name as name, email, username, password_hash as password, role, career FROM users WHERE LOWER(email) = $1 OR LOWER(username) = $1',
+      'SELECT id, full_name as name, email, username, password_hash as password, role, career, avatar_url as avatar, xp, level FROM users WHERE LOWER(email) = $1 OR LOWER(username) = $1',
       [cleanEmail]
     );
 
@@ -57,7 +57,6 @@ export async function login(req: Request, res: Response): Promise<void> {
         email: user.email,
         role: user.role,
       });
-
       res.status(200).json({
         status: 'ok',
         user: {
@@ -66,31 +65,71 @@ export async function login(req: Request, res: Response): Promise<void> {
           email: user.email,
           role: user.role,
           career: user.career,
+          avatar: user.avatar,
+          xp: user.xp,
+          level: user.level,
         },
         token,
       });
       return;
+    } else {
+      res.status(401).json({
+        status: 'error',
+        message: 'Usuario no encontrado.',
+      });
+      return;
     }
   } catch (err) {
-    // DB fallback — continue to generic login for dev mode
+    console.error('[login error]', err);
+    res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
+    return;
+  }
+}
+
+// ─── Update Profile ─────────────────────────────────────────────────────────
+
+export async function updateProfile(req: Request, res: Response): Promise<void> {
+  const user = (req as any).user as JwtPayload | undefined;
+
+  if (!user) {
+    res.status(401).json({ status: 'error', message: 'Autenticación requerida' });
+    return;
   }
 
-  // Generic success for valid formatted credentials in dev mode (no DB)
-  const devToken = signToken({
-    userId: `usr-${Date.now()}`,
-    email: cleanEmail,
-    role: (role as 'student' | 'teacher') || 'student',
-  });
+  const { avatar, xp, level } = req.body;
 
-  res.status(200).json({
-    status: 'ok',
-    user: {
-      id: `usr-${Date.now()}`,
-      name: cleanEmail.split('@')[0],
-      email: cleanEmail,
-      role: role || 'student',
-      career: 'Técnico-Profesional',
-    },
-    token: devToken,
-  });
+  try {
+    // Build dynamic update query based on provided fields
+    const updates = [];
+    const values = [user.userId];
+    let paramIdx = 2;
+
+    if (avatar !== undefined) {
+      updates.push(`avatar_url = $${paramIdx++}`);
+      values.push(avatar);
+    }
+    if (xp !== undefined) {
+      updates.push(`xp = $${paramIdx++}`);
+      values.push(xp);
+    }
+    if (level !== undefined) {
+      updates.push(`level = $${paramIdx++}`);
+      values.push(level);
+    }
+
+    if (updates.length === 0) {
+      res.status(400).json({ status: 'error', message: 'No hay campos para actualizar' });
+      return;
+    }
+
+    await query(
+      `UPDATE users SET ${updates.join(', ')} WHERE id = $1`,
+      values
+    );
+
+    res.status(200).json({ status: 'ok', message: 'Perfil actualizado' });
+  } catch (err: any) {
+    console.error('[Profile] Error al actualizar:', err.message);
+    res.status(500).json({ status: 'error', message: 'Error interno al actualizar perfil' });
+  }
 }

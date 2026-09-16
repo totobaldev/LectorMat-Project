@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 2019  -->
+  <question type="cloze">
+    <name>
+      <text>F1-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1230 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 10 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="text-align: center; height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="text-align: center; width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1230}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1240}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1250}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1260}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1270}</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;">&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%100%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span style="font-size: 0.9375rem;"><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%10x+1230~%100%1230+10x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 6𝒙 + 1078</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1150?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=12}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 51?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1384} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 4 pesos todas las semanas iniciando con un valor de $1250.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-4x+1250~%100%1250-4x}</p>
+<p><br>b) Si un cliente consume 20 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1250? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 20 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1250</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=80}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=160}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=240}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=320}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=400}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=1200} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2172  -->
+  <question type="cloze">
+    <name>
+      <text>F10-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1150 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 8 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1150}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1158}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1166}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1174}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1182}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%100%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%8x+1150~%100%1150+8x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 4𝒙 + 1072</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1136?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=16}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 34?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1208} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 7 pesos todas las semanas iniciando con un valor de $1310.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-7x+1310~%100%1310-7x}</p>
+<p><br>b) Si un cliente consume 15 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1310? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 15 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1310</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=105}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=210}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=315}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=420}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=525}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=1575} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2036  -->
+  <question type="cloze">
+    <name>
+      <text>F2-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1120 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 12 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="text-align: center; width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1120}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1132}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1144}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1156}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="text-align: center; width: 93.0938px;">{1:NM:=1168}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%100%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%12x+1120~%100%1120+12x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 5𝒙 + 1068</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1143?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=15}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 40?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1268} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 3 pesos todas las semanas iniciando con un valor de $1280.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-3x+1280~%100%1280-3x}</p>
+<p><br>b) Si un cliente consume 25 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1280? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 25 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1280</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=75}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=150}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=225}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=300}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=375}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=1125} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2053  -->
+  <question type="cloze">
+    <name>
+      <text>F3-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1260 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 8 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1260}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1268}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1276}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1284}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1292}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%100%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%8x+1260~%100%1260+8x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 7𝒙 + 1056</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1196?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=20}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 36?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1308} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 5 pesos todas las semanas iniciando con un valor de $1220.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-5x+1220~%100%1220-5x}</p>
+<p><br>b) Si un cliente consume 30 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1220? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 30 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1220</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=150}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=300}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=450}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=600}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=750}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=2250} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2070  -->
+  <question type="cloze">
+    <name>
+      <text>F4-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1140 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 9 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1140}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1149}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1158}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1167}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1176}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%100%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%9x+1140~%100%9X+1140~%100%1140+9x~%100%1140+9X}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 8𝒙 + 1047</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1191?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=18}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 48?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1431} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 6 pesos todas las semanas iniciando con un valor de $1270.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-6x+1270~%100%1270-6x}</p>
+<p><br>b) Si un cliente consume 15 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1270? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 15 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1270</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=90}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=180}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=270}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=360}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=450}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=1350} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2087  -->
+  <question type="cloze">
+    <name>
+      <text>F5-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1280 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 7 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1280}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1287}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1294}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1301}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1308}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%100%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%7x+1280~%100%1280+7x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 4𝒙 + 1063</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1147?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=21}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 44?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1239} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 7 pesos todas las semanas iniciando con un valor de $1290.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-7x+1290~%100%1290-7x}</p>
+<p><br>b) Si un cliente consume 35 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1290? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 35 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1290</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=245}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=490}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=735}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=980}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=1225}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=3675} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2104  -->
+  <question type="cloze">
+    <name>
+      <text>F6-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1160 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 11 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1160}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1171}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1182}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1193}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1204}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%100%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%11x+1160~%100%1160+11x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 6𝒙 + 1070</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1184?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=19}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 46?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1346} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 4 pesos todas las semanas iniciando con un valor de $1310.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-4x+1310~%100%1310-4x}</p>
+<p><br>b) Si un cliente consume 30 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1310? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 30 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1310</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=120}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=240}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=360}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=480}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=600}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=1800} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2121  -->
+  <question type="cloze">
+    <name>
+      <text>F7-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1300 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 6 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1300}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1306}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1312}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1318}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1324}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%100%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%6x+1300~%100%1300+6x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 5𝒙 + 1058</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1143?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=17}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 50?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1308} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 3 pesos todas las semanas iniciando con un valor de $1260.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es : {3:SA:%100%-3x+1260~%100%1260-3x}</p>
+<p><br>b) Si un cliente consume 20 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1260? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 20 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1260</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=60}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=120}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=180}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=240}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=300}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=900} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2138  -->
+  <question type="cloze">
+    <name>
+      <text>F8-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1100 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 13 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1100}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1113}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1126}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1139}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1152}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%0%Gráfica 1~%0%Gráfica 2~%100%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p>"<strong>Ingrese su respuesta en el formato: 2x+1000&nbsp; o&nbsp; -2X+1000"</strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%13x+1100~%100%1100+13x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 7𝒙 + 1050</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1148?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=14}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 42?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1344} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 5 pesos todas las semanas iniciando con un valor de $1300.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p>"<strong>Ingrese su respuesta en el formato: 2x+1000&nbsp; o&nbsp; -2X+1000"</strong></p>
+<p>La expresión es : {3:SA:%100%-5x+1300~%100%1300-5x}</p>
+<p><br>b) Si un cliente consume 25 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1300? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 25 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1300</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=125}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=250}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=375}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=500}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=625}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=1875} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 2155  -->
+  <question type="cloze">
+    <name>
+      <text>F9-Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)1.- Si en determinada ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<h4><strong><span style="color: rgb(51, 51, 51);" class="">Problema 1: EL PRECIO DEL COMBUSTIBLE (25 puntos)</span></strong></h4>
+<p><span style="color: #000000;">1.- Si en determinada semana del año (semana 0) el precio de la bencina es $1270 y sabiendo que el fondo de estabilización FEPCO, inyecta dinero, de forma que el precio de la bencina no suba más de 5 pesos por semana y suponiendo que en cada semana comienza a subir el máximo posible:</span></p>
+<p><span style="color: #000000;">a) Complete la tabla siguiente: <strong>(5 puntos)</strong></span></p>
+<table style="height: 214px; margin-left: auto; margin-right: auto;" border="2" width="205" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 96.9062px;"><strong>&nbsp; &nbsp;Semana</strong></td>
+<td style="width: 93.0938px; text-align: center;"><strong>Valor de la gasolina en Santiago</strong></td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>0</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1270}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>1</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1275}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>2</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1280}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>3</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1285}</td>
+</tr>
+<tr>
+<td style="width: 96.9062px; text-align: center;"><strong>4</strong></td>
+<td style="width: 93.0938px;">{1:NM:=1290}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>b) ¿Cuál de las gráficas siguientes representa mejor el valor de la gasolina en cada semana?&nbsp; <strong>(3 puntos)</strong></p>
+<p>&nbsp;</p>
+<p><iframe style="border: 0px;" title=" " src="https://www.geogebra.org/material/iframe/id/jegkprpv/width/818/height/640/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="1518px" height="640px" scrolling="no"> </iframe></p>
+<p>&nbsp;</p>
+<p>La gráfica es : {3:MULTICHOICE:%100%Gráfica 1~%0%Gráfica 2~%0%Gráfica 3~%0%Gráfica 4}</p>
+<p>&nbsp;</p>
+<p>&nbsp;c) Represente mediante una expresión algebraica el valor de la gasolina en función de las semanas transcurridas.&nbsp; <strong>(3 puntos)</strong></p>
+<p><strong><span class="" style="color: rgb(239, 69, 64);">INDICACIÓN:&nbsp;</span><span><span class="" style="color: rgb(239, 69, 64);">Ingrese su respuesta, sin espacios, en el formato siguiente: 2x+1000&nbsp; ó&nbsp; -2x+1000. La letra x debe estar en minúscula.</span></span></strong><strong></strong></p>
+<p>La expresión es :&nbsp; {3:SA:%100%5x+1270~%100%1270+5x}</p>
+<p>&nbsp;</p>
+<p>2)&nbsp;Si el precio de la gasolina en cierta semana en La Serena se modela a través de la función&nbsp;<strong>𝒇(𝒙) = 8𝒙 + 1048</strong>.</p>
+<p>a)&nbsp;¿En qué semana el valor de la gasolina alcanzará un valor aproximado de $1152?&nbsp; &nbsp;<strong>(3 puntos) </strong></p>
+<p>Semana = {3:NM:=13}</p>
+<p>b) Si las alzas continúan en forma sostenida, ¿Qué valor podría alcanzar la gasolina en la semana 38?&nbsp; &nbsp;<strong>(2 puntos)</strong></p>
+<p>{2:NM:=1352} pesos.</p>
+<p>&nbsp;</p>
+<p>3) Si debido a circunstancia a nivel mundial el valor de la gasolina comienza a bajar 6 pesos todas las semanas iniciando con un valor de $1240.</p>
+<p>Determine:</p>
+<p>a) La expresión funcional que modela el precio en función de las semanas transcurridas.&nbsp; &nbsp;<strong>(3 puntos)</strong></p>
+<p>"<strong>Ingrese su respuesta en el formato: 2x+1000&nbsp; o&nbsp; -2X+1000"</strong></p>
+<p>La expresión es : {3:SA:%100%-6x+1240~%100%1240-6x}</p>
+<p><br>b) Si un cliente consume 35 litros de bencina por semana, y la baja de la bencina se mantiene por un periodo de 5 semanas.</p>
+<p>¿Qué cantidad de dinero ahorró semana a semana y el total ahorrado durante todo el periodo de tiempo en&nbsp;que la bencina fue a la baja a partir del valor inicial de $1240? <strong>(6 puntos)</strong></p>
+<p>&nbsp;</p>
+<table style="height: 179px; margin-left: auto; margin-right: auto;" border="2" width="445" cellspacing="1">
+<tbody>
+<tr>
+<td style="width: 142.073px; text-align: center;">Semana</td>
+<td style="width: 142.073px; text-align: center;">Precio por litro</td>
+<td style="width: 142.188px; text-align: center;">Ahorro por 35 litros</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">0</td>
+<td style="width: 142.073px; text-align: center;">1240</td>
+<td style="width: 142.188px; text-align: center;">0</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">1</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=210}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">2</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=420}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">3</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=630}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">4</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=840}</td>
+</tr>
+<tr>
+<td style="width: 142.073px; text-align: center;">5</td>
+<td style="width: 142.073px; text-align: center;">&nbsp;</td>
+<td style="width: 142.188px; text-align: center;">{1:NM:=1050}</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>El total ahorrado es : {1:NM:=3150} pesos.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+</quiz>

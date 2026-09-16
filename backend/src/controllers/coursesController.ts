@@ -127,12 +127,46 @@ export async function listEnrolledCourses(req: Request, res: Response): Promise<
 export async function listCourses(_req: Request, res: Response): Promise<void> {
   try {
     const dbCourses = await query('SELECT * FROM courses ORDER BY created_at DESC');
+    
     if (dbCourses.length > 0) {
-      res.status(200).json({ status: 'ok', data: dbCourses });
+      // Fetch all sections
+      const dbSections = await query('SELECT * FROM course_sections ORDER BY section_order ASC');
+      // Fetch all units
+      const dbUnits = await query('SELECT * FROM course_units ORDER BY unit_order ASC');
+
+      // Nest them
+      const enrichedCourses = dbCourses.map((course: any) => {
+        const courseSections = dbSections.filter((s: any) => s.course_id === course.id);
+        const sectionsWithUnits = courseSections.map((sec: any) => {
+          const sectionUnits = dbUnits.filter((u: any) => u.section_id === sec.id);
+          return {
+            id: sec.id,
+            title: sec.title,
+            order: sec.section_order,
+            units: sectionUnits.map((u: any) => ({
+              id: u.id,
+              title: u.title,
+              subtitle: u.subtitle,
+              order: u.unit_order,
+              modules: { comprension: [], metodo: [], interactivo: [] }, // mock modules for now
+            })),
+            resources: [], // Required by frontend TeacherCoursesPage
+            students: [] // Will be fetched per section in TeacherCourseDetailPage
+          };
+        });
+
+        return {
+          ...course,
+          sections: sectionsWithUnits,
+          enrolledStudents: []
+        };
+      });
+
+      res.status(200).json({ status: 'ok', data: enrichedCourses });
       return;
     }
   } catch (err) {
-    // Fallback to memory state
+    console.error('[listCourses] error:', err);
   }
 
   res.status(200).json({ status: 'ok', data: memoryCourses });
@@ -273,21 +307,24 @@ export async function importSectionRoster(req: Request, res: Response): Promise<
   // Persist to PostgreSQL if DB is available
   for (const std of importedList) {
     try {
-      await query(
+      const userRes = await query(
         `INSERT INTO users (id, full_name, email, username, password_hash, role, career)
          VALUES ($1, $2, $3, $4, $5, 'student', $6)
-         ON CONFLICT (email) DO UPDATE SET password_hash = $5`,
+         ON CONFLICT (email) DO UPDATE SET password_hash = $5
+         RETURNING id`,
         [std.id, std.name, std.email, std.username, std.password, std.career]
       );
+
+      const realUserId = userRes.length > 0 ? userRes[0].id : std.id;
 
       await query(
         `INSERT INTO section_students (course_id, section_id, user_id, generated_password)
          VALUES ($1, $2, $3, $4)
          ON CONFLICT (section_id, user_id) DO NOTHING`,
-        [courseId, sectionId, std.id, std.password]
+        [courseId, sectionId, realUserId, std.password]
       );
     } catch (err) {
-      // DB fallback
+      console.error('[importSectionRoster] DB error', err);
     }
   }
 

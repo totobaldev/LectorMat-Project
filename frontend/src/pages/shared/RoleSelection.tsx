@@ -50,6 +50,16 @@ const RoleSelection: React.FC = () => {
 
         setStudentSession(res.user.email, res.user.name);
 
+        if (res.user.avatar) {
+          useProgressStore.getState().setAvatar(res.user.avatar);
+        }
+        
+        // Sync XP/Level if they are coming from DB and higher than current local
+        // Or simply override local with DB since DB is source of truth
+        if (res.user.xp !== undefined && res.user.level !== undefined) {
+           updateProgress({ xp: res.user.xp, level: res.user.level });
+        }
+
         if (res.user.career) {
           const isMech = res.user.career.toLowerCase().includes('mecánica');
           updateProgress({

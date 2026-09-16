@@ -1,0 +1,2212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/CCBB - MTFG01_MTFM01 - 2023- EXAMEN-PRIMAVERA </text>
+    </category>
+    <info format="html">
+      <text></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/CCBB - MTFG01_MTFM01 - 2023- EXAMEN-PRIMAVERA /PROBLEMA 1- MTFG01_MTFM01 - 2023- EXAMEN-PRIMAVERA</text>
+    </category>
+    <info format="html">
+      <text></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100828  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 11</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">7&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3600&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">9&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2500 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">19&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">1600&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">23&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">1200&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">28&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">200&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-139.22x+4214.66~%100%-139,22x+4214,66}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%31:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 1~%100%Grado 2~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2408:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100834  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 12</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">7&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3300&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">12&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2300 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">18&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">1900&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">23&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">1000&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">29&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">300&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-132.23x+4113.74~%100%-132,23x+4113,74}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%32:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 2~%100%Grado 1~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2394:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100840  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 13</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">5&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3200&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">11&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2200 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">17&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2000&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">25&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">700&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">29&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">500&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-112.19x+3672.11~%100%-112,19x+3672,11}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%34:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 2~%100%Grado 1~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2213:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100846  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 14</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">5&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3200&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">10&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2600 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">19&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2000&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">25&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">900&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">28&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">500&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-114.32x+3829.22~%100%-114,32x+3829,22}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%31:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 1~%100%Grado 2~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2506:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100852  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 15</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">3&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3500&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">11&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2300 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">17&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2000&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">23&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">800&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">29&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">300&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-123.64x+3832.39~%100%-123,64x+3832,39}</p>
+<br>
+<p></p><br>
+<p></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%31:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 2~%100%Grado 1~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2225:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100858  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 16</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">2&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3600&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">9&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2500 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">18&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">1400&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">23&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">700&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">29&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">100&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-129.73x+3761.7~%100%-129,73x+3761,7}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%30:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 2~%100%Grado 1~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2075:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100864  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 17</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">5&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3000&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">11&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2400 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">18&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">1800&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">25&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">1200&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">29&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">100&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-110.8x+3650~%100%-110,8x+3650}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%31:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 1~%100%Grado 2~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2367:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100870  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 18</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">3&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3400&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">9&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2200 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">16&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">1900&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">21&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">700&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">28&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">400&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-119.78x+3564.64~%100%-119,78x+3564,64}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%34:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 2~%100%Grado 1~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2007:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100876  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 19</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">5&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3900&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">9&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2500 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">17&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">1700&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">23&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">1000&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">28&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">200&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-145.98x+4254.07~%100%-145,98x+4254,07}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%32:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%0%Grado 2~%100%Grado 1~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2356:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39100882  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA 2</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">DESABASTECIMIENTO&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 24 puntos)</span></strong></h4>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;">En un hipermercado existen productos que tienen más demanda que otros, por ejemplo, los artículos de línea blanca presentan menos demanda que los artículos de limpieza y aseo, por lo que deben asegurar una cantidad de stock para ofrecer. El desabastecimiento se puede abordar usando los modelos predictivos analizados previamente.</span><br></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><span></span></p>
+<h4><strong><strong><span>Hipermercado</span></strong></strong></h4>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES">El encargado de bodega de la multinacional MegaSúper lleva un
+        inventario de los artículos de línea blanca que están disponible para ofrecer a
+        los usuarios, de tal manera de hacer los respectivos pedidos y así mantener el
+        stock en tienda. </span></p>
+
+<p><span style="font-size: calc(0.90375rem + 0.045vw);">Algunos de los datos registrados en los últimos meses se muestran a
+        continuación:</span></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Días</th>
+            <th style="text-align: center; border: 1px solid #333333;" scope="col">Disponibilidad de <br>Productos (Stock)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">6&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">3300&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">9&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">2400 &nbsp;&nbsp;<br></td>
+        </tr>
+      <tr>
+            <td style="text-align: center; border: 1px solid #333333;">18&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">1600&nbsp;&nbsp;<br></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">21&nbsp;&nbsp;</td>
+            <td style="text-align: center; border: 1px solid #333333;">1200&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid #333333;">32&nbsp;&nbsp;<br></td>
+            <td style="text-align: center; border: 1px solid #333333;">100&nbsp;&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: center;"><br></p>
+<p style="text-align: left;"><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong></strong></strong></p>
+<p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Modelos predictivos</span></span></strong></span></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Los datos
+        observados permiten utilizar diversos modelos que permiten predecir (o estimar)
+        la disponibilidad de productos.</span></p>
+<p><span lang="ES"><br></span></p>La expresión algebraica debe ingresarse como en el siguiente ejemplo:&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23.32x+5.67&nbsp; &nbsp;ó&nbsp; &nbsp; 3.1x^2+4.4x+1.2&nbsp; &nbsp; &nbsp;&nbsp;ó&nbsp; &nbsp; &nbsp;3.2x^3+1.5x^2-4.4x+12&nbsp;<br><br>
+<p><span style="color: #ff0000;"><strong>a)</strong></span>&nbsp;<span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">En el caso de utilizar el ajuste
+            polinómico de grado 1, responda: <strong>¿Cuál es la expresión algebraica de dicho
+                modelo?</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;6 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>El mejor modelo polinómico de grado 1 que representa los datos es&nbsp;</p><p>&nbsp;\(f(x)=\)&nbsp;{6:SHORTANSWER:~%100%-115.56x+3707.59~%100%-115,56x+3707,59}</p>
+<br>
+<p></p><p><span style="font-size: calc(0.950625rem + 0.6075vw);"><span style=""><strong><span style=""><span lang="ES" style="">Análisis de Modelos predictivos</span></span></strong></span></span></p><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>b)</strong></span><strong style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</strong><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style="">Considerando un ajuste polinómico
+            de grado 2,<strong> ¿En qué día se estaría produciendo el desabastecimiento del
+                producto en la multinacional? (Entendemos por desabastecimiento cero producto)</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>8 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>El desabastecimiento del producto en el hipermercado se produce a los {8:NUMERICAL:~%100%30:1} días.</p>
+<br>
+<p><span style="color: #ff0000;"><strong>c)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿Cuál de los tres modelos tiene mayor
+                Stock a lo</strong><strong>s 13 días? <span style=""><span lang="ES">(4 puntos);</span></span>&nbsp;¿A cuántos productos corresponde este Stock?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(6 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>El modelo que predice un mayor Stock es el modelo de<span>&nbsp;</span>{4:MULTICHOICE_S:~%100%Grado 1~%0%Grado 2~%0%Grado 3}, con una disponibilidad de {6:NUMERICAL:~%100%2205:1} productos.</p>
+<p></p>
+<h4><br></h4>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/CCBB - MTFG01_MTFM01 - 2023- EXAMEN-PRIMAVERA /PROBLEMA 3- MTFG01_MTFM01 - 2023- EXAMEN-PRIMAVERA</text>
+    </category>
+    <info format="html">
+      <text></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39196177  -->
+  <question type="cloze">
+    <name>
+      <text>Se desea remodelar el sector de área verde deuna cierta plaza, la ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">LA PLAZA&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 16 puntos)</span></strong></h4>
+<p></p>
+<p dir="ltr" style="text-align: left;"></p>
+<p><span lang="ES-MX">Se desea remodelar el sector de área verde de
+        una cierta plaza, la remodelación considera la instalación de pasto (sector
+        verde) e instalación de palmetas de caucho (sector gris), además se planifica cercar
+        todo el contorno.</span></p>
+
+<p><span lang="ES-MX">Se han tomado algunas medidas del terreno y se
+        conocen los ángulos interiores del cuadrilátero y dos lados del terreno medidos
+        en metros.</span></p>
+
+<p><span lang="ES-MX">El bosquejo de la situación se muestra a continuación:</span>
+</p>
+<iframe scrolling="no" title="Geogegra P5.1" src="https://www.geogebra.org/material/iframe/id/cr3xh4xx/width/753/height/511/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false" width="753px" height="511px" style="border:0px;"> </iframe>
+<br><span lang="ES-MX"><br>De
+    acuerdo a la información entregada, determinar:<br></span><br>a) La longitud del segmento&nbsp;\( \overline{AC} \).&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br>{4:NUMERICAL:~%100%16.07:0.2} m<br><br><br>
+<p><span style="font-size: 0.9375rem;">b) La
+        superficie de pasto a cubrir.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span><br></p>
+<p><span lang="ES-MX">{4:NUMERICAL:~%100%51.75:0.2}&nbsp;\( m^{2} \)<br></span></p>
+<p><span lang="ES-MX"><br></span></p>
+<p><span lang="ES-MX">c)&nbsp;<span lang="ES-MX">El área del sector donde se instalarán las
+            palmetas de caucho.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span></span>
+</p>
+<p><span lang="ES-MX"><span lang="ES-MX">{4:NUMERICAL:~%100%32.62:0.2}&nbsp;\( m^{2} \)<br></span></span>
+</p><br>d)&nbsp;<span lang="ES-MX">Lo metros lineales a considerar para cercar todo
+    el terreno.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br></span><br>{4:NUMERICAL:~%100%38.62:0.2} m<br><br><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39194982  -->
+  <question type="cloze">
+    <name>
+      <text>Se desea remodelar el sector de área verde deuna cierta plaza, la ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">LA PLAZA&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 16 puntos)</span></strong></h4>
+<p></p>
+<p dir="ltr" style="text-align: left;"></p>
+<p><span lang="ES-MX">Se desea remodelar el sector de área verde de
+        una cierta plaza, la remodelación considera la instalación de pasto (sector
+        verde) e instalación de palmetas de caucho (sector gris), además se planifica cercar
+        todo el contorno.</span></p>
+
+<p><span lang="ES-MX">Se han tomado algunas medidas del terreno y se
+        conocen los ángulos interiores del cuadrilátero y dos lados del terreno medidos
+        en metros.</span></p>
+
+<p><span lang="ES-MX">El bosquejo de la situación se muestra a continuación:</span>
+</p>
+<iframe scrolling="no" title="Geogebra P5.2" src="https://www.geogebra.org/material/iframe/id/mmaztef5/width/753/height/511/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false" width="753px" height="511px" style="border:0px;"> </iframe>
+<br><span lang="ES-MX"><br>De
+    acuerdo a la información entregada, determinar:<br></span><br>a) La longitud del segmento&nbsp;\( \overline{AC} \).&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br>{4:NUMERICAL:~%100%15.71:0.2} m<br><br><br>
+<p><span style="font-size: 0.9375rem;">b) La
+        superficie de pasto a cubrir.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span><br></p>
+<p><span lang="ES-MX">{4:NUMERICAL:~%100%41.31:0.2}&nbsp;\( m^{2} \)<br></span></p>
+<p><span lang="ES-MX"><br></span></p>
+<p><span lang="ES-MX">c)&nbsp;<span lang="ES-MX">El área del sector donde se instalarán las
+            palmetas de caucho.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span></span>
+</p>
+<p><span lang="ES-MX"><span lang="ES-MX">{4:NUMERICAL:~%100%40.18:0.2}&nbsp;\( m^{2} \)<br></span></span>
+</p><br>d)&nbsp;<span lang="ES-MX">Lo metros lineales a considerar para cercar todo
+    el terreno.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br></span><br>{4:NUMERICAL:~%100%37.72:0.2} m<br><br><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39195026  -->
+  <question type="cloze">
+    <name>
+      <text>Se desea remodelar el sector de área verde deuna cierta plaza, la ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">LA PLAZA&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 16 puntos)</span></strong></h4>
+<p></p>
+<p dir="ltr" style="text-align: left;"></p>
+<p><span lang="ES-MX">Se desea remodelar el sector de área verde de
+        una cierta plaza, la remodelación considera la instalación de pasto (sector
+        verde) e instalación de palmetas de caucho (sector gris), además se planifica cercar
+        todo el contorno.</span></p>
+
+<p><span lang="ES-MX">Se han tomado algunas medidas del terreno y se
+        conocen los ángulos interiores del cuadrilátero y dos lados del terreno medidos
+        en metros.</span></p>
+
+<p><span lang="ES-MX">El bosquejo de la situación se muestra a continuación:</span>
+</p>
+<iframe scrolling="no" title="Geogebra P5.4" src="https://www.geogebra.org/material/iframe/id/qszrspsy/width/753/height/511/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false" width="753px" height="511px" style="border:0px;"> </iframe>
+<br><span lang="ES-MX"><br>De
+    acuerdo a la información entregada, determinar:<br></span><br>a) La longitud del segmento&nbsp;\( \overline{AC} \).&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br>{4:NUMERICAL:~%100%15.39:0.2} m<br><br><br>
+<p><span style="font-size: 0.9375rem;">b) La
+        superficie de pasto a cubrir.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span><br></p>
+<p><span lang="ES-MX">{4:NUMERICAL:~%100%52.66:0.2}&nbsp;\( m^{2} \)<br></span></p>
+<p><span lang="ES-MX"><br></span></p>
+<p><span lang="ES-MX">c)&nbsp;<span lang="ES-MX">El área del sector donde se instalarán las
+            palmetas de caucho.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span></span>
+</p>
+<p><span lang="ES-MX"><span lang="ES-MX">{4:NUMERICAL:~%100%27.15:0.2}&nbsp;\( m^{2} \)<br></span></span>
+</p><br>d)&nbsp;<span lang="ES-MX">Lo metros lineales a considerar para cercar todo
+    el terreno.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br></span><br>{4:NUMERICAL:~%100%37.91:0.2} m<br><br><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39194987  -->
+  <question type="cloze">
+    <name>
+      <text>Se desea remodelar el sector de área verde deuna cierta plaza, la ...</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<div class="editor-indent" style="margin-left: 30px;"></div>
+<h4><strong><span class="" style="color: #0000ff;"><span lang="ES">LA PLAZA&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 16 puntos)</span></strong></h4>
+<p></p>
+<p dir="ltr" style="text-align: left;"></p>
+<p><span lang="ES-MX">Se desea remodelar el sector de área verde de
+        una cierta plaza, la remodelación considera la instalación de pasto (sector
+        verde) e instalación de palmetas de caucho (sector gris), además se planifica cercar
+        todo el contorno.</span></p>
+
+<p><span lang="ES-MX">Se han tomado algunas medidas del terreno y se
+        conocen los ángulos interiores del cuadrilátero y dos lados del terreno medidos
+        en metros.</span></p>
+
+<p><span lang="ES-MX">El bosquejo de la situación se muestra a continuación:</span>
+</p>
+<iframe scrolling="no" title="Geogebra P5.3" src="https://www.geogebra.org/material/iframe/id/a3hmpc7x/width/753/height/511/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false" width="753px" height="511px" style="border:0px;"> </iframe>
+<br><span lang="ES-MX"><br>De
+    acuerdo a la información entregada, determinar:<br></span><br>a) La longitud del segmento&nbsp;\( \overline{AC} \).&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br>{4:NUMERICAL:~%100%14.88:0.2} m<br><br><br>
+<p><span style="font-size: 0.9375rem;">b) La
+        superficie de pasto a cubrir.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span><br></p>
+<p><span lang="ES-MX">{4:NUMERICAL:~%100%47.43:0.2}&nbsp;\( m^{2} \)<br></span></p>
+<p><span lang="ES-MX"><br></span></p>
+<p><span lang="ES-MX">c)&nbsp;<span lang="ES-MX">El área del sector donde se instalarán las
+            palmetas de caucho.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)</span></span>
+</p>
+<p><span lang="ES-MX"><span lang="ES-MX">{4:NUMERICAL:~%100%27.9:0.2}&nbsp;\( m^{2} \)<br></span></span>
+</p><br>d)&nbsp;<span lang="ES-MX">Lo metros lineales a considerar para cercar todo
+    el terreno.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (4 puntos)<br></span><br>{4:NUMERICAL:~%100%36.51:0.2} m<br><br><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/CCBB - MTFG01_MTFM01 - 2023- EXAMEN-PRIMAVERA /PROBLEMA 2- MTFG01_MTFM01 - 2023- EXAMEN-PRIMAVERA</text>
+    </category>
+    <info format="html">
+      <text></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169183  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 11</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{76,9}{1+8,4 e^{-0,33x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -102 + 47,4 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    25 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%76.73:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%50.57:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%43.56:1} meses, con una altura de {5:NUMERICAL:~%100%76.9:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 40 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%4.05:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169195  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 12</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{69,3}{1+7,7 e^{-0,33x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -96,9 + 47,1 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    17 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%67.4:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%36.54:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%34.07:1} meses, con una altura de {5:NUMERICAL:~%100%69.29:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 42 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%9.84:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169207  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 13</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_2(x)=\dfrac{74,5}{1+7 e^{-0,31x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_3(x)= -102,3 + 51,8 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    16 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%71.01:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%41.32:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%30.33:1} meses, con una altura de {5:NUMERICAL:~%100%74.46:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 31 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%1.12:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169219  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 14</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><br></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{82}{1+8,3 e^{-0,31x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -95,6 + 49,5 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    30 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%81.94:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%72.76:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%36.15:1} meses, con una altura de {5:NUMERICAL:~%100%81.99:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 36 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%0.21:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169231  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 15</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{71}{1+8,1 e^{-0,33x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -93,6 + 47,3 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    20 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%70.23:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%48.1:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%32.45:1} meses, con una altura de {5:NUMERICAL:~%100%70.99:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 39 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%8.69:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169243  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 16</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{82,5}{1+7,1 e^{-0,32x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -108,5 + 46,1 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    16 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%79.14:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%19.32:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%63:1} meses, con una altura de {5:NUMERICAL:~%100%82.5:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 31 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%32.66:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169255  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 17</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{83,3}{1+7,5 e^{-0,33x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -92 + 46,3 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    27 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%83.22:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%60.6:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%44.09:1} meses, con una altura de {5:NUMERICAL:~%100%83.3:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 31 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%16.28:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169267  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 18</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{75,4}{1+8,1 e^{-0,33x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -99 + 48,4 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    28 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%75.34:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%62.28:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%36.72:1} meses, con una altura de {5:NUMERICAL:~%100%75.4:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 35 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%2.32:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169279  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 19</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{78,4}{1+8,4 e^{-0,31x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -94,3 + 51,8 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    16 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%74.04:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%49.32:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? <span style=""><span lang="ES">(5 puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%27.99:1} meses, con una altura de {5:NUMERICAL:~%100%78.29:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 35 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%11.48:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 39169303  -->
+  <question type="cloze">
+    <name>
+      <text>PROBLEMA 2- MTFG01_MTFM01_MTFF01 - 2023- ES01-PRIMAVERA FORMA 20</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<strong style="font-size: calc(0.950625rem + 0.6075vw);"><span class="" style="color: #0000ff;"><span lang="ES">LAS PLANTAS&nbsp;</span></span></strong><strong style="font-size: 1.40625rem;"><span class="" style="color: #0000ff;">(Total: 22 puntos)</span></strong><br>
+<p></p>
+<p></p>
+<p><span style="font-size: 0.9375rem;"></span></p>
+<p><span lang="ES">Seguro te habrás preguntado alguna vez: ¿Cuánto vive
+        o crece una planta? Si convives con ellas en casa, son dudas muy razonables.
+        Pues bien, su ciclo biológico tendrá un peso importante en esto. Algunas, como
+        las anuales (también conocidas como de temporada), viven apenas un año, otras
+        doblan, triplican o cuadriplican este tiempo, mientras que unas pocas elegidas
+        podrán hacerlo más allá de los mil años.</span><span lang="ES"></span></p><br>
+<p></p>
+<p></p>
+<p><strong style="color: rgb(255, 0, 0); font-size: 0.9375rem;">Indicaciones:</strong></p>
+<ul>
+    <li class="li1">Los números mayor a mil ingréselos sin punto separador de miles. Ejemplo: 34600</li>
+    <li class="li1">L<span style="font-size: 0.9375rem;">os números decimales colóquelos con punto decimal ó coma, y redondear a 2 decimales.&nbsp;</span>
+        <ul>
+            <p>Ejemplos: 23.536 a 23.54&nbsp; &nbsp; &nbsp; ó&nbsp; &nbsp; &nbsp; 34,673 a 34,67</p>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><strong style="font-size: calc(0.950625rem + 0.6075vw);"><strong>Crecimiento de las plantas</strong></strong><br></p>
+<p></p>
+<h4><span><span style=""><span style="">
+            </span></span></span></h4><span style="font-size: 14.84px;">
+    <p><span lang="ES"></span></p>
+</span>
+<p><span lang="ES"></span></p>
+<p><span lang="ES">Para que una
+        planta crezca y se desarrolle, deben ocurrir algunos eventos a nivel celular.
+        Sus células tienen que dividirse, lo que explica cómo de una sola célula se
+        producen los millones de células que conforman, por lo común, el cuerpo de un
+        organismo adulto. Pero no todas las células se dividen, ni este crecimiento
+        tiene lugar en todo el cuerpo de la planta; más bien, la división celular está
+        restringida a las partes jóvenes del vegetal. Algunos momentos de este ciclo se
+        pueden modelar de manera exponencial y otros de manera logarítmica, siendo esto
+        un proceso finito que termina cuando la planta muere.</span></p>
+<p><span lang="ES"><br></span></p>
+<p></p>
+
+<p></p><strong><strong>Planta 1 ( \(P_1\) ) y 2 (&nbsp;<strong><strong>\(P_2\) ):Comparación de modelos</strong></strong></strong></strong><br>
+<p></p>
+<p><span style="font-size: 0.9375rem;">Los modelos
+        matemáticos permiten predecir la altura de las plantas, ayudando a los
+        trabajadores de viveros a orientar a sus clientes entregado información de su
+        crecimiento, altura y mantenimiento.</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span style="font-size: 0.9375rem;">\(P_1(x)=\dfrac{83,1}{1+8,9 e^{-0,31x}}\)</span><br></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">\(P_2(x)= -96,3 + 48,6 ln(x) \)<br></span></p>
+<p><span lang="ES"><br></span></p>
+<p><span lang="ES">Las funciones </span><span lang="ES"><span>\(P_1\) y&nbsp;</span><span><span><span><span>\(P_2\)</span></span></span></span> </span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;modelan la altura de cada planta (en centímetros)
+        en un tiempo \(x\)</span>
+    <!--[if !msEquation]--><span lang="ES">
+
+    </span>
+    <!--[endif]--><span lang="ES">&nbsp;(en meses).</span>
+</p><br><br>
+<p><span style="font-size: calc(0.90375rem + 0.045vw); color: rgb(255, 0, 0);"><strong>a)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>&nbsp;¿<span lang="ES">Cuál es la altura aproximada de cada planta a los
+                    10 meses</span>?&nbsp;</strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>4 puntos</strong></p>
+
+<p><strong>Respuesta: </strong>La altura aproximada de la planta<span lang="ES">&nbsp;</span><span lang="ES"><span>\(P_1\)&nbsp; es de {2:NUMERICAL:~%100%59.32:0.1} centímetros y de&nbsp;</span><span><span><span><span>\(P_2\) es de</span></span></span></span></span> {2:NUMERICAL:~%100%15.61:0.1}<span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;centímetros</span><span style="font-size: calc(0.90375rem + 0.045vw);">.</span></p>
+<br>
+<p><span style="color: #ff0000;"><strong>b)</strong></span> <span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES" style=""><strong>¿<span lang="ES">Existe aproximadamente algún mes en el que en ambas
+                    plantas tengan la misma altura</span></strong><strong>? (5<span style=""><span lang="ES">&nbsp;puntos);</span></span>&nbsp;¿<span lang="ES">A qué altura corresponde</span>?&nbsp;<span style=""><span lang="ES" style=""><span style=""><span lang="ES" style="">(5 puntos)</span></span></span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje: </span>10 puntos</strong></p>
+<p><strong>Respuesta: </strong>Las plantas tendrán la misma altura aproximadamente a los&nbsp;{5:NUMERICAL:~%100%40.1:1} meses, con una altura de {5:NUMERICAL:~%100%83.1:0.1} centímetros.</p>
+<p><br></p>
+<p></p>
+<p></p><p><span style="color: #ff0000;"><strong>c)</strong></span><span style="font-size: calc(0.90375rem + 0.045vw);">&nbsp;</span><span style="font-size: calc(0.90375rem + 0.045vw);"><span lang="ES"><strong>¿<span lang="ES"></span></strong><span lang="ES"><strong>Cuál es la diferencia de altura entre las plantas a
+                    los 31 meses</strong></span><strong><span lang="ES"></span>?&nbsp;<span lang="ES"><span lang="ES">(8 puntos)</span></span></strong></span></span></p>
+<p><strong><span class="" style="color: rgb(0, 0, 255);">Puntaje:</span>&nbsp;8 puntos&nbsp;</strong></p>
+<p><strong>Respuesta:&nbsp;</strong>La diferencia de altura entre las plantas es de {8:NUMERICAL:~%100%12.46:0.1} centímetros.</p><br>
+<p></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <penalty>.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+  </question>
+
+</quiz>

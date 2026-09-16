@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { TeacherResources } from '../../../components/ui/TeacherResources';
 import { useFrontProps } from '../../../hooks/useFrontProps';
+import { QuizRunner } from '../../../components/ui/QuizRunner';
+import { U1_PROBLEMS } from '../../../data/u1Questions';
 
 import { Lock, Check, Lightbulb } from 'lucide-react';
 
@@ -56,6 +59,7 @@ export default function Module3() {
   const [hintOpen, setHintOpen] = useState(false);
   const [usedHint, setUsedHint] = useState(false);
   const [verified, setVerified] = useState<'ok' | 'bad' | null>(null);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const prob = PROBLEMS[level];
   const compCount = Object.keys(completed).length;
@@ -101,6 +105,8 @@ export default function Module3() {
         </div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-orange-200 rounded-full blur-3xl opacity-40 transform translate-x-1/3 -translate-y-1/3"></div>
       </header>
+
+      <TeacherResources unitId="u1" moduleType="interactivo" />
 
       {/* Tabs */}
       <div className="flex flex-wrap gap-4">
@@ -187,6 +193,17 @@ export default function Module3() {
                   {prob.steps.map((st, i) => (
                     <div key={i} className="bg-white p-4 rounded-xl border border-emerald-100/50 font-mono text-base font-bold text-emerald-800 shadow-sm">{st}</div>
                   ))}
+                  
+                  {level === 'avanzado' && (
+                    <div className="pt-6 mt-6 border-t border-emerald-200/50 flex justify-end">
+                      <button 
+                        onClick={() => setShowQuiz(true)}
+                        className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-extrabold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-orange-500/30 hover:-translate-y-1 cursor-pointer"
+                      >
+                        Realizar Cuestionario M3 Completo
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -212,6 +229,16 @@ export default function Module3() {
           </div>
         </div>
       </div>
+
+      {showQuiz && (
+        <QuizRunner
+          problem={U1_PROBLEMS.find(p => p.id === 'u1-s3-ajustes')!}
+          onClose={() => setShowQuiz(false)}
+          onComplete={(scorePct, totalPts, earnedPts) => {
+            setShowQuiz(false);
+          }}
+        />
+      )}
     </div>
   );
 }
