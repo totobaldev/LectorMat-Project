@@ -14,7 +14,7 @@ const MainLayout: React.FC = () => {
   const logout    = store.logout;
   const p         = store;
   
-  const { activeMaterial, units, overallPct } = useStudentProgress();
+  const { activeMaterial, overallPct } = useStudentProgress();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => (
     typeof window === 'undefined' ? true : window.innerWidth >= 768
@@ -89,26 +89,6 @@ const MainLayout: React.FC = () => {
                   <LectorMatIcon name="courses" size={20} className="shrink-0" />
                   {isSidebarOpen && <span>Mis Cursos</span>}
                 </button>
-                
-                {isSidebarOpen && (cur === '/courses' || cur.startsWith('/unit/')) && units.length > 0 && (
-                  <div className="ml-8 pl-3 border-l-2 border-slate-100 flex flex-col gap-1 py-1">
-                    {units.map(u => {
-                      const isActive = cur.includes(`/unit/${u.unitNum}`);
-                      return (
-                        <button
-                          key={u.id}
-                          onClick={() => navigate(`/unit/${u.unitNum}/module/1`)}
-                          className={`w-full text-left text-[11px] font-bold py-1.5 px-2 rounded-lg transition-colors border-none bg-transparent cursor-pointer flex justify-between items-center ${
-                            isActive ? 'bg-blue-50 text-blue-700' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
-                          }`}
-                        >
-                          Unidad {u.unitNum}
-                          {u.isCompleted && <span className="text-emerald-500">✓</span>}
-                        </button>
-                      )
-                    })}
-                  </div>
-                )}
 
                 <button onClick={() => navigate('/dashboard')} className={globalCls(cur === '/dashboard')} aria-label="Mi Avance" title={!isSidebarOpen ? 'Mi Avance' : undefined}>
                   <LectorMatIcon name="progress" size={20} className="shrink-0" />

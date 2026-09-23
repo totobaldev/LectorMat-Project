@@ -10,7 +10,7 @@ import { useTeacherStore, type SectionResource, type TeacherCourse, type ModuleC
 import { StatusBadge } from '../components/ui/StatusBadge';
 import { ActionButton } from '../components/ui/ActionButton';
 import { parseResourceToQuestions, type ParsedQuestion } from '../utils/fileQuestionParser';
-import { InteractiveQuestionRunner } from '../components/ui/InteractiveQuestionRunner';
+import { GuideActivityView } from '../components/ui/GuideActivityView';
 import { api } from '../services/api';
 
 export default function CoursesPage() {
@@ -19,18 +19,21 @@ export default function CoursesPage() {
   const { studentEmail, studentName, logout } = store;
   const teacherCourses = useTeacherStore((s) => s.teacherCourses);
 
-  // Active Resource Viewer Modal State
-  const [activeModalResource, setActiveModalResource] = useState<SectionResource | null>(null);
-  // Active Interactive Question Runner State (Question-by-Question runner)
+  // Multi-Resource Selector Modal State (when a module has >1 materials)
+  const [modulePickerModal, setModulePickerModal] = useState<{
+    moduleTitle: string;
+    unitTitle?: string;
+    resources: SectionResource[];
+  } | null>(null);
+
+  // Active Interactive Question Activity State (Full Page Activity)
   const [activeRunnerResource, setActiveRunnerResource] = useState<{
     name: string;
+    description?: string;
+    unitTitle?: string;
     moduleType: ModuleCategory;
     questions: ParsedQuestion[];
   } | null>(null);
-
-  // H5P Simulation State inside modal
-  const [h5pAnswerSelected, setH5pAnswerSelected] = useState<number | null>(null);
-  const [h5pSubmitted, setH5pSubmitted] = useState(false);
 
   // ── API-sourced courses (from DB via JWT) ──────────────────────────────────
   const [apiCourses, setApiCourses] = useState<any[] | null>(null); // null = loading
@@ -63,9 +66,9 @@ export default function CoursesPage() {
     return () => { cancelled = true; };
   }, []);
 
-  const handleOpenResource = (res: SectionResource) => {
+  const handleOpenResource = (res: SectionResource, unitTitle?: string) => {
     const modType = res.moduleType || 'comprension';
-    const questions = (res.parsedQuestions && res.parsedQuestions.length > 0)
+    const questions = (res.parsedQuestions && res.parsedQuestions.length > 0 && (res.parsedQuestions[0] as any)?.level)
       ? res.parsedQuestions
       : parseResourceToQuestions(
           res.extractedText || res.description || res.fileName || res.name,
@@ -75,6 +78,8 @@ export default function CoursesPage() {
 
     setActiveRunnerResource({
       name: res.name,
+      description: res.description,
+      unitTitle: unitTitle,
       moduleType: modType,
       questions,
     });
@@ -86,6 +91,10 @@ export default function CoursesPage() {
       m1SlotsPlaced: Math.max(store.m1SlotsPlaced, 3),
     });
     setActiveRunnerResource(null);
+  };
+
+  const handleOpenPicker = (data: { moduleTitle: string; unitTitle?: string; resources: SectionResource[] }) => {
+    setModulePickerModal(data);
   };
 
   // ── Resolve assigned courses: API first, then Zustand fallback ────────────
@@ -235,6 +244,20 @@ export default function CoursesPage() {
     ] : [])
   ];
 
+  if (activeRunnerResource) {
+    return (
+      <GuideActivityView
+        resourceName={activeRunnerResource.name}
+        resourceDescription={activeRunnerResource.description}
+        unitTitle={activeRunnerResource.unitTitle}
+        moduleType={activeRunnerResource.moduleType}
+        questions={activeRunnerResource.questions}
+        onClose={() => setActiveRunnerResource(null)}
+        onComplete={handleRunnerComplete}
+      />
+    );
+  }
+
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto flex flex-col gap-8 w-full pb-16">
       
@@ -364,7 +387,7 @@ export default function CoursesPage() {
                   /* If course has no sections defined yet, fall back to default curriculum units */
                   <div className="grid grid-cols-1 gap-8">
                     {defaultCurriculumUnits.map((unit) => (
-                      <UnitCardRender key={unit.id} unit={unit} navigate={navigate} onOpenResource={handleOpenResource} />
+                      <UnitCardRender key={unit.id} unit={unit} navigate={navigate} onOpenResource={handleOpenResource} onOpenPicker={handleOpenPicker} />
                     ))}
                   </div>
                 ) : (
@@ -387,7 +410,7 @@ export default function CoursesPage() {
                         /* Default curriculum units if section has no custom units */
                         <div className="grid grid-cols-1 gap-8">
                           {defaultCurriculumUnits.map((unit) => (
-                            <UnitCardRender key={unit.id} unit={unit} navigate={navigate} onOpenResource={handleOpenResource} />
+                            <UnitCardRender key={unit.id} unit={unit} navigate={navigate} onOpenResource={handleOpenResource} onOpenPicker={handleOpenPicker} />
                           ))}
                         </div>
                       ) : (
@@ -445,6 +468,8 @@ export default function CoursesPage() {
                                     defaultPath={`/unit/${Math.min(unit.order, 4)}/module/1`}
                                     navigate={navigate}
                                     onOpenResource={handleOpenResource}
+                                    onOpenPicker={handleOpenPicker}
+                                    unitTitle={unit.title}
                                   />
 
                                   {/* M2: Método */}
@@ -458,6 +483,8 @@ export default function CoursesPage() {
                                     defaultPath={`/unit/${Math.min(unit.order, 4)}/module/2`}
                                     navigate={navigate}
                                     onOpenResource={handleOpenResource}
+                                    onOpenPicker={handleOpenPicker}
+                                    unitTitle={unit.title}
                                   />
 
                                   {/* M3: Interactivo */}
@@ -471,6 +498,8 @@ export default function CoursesPage() {
                                     defaultPath={`/unit/${Math.min(unit.order, 4)}/module/3`}
                                     navigate={navigate}
                                     onOpenResource={handleOpenResource}
+                                    onOpenPicker={handleOpenPicker}
+                                    unitTitle={unit.title}
                                   />
                                 </div>
                               </div>
@@ -488,8 +517,9 @@ export default function CoursesPage() {
       )}
 
       {/* ── RESOURCE PREVIEW / PLAY MODAL ────────────────────────────────────── */}
+      {/* ── MULTI-RESOURCE PICKER MODAL (Ventana flotante de selección de materiales) ─── */}
       <AnimatePresence>
-        {activeModalResource && (
+        {modulePickerModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -497,159 +527,138 @@ export default function CoursesPage() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm"
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl max-w-2xl w-full p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden"
+              initial={{ scale: 0.95, opacity: 0, y: 12 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 12 }}
+              transition={{ type: 'spring', duration: 0.3 }}
+              className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl max-w-xl w-full flex flex-col overflow-hidden relative"
             >
               {/* Modal Header */}
-              <div className="flex items-start justify-between border-b border-slate-100 pb-5">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center shrink-0">
-                    {activeModalResource.resourceType === 'h5p' ? (
-                      <Sparkles className="w-6 h-6" />
-                    ) : activeModalResource.resourceType === 'pdf' ? (
-                      <FileText className="w-6 h-6 text-red-500" />
-                    ) : (
-                      <FileText className="w-6 h-6 text-blue-600" />
-                    )}
+              <div className="p-6 sm:p-7 border-b border-slate-100 flex items-start justify-between gap-4 bg-slate-50/50">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-600/20">
+                    <BookOpen className="w-6 h-6" />
                   </div>
-                  <div>
-                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-                      {activeModalResource.resourceType.toUpperCase()} Material
-                    </span>
-                    <h3 className="text-xl font-extrabold text-slate-900">{activeModalResource.name}</h3>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                        {modulePickerModal.resources.length} materiales disponibles
+                      </span>
+                      {modulePickerModal.unitTitle && (
+                        <span className="text-[10px] font-bold text-slate-400 truncate max-w-[200px]">
+                          {modulePickerModal.unitTitle}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-xl font-black text-slate-900 mt-1 truncate">
+                      {modulePickerModal.moduleTitle}
+                    </h3>
                   </div>
                 </div>
                 <button
-                  onClick={() => setActiveModalResource(null)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                  onClick={() => setModulePickerModal(null)}
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors shrink-0 cursor-pointer border-none bg-transparent"
+                  aria-label="Cerrar"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              {/* Resource Content Player / Viewer */}
-              {activeModalResource.resourceType === 'h5p' ? (
-                <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 flex flex-col gap-5">
-                  <div className="flex items-center justify-between">
-                    <StatusBadge tone="blue" icon={<Sparkles className="w-3.5 h-3.5" />}>
-                      Actividad Interactiva H5P
-                    </StatusBadge>
-                    <span className="text-xs font-bold text-slate-400">Puntaje: 100 pts</span>
-                  </div>
+              {/* Modal Subtitle / Instruction */}
+              <div className="px-6 sm:px-7 pt-4 pb-2">
+                <p className="text-xs font-semibold text-slate-500">
+                  Selecciona la guía o actividad que deseas realizar en este módulo:
+                </p>
+              </div>
 
-                  <p className="text-sm font-medium text-slate-700 leading-relaxed">
-                    {activeModalResource.description || 'Responde la siguiente pregunta de práctica interactiva para validar tu conocimiento:'}
-                  </p>
+              {/* Resource List */}
+              <div className="p-6 sm:p-7 pt-2 max-h-[55vh] overflow-y-auto space-y-3">
+                {modulePickerModal.resources.map((res, idx) => {
+                  const isPdf = res.resourceType === 'pdf' || res.fileName?.toLowerCase().endsWith('.pdf');
+                  const isH5p = res.resourceType === 'h5p';
+                  const isWord = res.resourceType === 'word' || res.fileName?.toLowerCase().endsWith('.docx') || res.fileName?.toLowerCase().endsWith('.doc');
 
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 space-y-4">
-                    <h4 className="text-sm font-extrabold text-slate-900">
-                      ¿Cuál de las siguientes afirmaciones caracteriza a un modelo exponencial?
-                    </h4>
-                    <div className="space-y-2">
-                      {[
-                        'Crece o decrece con una tasa porcentual constante por unidad de tiempo',
-                        'Mantiene un incremento lineal fijo en cada intervalo',
-                        'Es siempre simétrico respecto al eje de ordenadas',
-                        'Tiene una pendiente constante en todo su dominio'
-                      ].map((opt, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => { setH5pAnswerSelected(idx); setH5pSubmitted(false); }}
-                          className={`w-full p-3.5 rounded-xl border text-left text-xs font-bold transition-all cursor-pointer flex items-center justify-between ${
-                            h5pAnswerSelected === idx
-                              ? 'border-blue-600 bg-blue-50 text-blue-900 ring-2 ring-blue-500/20'
-                              : 'border-slate-200 bg-slate-50/50 text-slate-700 hover:bg-white'
+                  return (
+                    <div
+                      key={res.id || idx}
+                      className="bg-white border border-slate-200/80 hover:border-blue-400/80 hover:shadow-md hover:shadow-blue-500/5 rounded-2xl p-4 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
+                    >
+                      <div className="flex items-start gap-3.5 min-w-0 flex-1">
+                        <div
+                          className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
+                            isPdf
+                              ? 'bg-red-50 text-red-600 border border-red-100'
+                              : isWord
+                              ? 'bg-blue-50 text-blue-600 border border-blue-100'
+                              : 'bg-orange-50 text-orange-600 border border-orange-100'
                           }`}
                         >
-                          <span>{opt}</span>
-                          {h5pAnswerSelected === idx && <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {h5pAnswerSelected !== null && !h5pSubmitted && (
-                    <button
-                      onClick={() => setH5pSubmitted(true)}
-                      className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-extrabold text-sm transition-colors cursor-pointer shadow-md shadow-blue-600/20"
-                    >
-                      Comprobar Respuesta
-                    </button>
-                  )}
-
-                  {h5pSubmitted && (
-                    <div className={`p-4 rounded-xl text-xs font-bold flex items-center gap-3 animate-in fade-in duration-200 ${
-                      h5pAnswerSelected === 0 ? 'bg-emerald-50 border border-emerald-200 text-emerald-800' : 'bg-red-50 border border-red-200 text-red-800'
-                    }`}>
-                      <CheckCircle2 className="w-5 h-5 shrink-0" />
-                      <div>
-                        <p className="font-black">{h5pAnswerSelected === 0 ? '¡Respuesta Correcta! +100 pts' : 'Respuesta Incorrecta'}</p>
-                        <p className="font-medium mt-0.5">
-                          {h5pAnswerSelected === 0
-                            ? 'Los modelos exponenciales varían proporcionalmente según una razón constante.'
-                            : 'Intenta nuevamente revisando las propiedades de la función exponencial.'}
-                        </p>
+                          {isH5p ? (
+                            <Sparkles className="w-5 h-5" />
+                          ) : (
+                            <FileText className="w-5 h-5" />
+                          )}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span
+                              className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
+                                isPdf
+                                  ? 'bg-red-100 text-red-700'
+                                  : isWord
+                                  ? 'bg-blue-100 text-blue-700'
+                                  : 'bg-orange-100 text-orange-700'
+                              }`}
+                            >
+                              {isPdf ? 'PDF' : isWord ? 'DOCX' : 'H5P'}
+                            </span>
+                            {res.parsedQuestions && res.parsedQuestions.length > 0 && (
+                              <span className="text-[10px] font-bold text-slate-400">
+                                {res.parsedQuestions.length} {res.parsedQuestions.length === 1 ? 'pregunta' : 'preguntas'}
+                              </span>
+                            )}
+                          </div>
+                          <h4 className="text-sm font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2">
+                            {res.name}
+                          </h4>
+                          {(res.description || res.fileName) && (
+                            <p className="text-xs text-slate-400 font-medium truncate mt-0.5">
+                              {res.description || res.fileName}
+                            </p>
+                          )}
+                        </div>
                       </div>
+
+                      <button
+                        onClick={() => {
+                          const chosenUnitTitle = modulePickerModal.unitTitle;
+                          setModulePickerModal(null);
+                          handleOpenResource(res, chosenUnitTitle);
+                        }}
+                        className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-xl text-xs font-black flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md shadow-blue-600/20 shrink-0 border-none"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        <span>Iniciar Guía</span>
+                      </button>
                     </div>
-                  )}
-                </div>
-              ) : activeModalResource.resourceType === 'pdf' ? (
-                <div className="bg-slate-900 rounded-3xl p-8 text-white flex flex-col items-center justify-center gap-4 min-h-[220px]">
-                  <FileText className="w-16 h-16 text-red-400 animate-pulse" />
-                  <div className="text-center space-y-1">
-                    <h4 className="text-base font-black">{activeModalResource.fileName}</h4>
-                    <p className="text-xs text-slate-400 font-medium">Documento de Lectura PDF listo para revisar</p>
-                  </div>
-                  <a
-                    href={`#download-${activeModalResource.id}`}
-                    onClick={(e) => { e.preventDefault(); alert(`Descargando documento PDF: ${activeModalResource.fileName}`); }}
-                    className="mt-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-extrabold flex items-center gap-2 transition-colors cursor-pointer shadow-lg shadow-red-600/20"
-                  >
-                    <Download className="w-4 h-4" />
-                    Abrir PDF en pantalla completa
-                  </a>
-                </div>
-              ) : (
-                <div className="bg-blue-900/90 rounded-3xl p-8 text-white flex flex-col items-center justify-center gap-4 min-h-[220px]">
-                  <FileText className="w-16 h-16 text-blue-300" />
-                  <div className="text-center space-y-1">
-                    <h4 className="text-base font-black">{activeModalResource.fileName}</h4>
-                    <p className="text-xs text-blue-200 font-medium">Documento Word de estudio</p>
-                  </div>
-                  <button
-                    onClick={() => alert(`Descargando archivo Word: ${activeModalResource.fileName}`)}
-                    className="mt-2 px-6 py-3 bg-white text-blue-900 hover:bg-blue-50 rounded-xl text-xs font-extrabold flex items-center gap-2 transition-colors cursor-pointer shadow-lg"
-                  >
-                    <Download className="w-4 h-4" />
-                    Descargar Guía Word
-                  </button>
-                </div>
-              )}
+                  );
+                })}
+              </div>
 
               {/* Modal Footer */}
-              <div className="flex justify-end pt-2">
+              <div className="p-4 sm:p-5 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                <span className="text-xs text-slate-400 font-medium hidden sm:inline">
+                  Puedes resolver las guías en el orden que prefieras
+                </span>
                 <button
-                  onClick={() => setActiveModalResource(null)}
-                  className="px-6 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold text-xs transition-colors cursor-pointer"
+                  onClick={() => setModulePickerModal(null)}
+                  className="px-5 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 font-bold text-xs transition-colors cursor-pointer bg-white"
                 >
                   Cerrar
                 </button>
               </div>
             </motion.div>
           </motion.div>
-        )}
-
-        {/* Step-by-Step Interactive Question Runner */}
-        {activeRunnerResource && (
-          <InteractiveQuestionRunner
-            resourceName={activeRunnerResource.name}
-            moduleType={activeRunnerResource.moduleType}
-            questions={activeRunnerResource.questions}
-            onClose={() => setActiveRunnerResource(null)}
-            onComplete={handleRunnerComplete}
-          />
         )}
       </AnimatePresence>
     </div>
@@ -666,7 +675,9 @@ interface ModalityCardProps {
   resources: SectionResource[];
   defaultPath: string;
   navigate: (path: string) => void;
-  onOpenResource: (res: SectionResource) => void;
+  onOpenResource: (res: SectionResource, unitTitle?: string) => void;
+  onOpenPicker?: (data: { moduleTitle: string; unitTitle?: string; resources: SectionResource[] }) => void;
+  unitTitle?: string;
 }
 
 function ModalityCard({
@@ -678,8 +689,24 @@ function ModalityCard({
   resources,
   defaultPath,
   navigate,
-  onOpenResource
+  onOpenResource,
+  onOpenPicker,
+  unitTitle,
 }: ModalityCardProps) {
+  const handleStart = () => {
+    if (!resources || resources.length === 0) {
+      navigate(defaultPath);
+    } else if (resources.length === 1) {
+      onOpenResource(resources[0], unitTitle);
+    } else {
+      if (onOpenPicker) {
+        onOpenPicker({ moduleTitle: title, unitTitle, resources });
+      } else {
+        onOpenResource(resources[0], unitTitle);
+      }
+    }
+  };
+
   return (
     <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm flex flex-col justify-between gap-5 transition-all duration-300 hover:shadow-md">
       <div className="space-y-4">
@@ -691,8 +718,9 @@ function ModalityCard({
             <Icon className="w-6 h-6" />
           </div>
           {resources.length > 0 && (
-            <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
-              {resources.length} {resources.length === 1 ? 'recurso' : 'recursos'}
+            <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 flex items-center gap-1">
+              <FileText className="w-3 h-3 text-blue-500" />
+              {resources.length} {resources.length === 1 ? 'material' : 'materiales'}
             </span>
           )}
         </div>
@@ -702,43 +730,32 @@ function ModalityCard({
           <p className="text-xs text-slate-500 leading-relaxed font-medium">{desc}</p>
         </div>
 
-        {/* Uploaded Teacher Resources for this Modality */}
-        {resources.length > 0 && (
-          <div className="space-y-2 pt-2 border-t border-slate-100">
-            <p className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Materiales Adjuntos</p>
-            <div className="space-y-1.5">
-              {resources.map((res) => (
-                <button
-                  key={res.id}
-                  onClick={() => onOpenResource(res)}
-                  className="w-full p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-left transition-colors flex items-center justify-between gap-2 group/res cursor-pointer"
-                >
-                  <div className="flex items-center gap-2 min-w-0">
-                    {res.resourceType === 'h5p' ? (
-                      <Sparkles className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-                    ) : res.resourceType === 'pdf' ? (
-                      <FileText className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                    ) : (
-                      <FileText className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                    )}
-                    <span className="text-xs font-bold text-slate-700 group-hover/res:text-blue-600 truncate">
-                      {res.name}
-                    </span>
-                  </div>
-                  <Eye className="w-3.5 h-3.5 text-slate-400 group-hover/res:text-blue-600 shrink-0" />
-                </button>
-              ))}
+        {/* Uploaded materials status line */}
+        {resources.length === 1 && (
+          <div className="pt-2 border-t border-slate-100/80 flex items-center gap-2 text-slate-500 text-xs min-w-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+            <span className="truncate font-semibold text-slate-600">{resources[0].name}</span>
+          </div>
+        )}
+        {resources.length > 1 && (
+          <div className="pt-2 border-t border-slate-100/80 flex items-center justify-between text-slate-500 text-xs">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+              <span className="truncate font-semibold text-slate-600">{resources.length} guías subidas</span>
             </div>
+            <span className="text-[10px] font-black uppercase text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md shrink-0">
+              Múltiples
+            </span>
           </div>
         )}
       </div>
 
       <button
-        onClick={() => navigate(defaultPath)}
-        className="w-full pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black uppercase text-slate-600 hover:text-blue-600 transition-colors cursor-pointer bg-transparent border-none"
+        onClick={handleStart}
+        className="w-full pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black uppercase text-slate-600 hover:text-blue-600 transition-colors cursor-pointer bg-transparent border-none group/btn"
       >
-        <span>Iniciar Módulo</span>
-        <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+        <span className="group-hover/btn:underline">Iniciar Módulo</span>
+        <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
       </button>
     </div>
   );
@@ -748,11 +765,13 @@ function ModalityCard({
 function UnitCardRender({
   unit,
   navigate,
-  onOpenResource
+  onOpenResource,
+  onOpenPicker,
 }: {
   unit: any;
   navigate: (path: string) => void;
-  onOpenResource: (res: SectionResource) => void;
+  onOpenResource: (res: SectionResource, unitTitle?: string) => void;
+  onOpenPicker?: (data: { moduleTitle: string; unitTitle?: string; resources: SectionResource[] }) => void;
 }) {
   return (
     <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_35px_-12px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col xl:flex-row">
@@ -789,6 +808,8 @@ function UnitCardRender({
             defaultPath={`/unit/${unit.unitNum}/module/1`}
             navigate={navigate}
             onOpenResource={onOpenResource}
+            onOpenPicker={onOpenPicker}
+            unitTitle={unit.title}
           />
           <ModalityCard
             title="M2: Método"
@@ -800,6 +821,8 @@ function UnitCardRender({
             defaultPath={`/unit/${unit.unitNum}/module/2`}
             navigate={navigate}
             onOpenResource={onOpenResource}
+            onOpenPicker={onOpenPicker}
+            unitTitle={unit.title}
           />
           <ModalityCard
             title="M3: Banco"
@@ -811,6 +834,8 @@ function UnitCardRender({
             defaultPath={`/unit/${unit.unitNum}/module/3`}
             navigate={navigate}
             onOpenResource={onOpenResource}
+            onOpenPicker={onOpenPicker}
+            unitTitle={unit.title}
           />
         </div>
       </div>

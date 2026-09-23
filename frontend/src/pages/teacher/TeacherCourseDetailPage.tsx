@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   ChevronRight, Plus, Layers, FileCode2, X, Package,
   ArrowLeft, MoreHorizontal, Users, UserPlus, Trash2, Mail, GraduationCap,
-  Upload, Key, Copy, Download, Check, BookOpen, Compass, Zap, FileText
+  Upload, Key, Copy, Download, Check, BookOpen, Compass, Zap, FileText, Eye
 } from 'lucide-react';
 import {
   useTeacherStore,
@@ -14,6 +14,8 @@ import {
   type ResourceType
 } from '../../store/useTeacherStore';
 import { readRosterFile, parseStudentRosterText, type ParsedStudent } from '../../utils/pdfParser';
+import { parseResourceToQuestions, type ParsedQuestion } from '../../utils/fileQuestionParser';
+import { GuideActivityView } from '../../components/ui/GuideActivityView';
 import { api } from '../../services/api';
 import { ConfirmModal, type ModalVariant } from '../../components/ui/ConfirmModal';
 
@@ -126,6 +128,34 @@ export default function TeacherCourseDetailPage() {
   // Modal: Section Credentials View
   const [viewCredentialsSectionId, setViewCredentialsSectionId] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
+
+  // Preview Resource State (Student View simulation for Teacher)
+  const [previewResource, setPreviewResource] = useState<{
+    name: string;
+    description?: string;
+    unitTitle?: string;
+    moduleType: ModuleCategory;
+    questions: ParsedQuestion[];
+  } | null>(null);
+
+  const handlePreviewResource = (res: any, unitTitle?: string, fallbackModule: ModuleCategory = 'comprension') => {
+    const modType = res.moduleType || fallbackModule;
+    const questions = (res.parsedQuestions && res.parsedQuestions.length > 0 && res.parsedQuestions[0]?.level)
+      ? res.parsedQuestions
+      : parseResourceToQuestions(
+          res.extractedText || res.description || res.fileName || res.name,
+          res.name,
+          modType
+        );
+
+    setPreviewResource({
+      name: res.name,
+      description: res.description,
+      unitTitle: unitTitle || course?.name,
+      moduleType: modType,
+      questions,
+    });
+  };
 
   const handleAddSection = () => {
     if (!courseId) return;
@@ -407,6 +437,47 @@ export default function TeacherCourseDetailPage() {
     }
   };
 
+  if (previewResource) {
+    return (
+      <div className="p-4 sm:p-8 max-w-7xl mx-auto flex flex-col gap-6 w-full animate-in fade-in duration-300">
+        <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white p-4 sm:p-5 rounded-[2rem] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg border border-indigo-500/20">
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-2xl bg-indigo-600/30 border border-indigo-400/30 flex items-center justify-center shrink-0">
+              <Eye className="w-5 h-5 text-indigo-300" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded-full shadow-sm">
+                  Modo Vista Previa Docente
+                </span>
+                <span className="text-xs text-indigo-200 font-bold">Simulación Estudiante</span>
+              </div>
+              <p className="text-xs text-slate-300 font-medium mt-0.5">
+                Así es exactamente como tus estudiantes ven y resuelven esta guía en la plataforma.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setPreviewResource(null)}
+            className="flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-950 font-black px-5 py-2.5 rounded-xl text-xs transition-all shadow-md cursor-pointer border-none shrink-0"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Volver a Edición del Curso</span>
+          </button>
+        </div>
+        <GuideActivityView
+          resourceName={previewResource.name}
+          resourceDescription={previewResource.description}
+          unitTitle={previewResource.unitTitle}
+          moduleType={previewResource.moduleType}
+          questions={previewResource.questions}
+          onClose={() => setPreviewResource(null)}
+          onComplete={() => setPreviewResource(null)}
+        />
+      </div>
+    );
+  }
+
   if (!course) {
     return (
       <div className="p-10 text-center text-slate-500 font-bold">
@@ -683,13 +754,23 @@ export default function TeacherCourseDetailPage() {
                                             </div>
                                           </div>
                                         </div>
-                                        <button
-                                          onClick={() => handleDeleteResource(section.id, unit.id, 'comprension', res.id, res.name)}
-                                          className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1"
-                                          title="Eliminar recurso"
-                                        >
-                                          <X className="w-3.5 h-3.5" />
-                                        </button>
+                                        <div className="flex items-center gap-1.5 shrink-0">
+                                          <button
+                                            onClick={() => handlePreviewResource(res, unit.title, 'comprension')}
+                                            className="px-2.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-800 font-bold text-[11px] flex items-center gap-1 transition-all cursor-pointer border-none shadow-sm"
+                                            title="Ver cómo se le mostrará la guía a los alumnos"
+                                          >
+                                            <Eye className="w-3.5 h-3.5 text-sky-700" />
+                                            <span>Vista Previa</span>
+                                          </button>
+                                          <button
+                                            onClick={() => handleDeleteResource(section.id, unit.id, 'comprension', res.id, res.name)}
+                                            className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1 transition-colors"
+                                            title="Eliminar recurso"
+                                          >
+                                            <X className="w-3.5 h-3.5" />
+                                          </button>
+                                        </div>
                                       </div>
                                     ))
                                   )}
@@ -741,14 +822,24 @@ export default function TeacherCourseDetailPage() {
                                               <span className="text-[10px] text-slate-400 font-medium">{formatSize(res.fileSize)}</span>
                                             </div>
                                           </div>
+                                          </div>
+                                        <div className="flex items-center gap-1.5 shrink-0">
+                                          <button
+                                            onClick={() => handlePreviewResource(res, unit.title, 'metodo')}
+                                            className="px-2.5 py-1.5 rounded-xl bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold text-[11px] flex items-center gap-1 transition-all cursor-pointer border-none shadow-sm"
+                                            title="Ver cómo se le mostrará la guía a los alumnos"
+                                          >
+                                            <Eye className="w-3.5 h-3.5 text-blue-700" />
+                                            <span>Vista Previa</span>
+                                          </button>
+                                          <button
+                                            onClick={() => handleDeleteResource(section.id, unit.id, 'metodo', res.id, res.name)}
+                                            className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1 transition-colors"
+                                            title="Eliminar recurso"
+                                          >
+                                            <X className="w-3.5 h-3.5" />
+                                          </button>
                                         </div>
-                                        <button
-                                          onClick={() => handleDeleteResource(section.id, unit.id, 'metodo', res.id, res.name)}
-                                          className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1"
-                                          title="Eliminar recurso"
-                                        >
-                                          <X className="w-3.5 h-3.5" />
-                                        </button>
                                       </div>
                                     ))
                                   )}
@@ -800,15 +891,24 @@ export default function TeacherCourseDetailPage() {
                                               <span className="text-[10px] text-slate-400 font-medium">{formatSize(res.fileSize)}</span>
                                             </div>
                                           </div>
+                                          </div>
+                                        <div className="flex items-center gap-1.5 shrink-0">
+                                          <button
+                                            onClick={() => handlePreviewResource(res, unit.title, 'interactivo')}
+                                            className="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold text-[11px] flex items-center gap-1 transition-all cursor-pointer border-none shadow-sm"
+                                            title="Ver cómo se le mostrará la guía a los alumnos"
+                                          >
+                                            <Eye className="w-3.5 h-3.5 text-emerald-700" />
+                                            <span>Vista Previa</span>
+                                          </button>
+                                          <button
+                                            onClick={() => handleDeleteResource(section.id, unit.id, 'interactivo', res.id, res.name)}
+                                            className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1 transition-colors"
+                                            title="Eliminar recurso"
+                                          >
+                                            <X className="w-3.5 h-3.5" />
+                                          </button>
                                         </div>
-                                        <button
-                                          onClick={() => handleDeleteResource(section.id, unit.id, 'interactivo', res.id, res.name)}
-                                          className="text-slate-300 hover:text-rose-500 cursor-pointer border-none bg-transparent p-1"
-                                          title="Eliminar recurso"
-                                        >
-                                          <X className="w-3.5 h-3.5" />
-                                        </button>
-
                                       </div>
                                     ))
                                   )}
