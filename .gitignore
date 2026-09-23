@@ -10,3 +10,4 @@ dist/
 # IDEs
 .vscode/settings.json
 .idea/
+database/postgres-data/

@@ -13,7 +13,7 @@
 | Nombre | Correo | Contraseña |
 |---|---|---|
 | Ian Bryan Josué Aguilera Torres | `ian.aguilera02@inacapmail.cl` | `ian.aguilera02` |
-| Felipe Andrés Ancamilla Arias | `felipe.ancamilla@inacapmail.cl` | `felipe.ancamilla` |
+| Felipe Andrés Ancamilla Arias | `https://lector-mat-project.vercel.app` | `felipe.ancamilla` |
 | Benjamín Alonso Arias Ortiz | `benjamin.arias19@inacapmail.cl` | `benjamin.arias19` |
 | Victoria Belén Contreras Lagos | `victoria.contreras10@inacapmail.cl` | `victoria.contreras10` |
 | Jeison Ignacio Escobar Barra | `jeison.escobar02@inacapmail.cl` | `jeison.escobar02` |

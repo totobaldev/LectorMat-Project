@@ -27,6 +27,9 @@ export default function CoursesPage() {
     resources: SectionResource[];
   } | null>(null);
 
+  // Active Resource for Preview Modal
+  const [activeModalResource, setActiveModalResource] = useState<SectionResource | null>(null);
+
   // Active Interactive Question Activity State (Full Page Activity)
   const [activeRunnerResource, setActiveRunnerResource] = useState<{
     name: string;
